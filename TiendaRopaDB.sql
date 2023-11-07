@@ -42,9 +42,9 @@ insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Remera G
 insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Campera Gamer Diablo IV',65000,12,3,'XL')
 insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Buzo Gamer Halo',42000,8,2,'M')
 insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Remera Gamer Bros Star',5000,10,1,'S')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Pantalon Hombre Cargo',25000,10,1,'42')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Pantalon Hombre Cargo',25000,10,4,'42')
 insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Remera Gamer Xbox',7000,6,1,'M')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Pantalon Hombre Casual',35000,6,1,'44')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Pantalon Hombre Casual',35000,6,4,'44')
 insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Remera Gamer Bros Gore',6500,8,1,'L')
 
 
