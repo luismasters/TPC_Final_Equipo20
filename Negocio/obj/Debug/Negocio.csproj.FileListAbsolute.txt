@@ -1,0 +1,9 @@
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Negocio\bin\Debug\Negocio.dll
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Negocio\bin\Debug\Negocio.pdb
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Negocio\bin\Debug\Dominio.dll
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Negocio\bin\Debug\Dominio.pdb
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Negocio\obj\Debug\Negocio.csproj.AssemblyReference.cache
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Negocio\obj\Debug\Negocio.csproj.CopyComplete
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Negocio\obj\Debug\Negocio.dll
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Negocio\obj\Debug\Negocio.pdb
