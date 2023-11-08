@@ -121,6 +121,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Imagenes\81+wwGUpS3L._AC_SL1500_.jpg" />
+    <Content Include="Content\Imagenes\providence-team-merchandising-ropa.jpg" />
+    <Content Include="Content\Imagenes\Ropa-Gamer.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
