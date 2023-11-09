@@ -13,20 +13,15 @@ namespace Negocio
             List<Prenda> lista = new List<Prenda>();
             AccesoDatos datos = new AccesoDatos();
             ImagenNegocio imagenNegocio = new ImagenNegocio();
-
-
             try
             {
-                datos.setearConsulta("SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.Talle  \r\n                    FROM Prenda P \r\n                    INNER JOIN Categoria C ON P.IdCategoria = C.Id;");
+                datos.setearConsulta("SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle\r\nFROM Prenda P\r\nINNER JOIN Categoria C ON P.IdCategoria = C.Id\r\nINNER JOIN Genero G ON P.IdGenero = G.Id\r\nINNER JOIN Linea L ON P.IdLinea = L.Id;");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Prenda prenda = new Prenda();
-                 
-
-
-                        prenda.Id = (int)datos.Lector["Id"];
+                    prenda.Id = (int)datos.Lector["Id"];
                     prenda.Descripcion = datos.Lector["Descripcion"].ToString();
                     prenda.Precio = Math.Round((decimal)datos.Lector["Precio"], 2);
                     prenda.Talle = datos.Lector["Talle"].ToString();
@@ -36,11 +31,23 @@ namespace Negocio
                         prenda.Categoria.Id = (int)datos.Lector["IdCategoria"];
                         prenda.Categoria.Descripcion = datos.Lector["CategoriaDescripcion"].ToString();
                     };
+                    prenda.Genero=new Genero();
+                    {
+                        prenda.Genero.Id = (int)datos.Lector["IdGenero"];
+                        prenda.Genero.Descripcion = datos.Lector["Genero"].ToString();
+
+                    };
+                    prenda.Linea = new Linea();
+                    {
+                        prenda.Linea.Id = (int)datos.Lector["IdLinea"];
+                        prenda.Linea.Descripcion = datos.Lector["Linea"].ToString();
+
+                    };
 
 
-                   
 
-                { 
+
+                    { 
                     prenda.Imagenes = imagenNegocio.Listar((int)datos.Lector["Id"]);// Corregido aquí
 
                     lista.Add(prenda);

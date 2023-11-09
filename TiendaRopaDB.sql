@@ -62,11 +62,4 @@ insert into imagenes (IdPrenda,ImagenUrl) Values (6,'https://scontent.faep6-1.fn
 insert into imagenes (IdPrenda,ImagenUrl) Values (7,'https://scontent.faep6-1.fna.fbcdn.net/v/t39.30808-6/396732205_10230756458325686_7532596896816048791_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeG3vyhuldEEu7YJ7ZhJKZyrM7vwSVZDajozu_BJVkNqOsCXjHt8SW0MNCpVc-iGZmo&_nc_ohc=fREQ5t7_XggAX9bOsug&_nc_ht=scontent.faep6-1.fna&oh=00_AfCa41NZLiR4PrTwGXLa280Z5hU1WwmSnsMJce63loN0fg&oe=654F0728')
 insert into imagenes (IdPrenda,ImagenUrl) Values (8,'https://scontent.faep6-1.fna.fbcdn.net/v/t39.30808-6/397984163_10230756455805623_5038733250868377136_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHDiVkl7nR4hn8igUSMZRgtRG4_g6OwBB1Ebj-Do7AEHSsFaX6iFUZ2I3osvjp5AHQ&_nc_ohc=XiH-CojXl-4AX_gK3Gf&_nc_ht=scontent.faep6-1.fna&oh=00_AfCXDJp-QsN3X5yGi6s6KNfIP-i45hhzuwsqmxJTckRv6A&oe=6550168E')
 
-SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.Talle
-FROM Prenda P
-INNER JOIN Categoria C ON P.IdCategoria = C.Id;
-
-
-SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.Talle  
-                    FROM Prenda P 
-                    INNER JOIN Categoria C ON P.IdCategoria = C.Id;
+select Precio from Prenda

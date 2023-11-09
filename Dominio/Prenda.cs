@@ -13,6 +13,8 @@ namespace Dominio
         public decimal Precio { get; set; }
         public int Stock { get; set; }
         public Categoria Categoria { get; set; }
+        public Genero Genero { get; set; }
+        public Linea Linea { get; set; }
         public string Talle {  get; set; }
         public List<Imagen> Imagenes { get; set; }
         public string ImagenURL
