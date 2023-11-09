@@ -6,9 +6,23 @@ use TiendaRopa
 
 create table Categoria(
 Id int identity(1,1) primary key,
-Descripcion Varchar(200) not null,
+Descripcion Varchar(200) not null unique,
 
 )
+
+create table Genero(
+Id int identity(1,1) primary key,
+Descripcion Varchar(200) not null unique,
+
+)
+
+create table Linea(
+Id int identity(1,1) primary key,
+Descripcion Varchar(200) not null unique,
+
+)
+
+
 
 create table Prenda(
 Id int  identity(1,1) not null primary key,
@@ -16,6 +30,8 @@ Descripcion Varchar(200) not null,
 Precio money not null check (Precio>=0),
 Stock int default 0 check (Stock>=0),
 IdCategoria int not  null foreign key references Categoria(Id),
+IdLinea int not  null foreign key references Linea(Id),
+IdGenero int not  null foreign key references Genero(Id),
 Talle varchar(10),
 )
 
@@ -34,18 +50,30 @@ insert into Categoria (Descripcion) values ('Camperas')
 insert into Categoria (Descripcion) values ('Pantalones')
 
 
+insert into Genero (Descripcion) values ('Masculino')
+insert into Genero (Descripcion) values ('Femenino')
+
+
+
+insert into Linea (Descripcion) values ('Gamer')
+insert into Linea (Descripcion) values ('Casual')
+insert into Linea (Descripcion) values ('deportiva')
+insert into Linea (Descripcion) values ('Formal')
+insert into Linea (Descripcion) values ('Playa')
+
+
 
 
 select * from Imagenes
 
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Remera Gamer Mario Bros',5000,6,1,'L')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Campera Gamer Diablo IV',65000,12,3,'XL')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Buzo Gamer Halo',42000,8,2,'M')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Remera Gamer Bros Star',5000,10,1,'S')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Pantalon Hombre Cargo',25000,10,4,'42')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Remera Gamer Xbox',7000,6,1,'M')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Pantalon Hombre Casual',35000,6,4,'44')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,Talle) values ('Remera Gamer Bros Gore',6500,8,1,'L')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Remera Gamer Mario Bros',5000,6,1,1,1,'L')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Campera Gamer Diablo IV',65000,12,3,1,1,'XL')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Buzo Gamer Halo',42000,8,2,1,1,'M')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Remera Gamer Bros Star',5000,10,1,1,1,'S')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Pantalon Hombre Cargo',25000,10,4,1,2,'42')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle)values ('Remera Gamer Xbox',7000,6,1,1,1,'M')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Pantalon Hombre Casual',35000,6,4,1,2,'44')
+insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Remera Gamer Bros Gore',6500,8,1,1,1,'L')
 
 
 
@@ -62,4 +90,12 @@ insert into imagenes (IdPrenda,ImagenUrl) Values (6,'https://scontent.faep6-1.fn
 insert into imagenes (IdPrenda,ImagenUrl) Values (7,'https://scontent.faep6-1.fna.fbcdn.net/v/t39.30808-6/396732205_10230756458325686_7532596896816048791_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeG3vyhuldEEu7YJ7ZhJKZyrM7vwSVZDajozu_BJVkNqOsCXjHt8SW0MNCpVc-iGZmo&_nc_ohc=fREQ5t7_XggAX9bOsug&_nc_ht=scontent.faep6-1.fna&oh=00_AfCa41NZLiR4PrTwGXLa280Z5hU1WwmSnsMJce63loN0fg&oe=654F0728')
 insert into imagenes (IdPrenda,ImagenUrl) Values (8,'https://scontent.faep6-1.fna.fbcdn.net/v/t39.30808-6/397984163_10230756455805623_5038733250868377136_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHDiVkl7nR4hn8igUSMZRgtRG4_g6OwBB1Ebj-Do7AEHSsFaX6iFUZ2I3osvjp5AHQ&_nc_ohc=XiH-CojXl-4AX_gK3Gf&_nc_ht=scontent.faep6-1.fna&oh=00_AfCXDJp-QsN3X5yGi6s6KNfIP-i45hhzuwsqmxJTckRv6A&oe=6550168E')
 
-select Precio from Prenda
+
+SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle FROM Prenda P 
+INNER JOIN Categoria C ON P.IdCategoria = C.Id 
+INNER JOIN Genero G ON P.IdGenero = G.Id
+INNER JOIN Linea L ON P.IdLinea = L.Id;
+
+select * from linea
+select * from genero
+select * from Categoria
