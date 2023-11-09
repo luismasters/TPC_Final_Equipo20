@@ -8,6 +8,27 @@ namespace Negocio
 {
     public class PrendaNegocio
     {
+
+        public List<int> listarIDPrendas() {
+
+            List<int> Ids=new List<int>();
+            PrendaNegocio prendaNegocio = new PrendaNegocio();
+
+            List<Dominio.Prenda>  prendas= new List<Dominio.Prenda>();
+
+            prendas = prendaNegocio.Listar();
+
+            foreach (Prenda prenda in prendas)
+            {
+
+                Ids.Add(prenda.Id);
+
+            }
+
+            return Ids; }
+
+
+
         public List<Prenda> Listar()
         {
             List<Prenda> lista = new List<Prenda>();

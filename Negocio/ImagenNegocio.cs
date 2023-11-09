@@ -45,14 +45,14 @@ namespace Negocio
             }
         }
 
-        public void Agregar(Imagen imagen)
+        public void Agregar(string url, int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("insert into IMAGENES (ImagenUrl, IdPrenda) values(@imagenUrl, @idArticulo)");
-                datos.agregarParametro("@imagenUrl", imagen.ImagenURL);
-                datos.agregarParametro("@idArticulo", imagen.IdPrenda);
+                datos.setearConsulta("INSERT INTO IMAGENES (ImagenUrl, IdPrenda) VALUES (@Url, @IdPrenda)");
+                datos.agregarParametro("@Url", url);
+                datos.agregarParametro("@IdPrenda", id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -64,6 +64,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
 
         public void Modificar(Imagen imagen)
         {
@@ -104,23 +105,5 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

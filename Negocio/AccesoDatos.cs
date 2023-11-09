@@ -31,17 +31,19 @@ namespace Negocio
         {
             comando.Parameters.AddWithValue(nombre, valor);
         }
-        public void ejecutarAccion()
+        public bool ejecutarAccion()
         {
             comando.Connection = conexion;
             try
             {
                 conexion.Open();
                 comando.ExecuteNonQuery();
+                return true; // La operación fue exitosa
+
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                throw ex;
+                return false;
             }
 
         }
