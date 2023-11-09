@@ -112,6 +112,36 @@ namespace Negocio
             }
         }
 
+        public int AgregarNuevaPrenda(Prenda prenda)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT INTO Prenda (Descripcion, Precio, Talle, IdCategoria, IdGenero, IdLinea) " +
+                                     "OUTPUT INSERTED.Id VALUES (@descripcion, @precio, @talle, @idCategoria, @idGenero, @idLinea)");
+                datos.agregarParametro("@descripcion", prenda.Descripcion);
+                datos.agregarParametro("@precio", prenda.Precio);
+                datos.agregarParametro("@talle", prenda.Talle);
+                datos.agregarParametro("@idCategoria", prenda.Categoria.Id);
+                datos.agregarParametro("@idGenero", prenda.Genero.Id);
+                datos.agregarParametro("@idLinea", prenda.Linea.Id);
+
+                int prendaId = (int)datos.ejecutarAccionReturn();
+                return prendaId;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+
         public void Agregar(Prenda prenda)
         {
             AccesoDatos datos = new AccesoDatos();

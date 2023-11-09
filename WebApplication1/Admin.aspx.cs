@@ -28,7 +28,13 @@ namespace WebApplication1
                 List<int> idsPrendas =prendaNegocio.listarIDPrendas() ;
                 ddlPrendas.DataSource = idsPrendas;
                 ddlPrendas.DataBind();
-            }
+
+                //CargarGeneros();
+                CargarCategorias();
+
+                CargarLineas();
+            }               
+
 
 
         }
@@ -161,6 +167,81 @@ namespace WebApplication1
                 // Por ejemplo, puedes agregar una etiqueta en tu formulario para mostrar mensajes de error.
             }
         }
+
+        protected void btnLimpiarLista_Click(object sender, EventArgs e)
+        {
+            gvCategorias.Visible = false;
+            gvLineas.Visible = false;
+            gvImagenes.Visible = false;
+
+            // Puedes agregar más líneas si hay otros GridView que también quieres ocultar
+        }
+
+        protected void btnAgregarPrenda_Click(object sender, EventArgs e)
+{
+    PrendaNegocio prendaNegocio = new PrendaNegocio();
+    
+
+    Prenda nuevaPrenda = new Prenda();
+    nuevaPrenda.Descripcion = txtDescripcion.Text;
+    nuevaPrenda.Precio = Convert.ToDecimal(txtPrecio.Text);
+    nuevaPrenda.Talle = txtTalle.Text;
+            nuevaPrenda.Categoria = new Categoria();
+
+            nuevaPrenda.Categoria.Id = Convert.ToInt32(ddlCategorias.SelectedValue); 
+            nuevaPrenda.Genero=new Genero();
+   nuevaPrenda.Genero.Id = Convert.ToInt32(ddlGeneros.SelectedValue); 
+    nuevaPrenda.Linea = new Linea();
+            nuevaPrenda.Linea.Id = Convert.ToInt32(ddlLineas.SelectedValue); // Puedes implementar ObtenerLineaSeleccionada según tu lógica
+
+    int nuevaPrendaId = prendaNegocio.AgregarNuevaPrenda(nuevaPrenda);
+
+    // Aquí puedes realizar otras operaciones o mostrar mensajes según sea necesario
+    Response.Write($"Nueva prenda agregada con Id: {nuevaPrendaId}");
+            Response.Redirect(Request.RawUrl);
+
+
+
+        }
+
+        protected void CargarCategorias()
+        {
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            List<Categoria> categorias = categoriaNegocio.ObtenerCategorias();
+
+            ddlCategorias.DataSource = categorias;
+            ddlCategorias.DataTextField = "Descripcion";
+            ddlCategorias.DataValueField = "Id";
+            ddlCategorias.DataBind();
+        }
+        protected void CargarLineas()
+        {
+            LineaNegocio lineaNegocio = new LineaNegocio();
+            List<Linea> lineas = lineaNegocio.ObtenerLineas();
+
+            ddlLineas.DataSource = lineas;  
+            ddlLineas.DataTextField = "Descripcion";
+            ddlLineas.DataValueField = "Id";
+            ddlLineas.DataBind();
+        }
+
+
+
+       
+
+        protected Linea ObtenerLineaSeleccionada()
+        {
+            // Obtener el ID de la categoría seleccionada desde el DropDownList
+            int idLineaSeleccionada = Convert.ToInt32(ddlLineas.SelectedValue);
+
+            // Buscar la categoría en la lista de categorías
+            Linea lineaSeleccionada = ListLinea.FirstOrDefault(c => c.Id == idLineaSeleccionada);
+
+            // Devolver la categoría encontrada (o manejar el caso en el que no se encuentra)
+            return lineaSeleccionada;
+        }
+
+
 
     }
 }
