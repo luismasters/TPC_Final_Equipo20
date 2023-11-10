@@ -12,17 +12,6 @@ namespace WebApplication1
     public partial class _Default : Page
     {
 
-        public List<Prenda> PrendaList;
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-            PrendaNegocio prenda = new PrendaNegocio();
-            PrendaList = prenda.Listar();
-            
-            rptArticulos.DataSource = PrendaList;
-            rptArticulos.DataBind();
-
-        }
+        
     }
 }

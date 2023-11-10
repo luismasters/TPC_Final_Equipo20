@@ -4,21 +4,21 @@
 
 <html lang="es">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+    <title><%: Page.Title %> - Mi  ASP.NET</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <link rel="Site" type="text/css" href="Content/Site.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="Site" type="text/css" href="Content/Site.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/StyleSheet.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -51,10 +51,17 @@
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Carrito">Carrito</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Consulta">Consulta</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Productos">Productos</a></li>
                         <li class="nav-item"><a class="nav-link" runat="server" href="~/Admin">Administrar sitio</a></li>
+                        <li class="nav-item ml-auto">
+                            <a class="nav-link" runat="server" href="~/Carrito">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </svg>
+                                <span id="cartCount" runat="server" class="badge badge-light"></span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
@@ -65,7 +72,11 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
+                <a class="nav-link" runat="server" href="~/Acerca">Acerca de nosotros</a>
+                <a class="nav-link" runat="server" href="~/Contacto">Contactanos</a>
+                <p></p>
+                <p>&copy; <%: DateTime.Now.Year %> - <b>SUPER PRENDAS .NET</b></p>
+                <p>Todos los derechos reservados</p>
             </footer>
         </div>
     </form>
