@@ -162,3 +162,9 @@ E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-fina
 E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\WebApplication1\bin\System.Net.Http.Formatting.xml
 E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.xml
 E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.WebHost.xml
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\WebApplication1\bin\System.Net.Http.Formatting.dll
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.dll
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.WebHost.dll
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\WebApplication1\bin\System.Net.Http.Formatting.xml
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.xml
+C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.WebHost.xml
