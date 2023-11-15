@@ -2,132 +2,57 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server" class="container">
 
 
-    <div class="container mt-4">
-
-  <div class="mt-4">
-    <h2>Gestión de Categorías</h2>
-    <asp:Button ID="btnVerCategorias" runat="server" Text="Ver Categorías" OnClick="btnVerCategorias_Click" />
-          <asp:Button ID="btnLimpiarLista" runat="server" Text="Limpiar Listas" OnClick="btnLimpiarLista_Click" />
-
-    <br />
-    <asp:GridView ID="gvCategorias" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" Visible="false">
-        <Columns>
-            <asp:BoundField DataField="Id" HeaderText="ID" SortExpression="Id" />
-            <asp:BoundField DataField="Descripcion" HeaderText="Descripción" SortExpression="Descripcion" />
-        </Columns>
-    </asp:GridView>
-    <br />
-    <asp:Label ID="lblNuevaCategoria" runat="server" Text="Nueva Categoría:"></asp:Label>
-    <asp:TextBox ID="txtNuevaCategoria" runat="server"></asp:TextBox>
-    <asp:Button ID="btnAgregarCategoria" runat="server" Text="Agregar Categoría" OnClick="btnAgregarCategoria_Click" />
-</div>
-
-
-
-
-    <div class="mt-4">
-    <h2>Gestión de Líneas</h2>
-    <asp:Button ID="btnVerLineas" runat="server" Text="Ver Líneas" OnClick="btnVerLineas_Click" />
-            <asp:Button ID="Button1" runat="server" Text="Limpiar Listas" OnClick="btnLimpiarLista_Click" />
-
-    <br />
-    <asp:GridView ID="gvLineas" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" Visible="false">
-        <Columns>
-            <asp:BoundField DataField="Id" HeaderText="ID" SortExpression="Id" />
-            <asp:BoundField DataField="Descripcion" HeaderText="Descripción" SortExpression="Descripcion" />
-        </Columns>
-    </asp:GridView>
-    <br />
-    <asp:Label ID="lblNuevaLinea" runat="server" Text="Nueva Línea:"></asp:Label>
-    <asp:TextBox ID="txtNuevaLinea" runat="server"></asp:TextBox>
-    <asp:Button ID="btnAgregarLinea" runat="server" Text="Agregar Línea" OnClick="btnAgregarLinea_Click" />
-</div>
-
-
-    <!-- Otras secciones de tu página... -->
-<div class="mt-4">
-    <h2>Gestión de Imágenes</h2>
-    <!-- DropDownList para seleccionar el ID de la prenda -->
-    <asp:Label ID="lblSeleccionarPrenda" runat="server" Text="Seleccionar Prenda:"></asp:Label>
-    <asp:DropDownList ID="ddlPrendas" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPrendas_SelectedIndexChanged">
+  <div class="container">
+    <h2 class="mt-5 mb-5 text-center col-md-6">Agregar Nueva Prenda </h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-2">
+     <asp:Label Text="Descripcion" runat="server" ID="lblDescripcion" />   
+     <asp:TextBox CssClass="form-control" runat="server" ID="TxtDescripcion"/>  </div>
+            <div class="mb-2">
+     <asp:Label Text="Precio" runat="server" ID="lblPrecio" />   
+     <asp:TextBox CssClass="form-control" runat="server" ID="TxtPrecio"/>  </div>
+            <div class="mb-2">
+    <asp:Label Text="Cantidad Ingreso" runat="server" ID="lblStock" />   
+    <asp:TextBox CssClass="form-control" runat="server" ID="TxtStock"/> </div>  
+            <div class="mb-2">
+    <asp:Label Text="Talle" runat="server" ID="lblTalle" />   
+   <asp:TextBox CssClass="form-control" runat="server" ID="TxtTalle"/>  </div>
+            <div class="mb-2">
+    <asp:Label Text="Categoria" runat="server" ID="lblCategoria" />   
+    <asp:DropDownList CssClass="form-control" ID="DropListCategoria" runat="server">  
     </asp:DropDownList>
-    
-    <!-- Botón para ver imágenes por PrendaID -->
-    <asp:Button ID="btnVerImagenes" runat="server" Text="Ver Imágenes" OnClick="btnVerImagenes_Click" />
-
-    <!-- Gridview para mostrar imágenes -->
-    <asp:GridView ID="gvImagenes" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" Visible="false">
-        <Columns>
-            <asp:BoundField DataField="Id" HeaderText="ID" SortExpression="Id" Visible="false" />
-            <asp:ImageField DataImageUrlField="ImagenURL" HeaderText="Imagen" SortExpression="ImagenURL" ControlStyle-Width="200" ControlStyle-Height="200" />
-        </Columns>
-    </asp:GridView>
-
-    <!-- Sección para agregar nueva imagen -->
-    <asp:Label ID="lblNuevaImagen" runat="server" Text="Nueva Imagen URL:"></asp:Label>
-    <asp:TextBox ID="txtNuevaImagen" runat="server"></asp:TextBox>
-    <asp:Button ID="btnAgregarImagen" runat="server" Text="Agregar Imagen" OnClick="btnAgregarImagen_Click" />
-                <asp:Button ID="Button2" runat="server" Text="Limpiar Listas" OnClick="btnLimpiarLista_Click" />
-
-</div>
-
-         <h2>Agregar Nueva Prenda</h2>
-    
-    <div>
-        <asp:Label ID="lblDescripcion" runat="server" Text="Descripción:"></asp:Label>
-        <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
-    </div>
-    
-    <div>
-        <asp:Label ID="lblPrecio" runat="server" Text="Precio:"></asp:Label>
-        <asp:TextBox ID="txtPrecio" runat="server"></asp:TextBox>
-    </div>
-    
-    <div>
-        <asp:Label ID="lblTalle" runat="server" Text="Talle:"></asp:Label>
-        <asp:TextBox ID="txtTalle" runat="server"></asp:TextBox>
-    </div>
-    
-    <div>
-        <asp:Label ID="lblCategoria" runat="server" Text="Categoría:"></asp:Label>
-        <!-- Agrega aquí un DropDownList con las categorías disponibles -->
-        <asp:DropDownList ID="ddlCategorias" runat="server">
-        </asp:DropDownList>
-    </div>
-    
-   <div>
-    <asp:Label ID="lblGenero" runat="server" Text="Género:"></asp:Label>
-    <asp:DropDownList ID="ddlGeneros" runat="server">
-        <asp:ListItem Text="Masculino" Value="1"></asp:ListItem>
-        <asp:ListItem Text="Femenino" Value="2"></asp:ListItem>
+    <asp:Button runat="server" ID="BtnAgregarCategoria" Text="add Nueva" OnClick="BtnAgregarCategoria_Click" CssClass="btn btn-primary" />
+    <asp:TextBox runat="server" ID="TxtNuevaCategoria" Visible="false" placeholder="Nueva Categoría"></asp:TextBox>
+    <asp:Button runat="server" ID="BtnNuevaCategoria" Text="Enviar" OnClick="BtnEnviarCategoria_Click" Visible="false"  CssClass="btn btn-primary"  OnClientClick="return confirm('¿Estás seguro de querer enviar la nueva categoría?');" /></div>
+    <div class="mb-2">
+            <asp:Label Text="Linea" ID="lblLinea" runat="server" />
+    <asp:DropDownList CssClass="form-control" runat="server" ID="DropListLinea" >
     </asp:DropDownList>
-</div>
-    <div>
-        <asp:Label ID="lblLinea" runat="server" Text="Línea:"></asp:Label>
-        <!-- Agrega aquí un DropDownList con las líneas disponibles -->
-        <asp:DropDownList ID="ddlLineas" runat="server">
-        </asp:DropDownList>
+    <asp:Button Text="add Nueva" runat="server" ID="BtnAgregarLinea" OnClick="BtnAgregarLinea_Click"  CssClass="btn btn-primary" />
+    <asp:TextBox runat="server" ID="TxtNuevaLinea" Visible="false" placeholder="Nueva Linea"></asp:TextBox>
+    <asp:Button runat="server" ID="BtnNuevaLinea" Text="Enviar" OnClick="BtnEnviarLinea_Click" Visible="false"  CssClass="btn btn-primary" OnClientClick="return confirm('¿Estás seguro de querer enviar la nueva Linea?');" />
+
     </div>
-    
-    <div>
-        <asp:Button ID="btnAgregarPrenda" runat="server" Text="Agregar Prenda" OnClick="btnAgregarPrenda_Click" />
+   <div class="mb-2">
+    <asp:Label Text="Genero" ID="lblGenero" runat="server" />
+    <asp:DropDownList CssClass="form-control" runat="server" ID="DropListGenero">
+        <asp:ListItem Text="Masculino" />
+        <asp:ListItem Text="Femenino" />
+    </asp:DropDownList></div>
     </div>
 
+        <div class="col-md-8">
+            <div class="mb-2">
+                <asp:Label CssClass="form-label" Text ="Imagen Prenda" runat="server" />
+                <input type="file" name="txtImage" runat="server" class="form-control"  />
+                <asp:Image ID="imgNueva" ImageUrl="https://img.freepik.com/vector-premium/foto-blanco-icono-simple-azul-plano-sombra-larga-xa_159242-10176.jpg?w=360" runat="server"  CssClass="img-fluid mb-2" />
+            </div>
 
+        </div>
 
+   </div>
 
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
+  </div>
 </asp:Content>
+
