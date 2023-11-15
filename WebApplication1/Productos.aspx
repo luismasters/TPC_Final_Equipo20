@@ -94,6 +94,9 @@
         <!-- Sección de resultados (80%) -->
         <%--<div class="col-md-9 result-section">--%>
 
+
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <ContentTemplate>
         <div class="container">
             <p>Columna a la izquierda de las tarjetas para navegar items. Buzos, remeras, pantalones... Animé, gamer, etc   </p>
             <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
@@ -122,5 +125,7 @@
                 </asp:Repeater>
             </div>
         </div>
+     </ContentTemplate>
+    </asp:UpdatePanel>
     </main>
 </asp:Content>

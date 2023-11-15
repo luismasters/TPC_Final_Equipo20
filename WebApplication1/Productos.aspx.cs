@@ -32,10 +32,10 @@ namespace WebApplication1
 
 
                 CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            ListCategoria = categoriaNegocio.ObtenerCategorias();
-            DropListCategoria.DataSource = ListCategoria;
-            DropListCategoria.DataTextField = "Descripcion";
-            DropListCategoria.DataBind();
+                ListCategoria = categoriaNegocio.ObtenerCategorias();
+                DropListCategoria.DataSource = ListCategoria;
+                DropListCategoria.DataTextField = "Descripcion";
+                DropListCategoria.DataBind();
 
                 LineaNegocio lineaNegocio = new LineaNegocio();
                 lineaNegocio.ObtenerLineas();
@@ -99,7 +99,8 @@ namespace WebApplication1
                 }
 
                 // Actualizar el contador del carrito en el nav
-                ((SiteMaster)this.Master).UpdateContadorCarrito();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateCartCountScript", "updateCartCount();", true);
+                //((SiteMaster)this.Master).UpdateContadorCarrito();
             }
         }
         protected void BtnDecrement_Click(object sender, EventArgs e)
