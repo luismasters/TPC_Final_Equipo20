@@ -101,5 +101,22 @@ namespace WebApplication1
                 quantity.Text = currentValue.ToString();
             }
         }
+
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            string categoria = txtFiltroCategoria.Text;
+            string genero = txtFiltroGenero.Text;
+            string linea = txtFiltroLinea.Text;
+            decimal? precio = string.IsNullOrEmpty(txtFiltroPrecio.Text) ? null : (decimal?)Convert.ToDecimal(txtFiltroPrecio.Text);
+            string nombre = txtFiltroNombre.Text;
+
+            PrendaNegocio negocio = new PrendaNegocio();
+            // Asumiendo que tienes un método en PrendaNegocio que permite filtrar por estos parámetros
+            var listaFiltrada = negocio.ListarConFiltro(categoria, genero, linea, precio, nombre);
+
+            rptArticulos.DataSource = listaFiltrada;
+            rptArticulos.DataBind();
+        }
+
     }
 }

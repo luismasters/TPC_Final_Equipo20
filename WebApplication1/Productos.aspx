@@ -1,6 +1,39 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Productos.aspx.cs" Inherits="WebApplication1.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <asp:Button ID="btnMostrarFiltro" runat="server"  ClientIDMode="Static" Text="Filtrar" CssClass="btn-mostrar-filtro btn-filtrar-circular" OnClientClick="toggleFiltro(); return false;" />
+
+<div id="filtroSidebar" class="filtro-sidebar p-3" style="display: none;">
+
+    <div class="form-group">
+        <label for="txtFiltroCategoria">Categoría</label>
+        <asp:TextBox ID="txtFiltroCategoria" runat="server" CssClass="form-control" Placeholder="Categoría" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtFiltroGenero">Género</label>
+        <asp:TextBox ID="txtFiltroGenero" runat="server" CssClass="form-control" Placeholder="Género" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtFiltroLinea">Línea</label>
+        <asp:TextBox ID="txtFiltroLinea" runat="server" CssClass="form-control" Placeholder="Línea" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtFiltroPrecio">Precio Máximo</label>
+        <asp:TextBox ID="txtFiltroPrecio" runat="server" CssClass="form-control" Placeholder="Precio Máximo" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtFiltroNombre">Nombre</label>
+        <asp:TextBox ID="txtFiltroNombre" runat="server" CssClass="form-control" Placeholder="Nombre" />
+    </div>
+
+    <asp:Button ID="btnFiltrar" runat="server" Text="Aplicar Filtros" OnClick="btnFiltrar_Click" CssClass="btn btn-primary btn-block mt-3" />
+</div>
+    
     <main>
         <div class="container">
             <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
@@ -81,10 +114,6 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </div>
-        </div>
-
-        </div>
-        </div>
         </div>
     </main>
 </asp:Content>

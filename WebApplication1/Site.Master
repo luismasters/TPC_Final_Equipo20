@@ -82,5 +82,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
     </asp:PlaceHolder>
+
+    <script src="/Scripts/Filtro.js" type="text/javascript"></script>
 </body>
 </html>

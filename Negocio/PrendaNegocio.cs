@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
 using Dominio;
+using System.Text;
 
 namespace Negocio
 {
     public class PrendaNegocio
     {
 
+        #region metodos listar
         public List<int> listarIDPrendas() {
 
             List<int> Ids=new List<int>();
@@ -26,8 +28,6 @@ namespace Negocio
             }
 
             return Ids; }
-
-
 
         public List<Prenda> Listar()
         {
@@ -64,10 +64,6 @@ namespace Negocio
                         prenda.Linea.Descripcion = datos.Lector["Linea"].ToString();
 
                     };
-
-
-
-
                     { 
                     prenda.Imagenes = imagenNegocio.Listar((int)datos.Lector["Id"]);// Corregido aquí
 
@@ -86,6 +82,83 @@ namespace Negocio
             }
         }
 
+        public List<Prenda> ListarConFiltro(string categoria = null, string genero = null, string linea = null, decimal? precio = null, string nombre = null)
+        {
+            List<Prenda> lista = new List<Prenda>();
+            AccesoDatos datos = new AccesoDatos();
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+            try
+            {
+                StringBuilder consulta = new StringBuilder();
+                consulta.Append("SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle FROM Prenda P INNER JOIN Categoria C ON P.IdCategoria = C.Id INNER JOIN Genero G ON P.IdGenero = G.Id INNER JOIN Linea L ON P.IdLinea = L.Id WHERE 1=1");
+
+                if (!string.IsNullOrEmpty(categoria))
+                    consulta.Append(" AND C.Descripcion LIKE @categoria");
+                if (!string.IsNullOrEmpty(genero))
+                    consulta.Append(" AND G.Descripcion LIKE @genero");
+                if (!string.IsNullOrEmpty(linea))
+                    consulta.Append(" AND L.Descripcion LIKE @linea");
+                if (precio.HasValue)
+                    consulta.Append(" AND P.Precio <= @precio");
+                if (!string.IsNullOrEmpty(nombre))
+                    consulta.Append(" AND P.Descripcion LIKE @nombre");
+
+                datos.setearConsulta(consulta.ToString());
+
+                if (!string.IsNullOrEmpty(categoria))
+                    datos.agregarParametro("@categoria", "%" + categoria + "%");
+                if (!string.IsNullOrEmpty(genero))
+                    datos.agregarParametro("@genero", "%" + genero + "%");
+                if (!string.IsNullOrEmpty(linea))
+                    datos.agregarParametro("@linea", "%" + linea + "%");
+                if (precio.HasValue)
+                    datos.agregarParametro("@precio", precio.Value);
+                if (!string.IsNullOrEmpty(nombre))
+                    datos.agregarParametro("@nombre", "%" + nombre + "%");
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Prenda prenda = new Prenda
+                    {
+                        Id = (int)datos.Lector["Id"],
+                        Descripcion = datos.Lector["Descripcion"].ToString(),
+                        Precio = (decimal)datos.Lector["Precio"],
+                        Stock = (int)datos.Lector["Stock"],
+                        Talle = datos.Lector["Talle"].ToString(),
+                        Categoria = new Categoria
+                        {
+                            Id = (int)datos.Lector["IdCategoria"],
+                            Descripcion = datos.Lector["CategoriaDescripcion"].ToString()
+                        },
+                        Genero = new Genero
+                        {
+                            Id = (int)datos.Lector["IdGenero"],
+                            Descripcion = datos.Lector["Genero"].ToString()
+                        },
+                        Linea = new Linea
+                        {
+                            Id = (int)datos.Lector["IdLinea"],
+                            Descripcion = datos.Lector["Linea"].ToString()
+                        }
+                    };
+                    prenda.Imagenes = imagenNegocio.Listar(prenda.Id);
+                    lista.Add(prenda);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        #endregion
         public void Modificar(Prenda prenda)
         {
             AccesoDatos datos = new AccesoDatos();
