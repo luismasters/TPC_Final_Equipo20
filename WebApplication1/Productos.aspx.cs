@@ -13,6 +13,11 @@ namespace WebApplication1
     public partial class WebForm1 : System.Web.UI.Page
     {
         public List<Prenda> PrendaList;
+        public List<Categoria> ListCategoria { get; set; }
+        public List<Linea> ListLinea { get; set; }
+
+
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,7 +28,32 @@ namespace WebApplication1
 
                 rptArticulos.DataSource = PrendaList;
                 rptArticulos.DataBind();
+
+
+
+                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            ListCategoria = categoriaNegocio.ObtenerCategorias();
+            DropListCategoria.DataSource = ListCategoria;
+            DropListCategoria.DataTextField = "Descripcion";
+            DropListCategoria.DataBind();
+
+                LineaNegocio lineaNegocio = new LineaNegocio();
+                lineaNegocio.ObtenerLineas();
+                ListLinea = lineaNegocio.ObtenerLineas();
+                DropListLinea.DataSource = ListLinea;
+                DropListLinea.DataTextField = "Descripcion";
+                DropListLinea.DataBind();
+
+
+                string valorPredeterminado = "Todas"; // Valor que se quiere establecer como predeterminado
+                DropListCategoria.Items.FindByValue(valorPredeterminado).Selected = true;
+                DropListLinea.Items.FindByValue(valorPredeterminado).Selected = true;
+
+
             }
+
+
+
 
 
         }
@@ -104,9 +134,11 @@ namespace WebApplication1
 
         protected void btnFiltrar_Click(object sender, EventArgs e)
         {
-            string categoria = txtFiltroCategoria.Text;
-            string genero = txtFiltroGenero.Text;
-            string linea = txtFiltroLinea.Text;
+           
+
+            string categoria = DropListCategoria.Text;
+            string genero = DropListGenero.Text;
+            string linea = DropListLinea.Text;
             decimal? precio = string.IsNullOrEmpty(txtFiltroPrecio.Text) ? null : (decimal?)Convert.ToDecimal(txtFiltroPrecio.Text);
             string nombre = txtFiltroNombre.Text;
 
