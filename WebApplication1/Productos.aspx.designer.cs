@@ -24,31 +24,31 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button btnMostrarFiltro;
 
         /// <summary>
-        /// Control txtFiltroCategoria.
+        /// Control DropListCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroCategoria;
+        protected global::System.Web.UI.WebControls.DropDownList DropListCategoria;
 
         /// <summary>
-        /// Control txtFiltroGenero.
+        /// Control DropListLinea.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroGenero;
+        protected global::System.Web.UI.WebControls.DropDownList DropListLinea;
 
         /// <summary>
-        /// Control txtFiltroLinea.
+        /// Control DropListGenero.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroLinea;
+        protected global::System.Web.UI.WebControls.DropDownList DropListGenero;
 
         /// <summary>
         /// Control txtFiltroPrecio.

@@ -92,11 +92,11 @@ namespace Negocio
                 StringBuilder consulta = new StringBuilder();
                 consulta.Append("SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle FROM Prenda P INNER JOIN Categoria C ON P.IdCategoria = C.Id INNER JOIN Genero G ON P.IdGenero = G.Id INNER JOIN Linea L ON P.IdLinea = L.Id WHERE 1=1");
 
-                if (!string.IsNullOrEmpty(categoria))
+                if (!string.IsNullOrEmpty(categoria)&& categoria!="Todas")
                     consulta.Append(" AND C.Descripcion LIKE @categoria");
                 if (!string.IsNullOrEmpty(genero))
                     consulta.Append(" AND G.Descripcion LIKE @genero");
-                if (!string.IsNullOrEmpty(linea))
+                if (!string.IsNullOrEmpty(linea) && linea!="Todas")
                     consulta.Append(" AND L.Descripcion LIKE @linea");
                 if (precio.HasValue)
                     consulta.Append(" AND P.Precio <= @precio");

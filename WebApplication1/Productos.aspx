@@ -8,18 +8,25 @@
 
     <div class="form-group">
         <label for="txtFiltroCategoria">Categoría</label>
-        <asp:TextBox ID="txtFiltroCategoria" runat="server" CssClass="form-control" Placeholder="Categoría" />
+
+        <asp:DropDownList runat="server" ID="DropListCategoria" CssClass="form-control" DataTextField=" ">
+           
+        </asp:DropDownList>
     </div>
 
     <div class="form-group">
-        <label for="txtFiltroGenero">Género</label>
-        <asp:TextBox ID="txtFiltroGenero" runat="server" CssClass="form-control" Placeholder="Género" />
-    </div>
+        <label for="txtFiltroLinea">Linea</label>
+  <asp:DropDownList runat="server" ID="DropListLinea" CssClass="form-control">
+     
+  </asp:DropDownList>    </div>
 
     <div class="form-group">
-        <label for="txtFiltroLinea">Línea</label>
-        <asp:TextBox ID="txtFiltroLinea" runat="server" CssClass="form-control" Placeholder="Línea" />
-    </div>
+        <label for="txtFiltroGenero">Genero</label>
+        <asp:DropDownList runat="server" ID="DropListGenero" CssClass="form-control">
+            <asp:ListItem Text="Masculino" />
+            <asp:ListItem Text="Femenino" />
+        </asp:DropDownList>
+        </div>
 
     <div class="form-group">
         <label for="txtFiltroPrecio">Precio Máximo</label>
