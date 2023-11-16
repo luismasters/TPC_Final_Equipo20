@@ -42,7 +42,7 @@
 </div>
     
     <main>
-        <div class="container">
+<%--        <div class="container">
             <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
                 <!-- Indicadores de carrusel (opcional) -->
                 <ol class="carousel-indicators">
@@ -74,31 +74,12 @@
                     });
                 </script>
             </div>
-        </div>
-        <%--<div class="container-fluid">
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-md-2 filter-section">
-                    <!-- Caja de texto para filtrar por categoría -->
-                    <h6>Busqueda por:</h6>
-                    <h6>Categoría:</h6>
-                    <asp:TextBox ID="txtCategoria" runat="server" CssClass="form-control" Placeholder="Escribe una categoría" />
-                    <!-- Caja de texto para filtrar por precio -->
-                    <h6>Genero:</h6>
-                    <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" Placeholder="Genero" />
-                    <h6>Linea:</h6>
-                    <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" Placeholder="Linea" />
-                    <h6>Precio:</h6>
-                    <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" Placeholder="Escribe un precio" />
-                </div>--%>
-        <!-- Sección de resultados (80%) -->
-        <%--<div class="col-md-9 result-section">--%>
-
+        </div>--%>
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-        <div class="container">
-            <p>Columna a la izquierda de las tarjetas para navegar items. Buzos, remeras, pantalones... Animé, gamer, etc   </p>
+<%--        <input type="text" id="inputBusqueda" placeholder="Buscar productos..." class="form-control" />--%>
+        <div class="container">     
             <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
                 <asp:Repeater ID="rptArticulos" runat="server" OnItemCommand="RptArticulos_ItemCommand">
                     <ItemTemplate>
