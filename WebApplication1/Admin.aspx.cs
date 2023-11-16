@@ -12,83 +12,25 @@ namespace WebApplication1
 {
     public partial class Admin : System.Web.UI.Page
     {
-        public List<Categoria> ListCategoria { get; set; }
-        public List<Linea> ListLinea { get; set; }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (!IsPostBack)
-            {
 
-            }
-            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            ListCategoria = categoriaNegocio.ObtenerCategorias();
-            DropListCategoria.DataSource = ListCategoria;
-            DropListCategoria.DataTextField = "Descripcion";
-            DropListCategoria.DataBind();
-
-            LineaNegocio lineaNegocio = new LineaNegocio();
-            ListLinea = lineaNegocio.ObtenerLineas();
-            DropListLinea.DataSource = ListLinea;
-            DropListLinea.DataTextField = "Descripcion";
-            DropListLinea.DataBind();
 
 
 
         }
 
-        protected void BtnAgregarCategoria_Click(object sender, EventArgs e)
+        protected void Alta_Click(object sender, ImageClickEventArgs e)
         {
-            TxtNuevaCategoria.Visible = true;
-            BtnNuevaCategoria.Visible = true;
+
+            Response.Redirect("Alta.aspx");
+
         }
-
-        protected void BtnEnviarCategoria_Click(object sender, EventArgs e)
-        {
-            string NuevaCategoria = TxtNuevaCategoria.Text;
-            TxtNuevaCategoria.Visible = false;
-            BtnNuevaCategoria.Visible = false;
-
-            if (!string.IsNullOrEmpty(NuevaCategoria))
-
-            {
-                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-                categoriaNegocio.AgregarCategoria(NuevaCategoria);
-                ListCategoria = categoriaNegocio.ObtenerCategorias();
-                DropListCategoria.DataSource = ListCategoria;
-                DropListCategoria.DataTextField = "Descripcion";
-                DropListCategoria.DataBind();
-            }
-        }
-        protected void BtnAgregarLinea_Click(object sender, EventArgs e)
-        {
-            TxtNuevaLinea.Visible = true;
-            BtnNuevaLinea.Visible = true;
-        }
-
-        protected void BtnEnviarLinea_Click(object sender, EventArgs e)
-        {
-            string NuevaLinea = TxtNuevaLinea.Text;
-            TxtNuevaLinea.Visible = false;
-            BtnNuevaLinea.Visible = false;
-
-            if (!string.IsNullOrEmpty(NuevaLinea))
-
-            {
-                LineaNegocio lineaNegocio = new LineaNegocio();
-                lineaNegocio.AgregarLinea(NuevaLinea);
-                ListLinea = lineaNegocio.ObtenerLineas();
-                DropListLinea.DataSource = ListLinea;
-                DropListLinea.DataTextField = "Descripcion";
-                DropListLinea.DataBind();
-
-            }
-        }
-
-
-
-
-
     }
 }
+
+
+
