@@ -15,14 +15,21 @@ namespace Dominio
     {
         public int Id { get; set; }
         public string User { get; set; }
-        public string Pass {  get; set; }  
+        public string Pass { get; set; }
+        public string Email { get; set; } // Agregada la propiedad Email
         public TipoUsuario TipoUsuario { get; set; }
 
-        public Usuario(string user, string pass, bool admin)
+        // Constructor existente
+        public Usuario(string user, string pass)
         {
             User = user;
             Pass = pass;
-            TipoUsuario = admin ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;   
+            TipoUsuario = TipoUsuario.NORMAL; // Por defecto, el usuario es normal
+        }
+
+        // Constructor sin parámetros
+        public Usuario()
+        {
         }
     }
 
