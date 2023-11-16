@@ -43,11 +43,25 @@ IdPrenda int Foreign key references Prenda(Id),
 ImagenUrl varchar(1000) not null,
 )
 
+CREATE TABLE Rol (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE Usuario (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    NombreUsuario VARCHAR(50) NOT NULL UNIQUE,
+    Contraseña VARCHAR(50) NOT NULL,
+    IdRol INT NOT NULL FOREIGN KEY REFERENCES Rol(Id),
+    Email VARCHAR(255) NOT NULL 
+);
+
 
 insert into Categoria (Descripcion) values ('Remeras')
 insert into Categoria (Descripcion) values ('Buzos')
 insert into Categoria (Descripcion) values ('Camperas')
 insert into Categoria (Descripcion) values ('Pantalones')
+insert into Categoria (Descripcion) values ('Todas')
 
 
 insert into Genero (Descripcion) values ('Masculino')
@@ -60,6 +74,7 @@ insert into Linea (Descripcion) values ('Casual')
 insert into Linea (Descripcion) values ('deportiva')
 insert into Linea (Descripcion) values ('Formal')
 insert into Linea (Descripcion) values ('Playa')
+insert into Linea (Descripcion) values ('Todas')
 
 
 
@@ -94,6 +109,9 @@ SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS C
 INNER JOIN Categoria C ON P.IdCategoria = C.Id 
 INNER JOIN Genero G ON P.IdGenero = G.Id
 INNER JOIN Linea L ON P.IdLinea = L.Id;
+
+INSERT INTO Rol (Nombre) VALUES ('Administrador');
+INSERT INTO Rol (Nombre) VALUES ('Comprador');
 
 select * from linea
 select * from genero
