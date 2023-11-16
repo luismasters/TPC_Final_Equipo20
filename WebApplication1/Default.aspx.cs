@@ -20,7 +20,6 @@ namespace WebApplication1
             {
                 PrendaNegocio prendaNegocio = new PrendaNegocio();
                 PrendaList = prendaNegocio.Listar();
-
                 rptArticulos.DataSource = PrendaList;
                 rptArticulos.DataBind();
             }

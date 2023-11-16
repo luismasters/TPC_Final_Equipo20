@@ -20,17 +20,25 @@ namespace Dominio
         public TipoUsuario TipoUsuario { get; set; }
 
         // Constructor existente
-        public Usuario(string user, string pass)
+        public Usuario(string user, string pass, string email)
         {
             User = user;
             Pass = pass;
+            Email= email;
             TipoUsuario = TipoUsuario.NORMAL; // Por defecto, el usuario es normal
         }
 
-        // Constructor sin parámetros
-        public Usuario()
+        // Constructor con IdRol
+        public Usuario(string user, string pass, string email, bool idRol)
         {
+
+            User = user;
+            Pass = pass;
+            Email = email;
+            TipoUsuario = idRol ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
+
         }
+        public Usuario() { }
     }
 
 }

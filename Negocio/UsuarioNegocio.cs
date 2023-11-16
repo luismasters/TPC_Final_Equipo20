@@ -24,9 +24,9 @@ namespace Negocio
                     return new Usuario
                     {
                         Id = (int)datos.Lector["Id"],
-                        User = datos.Lector["Usuario"].ToString(),
-                        Pass = datos.Lector["Pass"].ToString(),
-                        TipoUsuario = (int)(datos.Lector["EsAdmin"]) == 1 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL
+                        User = datos.Lector["NombreUsuario"].ToString(),
+                        Pass = datos.Lector["Contraseña"].ToString(),
+                        TipoUsuario = (int)(datos.Lector["IdRol"]) == 1 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL
                     };
                 }
                 return null;
@@ -46,11 +46,11 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO Usuario (NombreUsuario, Email, Pass, IdRol) VALUES (@NombreUsuario,@Email, @Pass, @IdRol)");
+                datos.setearConsulta("INSERT INTO Usuario (NombreUsuario, Contraseña, IdRol, Email) VALUES (@NombreUsuario, @Contraseña, @IdRol, @Email)");
                 datos.agregarParametro("@NombreUsuario", usuario.User);
+                datos.agregarParametro("@Contraseña", usuario.Pass);
+                datos.agregarParametro("@IdRol", usuario.TipoUsuario);
                 datos.agregarParametro("@Email", usuario.Email);
-                datos.agregarParametro("@Pass", usuario.Pass);
-                datos.agregarParametro("@IdRol", usuario.TipoUsuario == TipoUsuario.ADMIN ? 1 : 0);
                 datos.ejecutarAccion();
                 return true;
             }

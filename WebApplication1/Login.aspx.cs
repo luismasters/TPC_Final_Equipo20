@@ -51,7 +51,7 @@ namespace WebApplication1
                 {
                     FormsAuthentication.SetAuthCookie(username, false);
                     Session.Add("usuario", usuario);
-                    Response.Redirect("Default.aspx", false);
+                    Response.Redirect("Perfil.aspx", false);
                 }
                 else
                 {
@@ -73,6 +73,7 @@ namespace WebApplication1
                 string username = registerName.Text;
                 string email = registerEmail.Text;
                 string password = registerPassword.Text;
+                bool rol = chkEsAdmin.Checked;
 
                 // Validación básica
                 if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
@@ -82,28 +83,34 @@ namespace WebApplication1
                 }
 
                 // Validación de formato de corrEo
-                if (!Regex.IsMatch(email, @"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"))
-                {
-                    lblErrorRegistro.Text = "El formato del correo electrónico es inválido.";
-                    return;
-                }
+                //if (!Regex.IsMatch(email, @"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"))
+                //{
+                //    lblErrorRegistro.Text = "El formato del correo electrónico es inválido.";
+                //    return;
+                //}
 
                 // Validación de contraseña (longitud y composición)
-                if (password.Length < 8 || !Regex.IsMatch(password, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"))
-                {
-                    lblErrorRegistro.Text = "La contraseña debe tener al menos 8 caracteres e incluir al menos una letra y un número.";
-                    return;
-                }
+                //if (password.Length < 8 || !Regex.IsMatch(password, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"))
+                //{
+                //    lblErrorRegistro.Text = "La contraseña debe tener al menos 8 caracteres e incluir al menos una letra y un número.";
+                //    return;
+                //}
 
                 // Proceso de registro
-                Usuario nuevoUsuario = new Usuario(username, password);
+                Usuario nuevoUsuario = new Usuario(username, password, email, rol);
                 bool registrado = usuarioNegocio.Registrar(nuevoUsuario);
                 if (registrado)
                 {
                     MostrarFormularioRegistro = false;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "RegistroExitoso",
-                        "alert('Registro exitoso. Por favor, inicie sesión.'); " +
+                        "alert('Registro exitoso. A continuación será redirigido a la página de inicio.'); " +
                         "limpiarCamposRegistro();", true);
+                    if (nuevoUsuario != null)
+                    {
+                        FormsAuthentication.SetAuthCookie(username, false);
+                        Session.Add("usuario", nuevoUsuario);
+                        Response.Redirect("Perfil.aspx", false);
+                    }
                 }
                 else
                 {
