@@ -109,7 +109,7 @@ namespace WebApplication1
                     {
                         FormsAuthentication.SetAuthCookie(username, false);
                         Session.Add("usuario", nuevoUsuario);
-                        Response.Redirect("Perfil.aspx", false);
+                        Response.Redirect("Default.aspx", false);
                     }
                 }
                 else

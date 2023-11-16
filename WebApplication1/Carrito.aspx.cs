@@ -24,7 +24,9 @@ namespace WebApplication1
         }
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
-
+            if (!Seguridad.sesionActiva(Session["usuario"]))
+                Response.Redirect("Login.aspx");
+            else Response.Redirect("Checkout.aspx");
         }
         protected void btnVolver_Click(object sender, EventArgs e)
         {

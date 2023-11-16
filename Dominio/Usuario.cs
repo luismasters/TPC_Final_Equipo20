@@ -18,7 +18,9 @@ namespace Dominio
         public string Pass { get; set; }
         public string Email { get; set; } // Agregada la propiedad Email
         public TipoUsuario TipoUsuario { get; set; }
-
+        
+       
+        
         // Constructor existente
         public Usuario(string user, string pass, string email)
         {
@@ -29,16 +31,15 @@ namespace Dominio
         }
 
         // Constructor con IdRol
-        public Usuario(string user, string pass, string email, bool idRol)
+        public Usuario(string user, string pass, string email, bool esAdmin)
         {
-
             User = user;
             Pass = pass;
             Email = email;
-            TipoUsuario = idRol ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
-
+            TipoUsuario = esAdmin ? TipoUsuario.ADMIN : TipoUsuario.NORMAL;
         }
         public Usuario() { }
+        
     }
 
 }

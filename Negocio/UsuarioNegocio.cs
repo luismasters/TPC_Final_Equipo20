@@ -26,7 +26,7 @@ namespace Negocio
                         Id = (int)datos.Lector["Id"],
                         User = datos.Lector["NombreUsuario"].ToString(),
                         Pass = datos.Lector["Contraseña"].ToString(),
-                        TipoUsuario = (int)(datos.Lector["IdRol"]) == 1 ? TipoUsuario.ADMIN : TipoUsuario.NORMAL
+                        TipoUsuario = (int)(datos.Lector["IdRol"]) == 1 ? TipoUsuario.NORMAL : TipoUsuario.ADMIN
                     };
                 }
                 return null;

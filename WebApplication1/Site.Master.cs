@@ -13,7 +13,7 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-                UpdateContadorCarrito();        
+            UpdateContadorCarrito();
         }
 
         public void UpdateContadorCarrito()
@@ -29,6 +29,6 @@ namespace WebApplication1
                 cartCount.InnerText = "0";
             }
         }
-        
+
     }
 }

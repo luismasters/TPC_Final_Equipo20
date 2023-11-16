@@ -77,9 +77,7 @@
                                 { %>
                             <!-- Si la sesión está iniciada, mostrar el nombre del usuario -->
                             <a class="nav-link" href="Perfil">Bienvenido, <%: ((Dominio.Usuario)Session["usuario"]).User %> </a>
-                            <a class="nav-link" runat="server" onclick="CerrarSesion()" style="cursor: pointer;">
-                                <i class="fas fa-sign-out-alt"></i>Cerrar Sesión
-                            </a>
+
                             <% }
                                 else
                                 { %>

@@ -16,18 +16,17 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
-
-
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Session.Add("error", "Se requiere permiso de admin para ingresar a esta página");
+                Response.Redirect("Error.aspx");
+            }
 
         }
 
         protected void Alta_Click(object sender, ImageClickEventArgs e)
         {
-
             Response.Redirect("Alta.aspx");
-
         }
     }
 }

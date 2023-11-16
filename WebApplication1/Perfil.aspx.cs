@@ -16,9 +16,10 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
-                DataBind();
-            }
-           
+                if (!Seguridad.sesionActiva(Session["usuario"]))
+                    Response.Redirect("Login.aspx");
+                    DataBind();
+            }         
         }
         protected string ObtenerNombreUsuario()
         {
