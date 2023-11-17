@@ -9,19 +9,26 @@
             <div class="col-md-4">
                 <div class="mb-2">
                     <asp:Label Text="Descripcion" runat="server" ID="lblDescripcion" />
-                    <asp:TextBox CssClass="form-control" runat="server" ID="TxtDescripcion" />
+                    <asp:TextBox CssClass="form-control" runat="server" ID="TxtDescripcion"  />
+                    <asp:RequiredFieldValidator ID="ValidatorDescripcion" runat="server" ControlToValidate="TxtDescripcion" ErrorMessage="Campo requerido" Display="Dynamic" />
+
                 </div>
                 <div class="mb-2">
                     <asp:Label Text="Precio" runat="server" ID="lblPrecio" />
-                    <asp:TextBox CssClass="form-control" runat="server" ID="TxtPrecio" />
-                </div>
+<asp:TextBox CssClass="form-control" runat="server" ID="TxtPrecio" />
+<asp:RegularExpressionValidator ID="RegexValidatorPrecio" runat="server" ControlToValidate="TxtPrecio"
+    ErrorMessage="Debe ser un número válido" ValidationExpression="^(0|\d+(\.\d+)?)$" Display="Dynamic" />
+<asp:RangeValidator ID="RangeValidatorPrecio" runat="server" ControlToValidate="TxtPrecio"
+    ErrorMessage="El precio debe ser mayor o igual a 0" MinimumValue="0" Type="Double" Display="Dynamic" />              </div>
                 <div class="mb-2">
                     <asp:Label Text="Cantidad Ingreso" runat="server" ID="lblStock" />
-                    <asp:TextBox CssClass="form-control" runat="server" ID="TxtStock" />
-                </div>
+<asp:TextBox CssClass="form-control" runat="server" ID="TxtStock" type="integer"/>
+         </div>
                 <div class="mb-2">
                     <asp:Label Text="Talle" runat="server" ID="lblTalle" />
-                    <asp:TextBox CssClass="form-control" runat="server" ID="TxtTalle" />
+<asp:TextBox CssClass="form-control" runat="server" ID="TxtTalle" />
+<asp:RegularExpressionValidator ID="RegexValidatorTalle" runat="server" ControlToValidate="TxtTalle"
+    ErrorMessage="Ingrese números o letras mayúsculas" ValidationExpression="^[A-Z0-9]+$" Display="Dynamic" />
                 </div>
                 <div class="mb-2">
                     <asp:Label Text="Categoria" runat="server" ID="lblCategoria" />
@@ -51,15 +58,23 @@
 
             <div class="col-md-8">
                 <div class="mb-2">
-                    <asp:Label CssClass="form-label" Text="Imagen Prenda" runat="server" />
-                    <input type="file" name="txtImage" runat="server" class="form-control" />
+                    <asp:Label CssClass="form-label" Text="Imagen Prenda: carga una imagen desde tu equipo" runat="server" />
+                    <input type="file" ID="txtImage" runat="server" class="form-control" /> 
                     <asp:Image ID="imgNueva" ImageUrl="https://img.freepik.com/vector-premium/foto-blanco-icono-simple-azul-plano-sombra-larga-xa_159242-10176.jpg?w=360" runat="server" CssClass="img-fluid mb-2" />
                 </div>
-                <asp:Button Text="Dar Alta a la prenda" runat="server" CssClass="btn btn-primary" OnClick="Registrar_Click"/>
+                <asp:Button Text="Dar Alta a la prenda" runat="server" CssClass="btn btn-primary" OnClick="Registrar_Click" OnClientClick="return confirmarAlta();"/>
+                <script>
+                    function confirmarAlta() {
+                        return confirm("¿Estás seguro de dar de alta esta prenda?");
+                    }
+                </script>
+
             </div>
 
         </div>
-
+ <div class="d-flex justify-content-end">
+      <a href="Default.aspx" class="mb-2">Salir</a>
+    </div>
     </div>
 
 

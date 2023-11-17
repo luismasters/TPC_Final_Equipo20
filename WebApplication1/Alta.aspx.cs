@@ -21,28 +21,25 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (!IsPostBack)
-            {
-
-            }
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+
             ListCategoria = categoriaNegocio.ObtenerCategorias();
-            DropListCategoria.DataSource = ListCategoria;
-            DropListCategoria.DataTextField = "Descripcion";
-            DropListCategoria.DataBind();
+
 
             LineaNegocio lineaNegocio = new LineaNegocio();
             ListLinea = lineaNegocio.ObtenerLineas();
-            DropListLinea.DataSource = ListLinea;
-            DropListLinea.DataTextField = "Descripcion";
-            DropListLinea.DataBind();
 
-
+            if (!IsPostBack)
+            {
+                DropListCategoria.DataSource = ListCategoria;
+                DropListCategoria.DataTextField = "Descripcion";
+                DropListCategoria.DataBind();
+                DropListLinea.DataSource = ListLinea;
+                DropListLinea.DataTextField = "Descripcion";
+                DropListLinea.DataBind();
+            }
             PrendaNegocio pre = new PrendaNegocio();
             Listprenda = pre.Listar();
-
-
 
         }
 
@@ -96,15 +93,58 @@ namespace WebApplication1
 
         protected void Registrar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Prenda prenda = new Prenda();
+                prenda.Descripcion = TxtDescripcion.Text;
+                prenda.Precio = decimal.Parse(TxtPrecio.Text);
+                prenda.Talle = TxtTalle.Text;
+                prenda.Stock = int.Parse(TxtStock.Text);
 
+                // Inicializar las propiedades dentro de Prenda
+                prenda.Categoria = new Categoria(); // Asegurar que se cree una nueva instancia de Categoria
+                prenda.Linea = new Linea(); // Asegurar que se cree una nueva instancia de Linea
+                prenda.Genero = new Genero(); // Asegurar que se cree una nueva instancia de Genero
 
-            string mensaje = BuscarId(Listprenda).ToString();
-            TxtDescripcion.Text = mensaje;
+                foreach (Categoria item in ListCategoria)
+                {
+                    if (item.Descripcion == DropListCategoria.Text)
+                    {
+                        prenda.Categoria.Id = item.Id;
+                        prenda.Categoria.Descripcion = item.Descripcion;
+                        break; // Terminar el bucle una vez que se encuentre la categoría
+                    }
+                }
 
+                foreach (var item in ListLinea)
+                {
+                    if (item.Descripcion == DropListLinea.Text)
+                    {
+                        prenda.Linea.Id = item.Id;
+                        prenda.Linea.Descripcion = item.Descripcion;
+                        break; // Terminar el bucle una vez que se encuentre la línea
+                    }
+                }
 
+                prenda.Genero.Id = (DropListGenero.SelectedValue == "Masculino") ? 1 : 2;
+                prenda.Genero.Descripcion = (DropListGenero.SelectedValue == "Masculino") ? "Masculino" : "Femenino";
 
+                PrendaNegocio prendaNegocio = new PrendaNegocio();
+                ImagenNegocio ima = new ImagenNegocio();
+                int id = BuscarId(Listprenda);
+                List<Imagen> imagenesObtenidas = ima.Listar(id);
+                int cantImg = imagenesObtenidas.Count;
+                string Ruta = Server.MapPath("./Prenda_Img/");
+                txtImage.PostedFile.SaveAs(Ruta + "Prenda-" + id + "-" + (cantImg + 1) + ".jpg");
+                imgNueva.ImageUrl = "~/Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+                prendaNegocio.AgregarNuevaPrenda(prenda);
+                ima.Agregar("./Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg", id);
 
-
+            }
+            catch (Exception ex)
+            {
+                // Manejo de la excepción (por ejemplo, mostrar un mensaje de error)
+            }
         }
 
 
@@ -123,5 +163,8 @@ namespace WebApplication1
 
             return proximoID;
         }
+
+
     }
 }
+

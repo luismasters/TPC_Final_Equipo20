@@ -423,3 +423,39 @@ C:\Users\luism\Desktop\Nueva carpeta\TPC_Final_Equipo20\WebApplication1\obj\Debu
 C:\Users\luism\Desktop\Nueva carpeta\TPC_Final_Equipo20\WebApplication1\obj\Debug\WebApplication1.csproj.CopyComplete
 C:\Users\luism\Desktop\Nueva carpeta\TPC_Final_Equipo20\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\luism\Desktop\Nueva carpeta\TPC_Final_Equipo20\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\WebApplication1.dll.config
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\WebApplication1.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\WebApplication1.pdb
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Antlr3.Runtime.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\AspNet.ScriptManager.jQuery.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Dominio.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Microsoft.AspNet.FriendlyUrls.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Microsoft.ScriptManager.MSAjax.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Microsoft.ScriptManager.WebForms.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Negocio.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Newtonsoft.Json.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\System.Net.Http.Formatting.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.WebHost.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Optimization.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\WebGrease.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Dominio.pdb
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Negocio.pdb
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\System.Net.Http.Formatting.xml
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.xml
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Http.WebHost.xml
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\System.Web.Optimization.xml
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Newtonsoft.Json.xml
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Antlr3.Runtime.pdb
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Microsoft.AspNet.FriendlyUrls.xml
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\es\System.Web.Optimization.resources.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\bin\es\Microsoft.AspNet.FriendlyUrls.resources.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\obj\Debug\WebApplication1.csproj.AssemblyReference.cache
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\obj\Debug\WebApplication1.csproj.CoreCompileInputs.cache
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\obj\Debug\WebApplication1.csproj.CopyComplete
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\obj\Debug\WebApplication1.dll
+C:\Users\luism\Desktop\Nueva carpeta (2)\TPC_Final_Equipo20\WebApplication1\obj\Debug\WebApplication1.pdb
