@@ -76,16 +76,22 @@ namespace WebApplication1
         }
         protected void gvCarrito_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int productoId = Convert.ToInt32(gvCarrito.DataKeys[e.RowIndex].Value);
-
-            var carrito = (Dictionary<int, int>)Session["carrito"];
-
-            carrito.Remove(productoId);
-
-
-            BindGrid();
-            // Actualizar el contador del carrito en el nav
-            ((SiteMaster)this.Master).UpdateContadorCarrito();
+            try
+            {
+                if (gvCarrito.DataKeys.Count > e.RowIndex)
+                {
+                    int productoId = Convert.ToInt32(gvCarrito.DataKeys[e.RowIndex].Value);
+                    var carrito = (Dictionary<int, int>)Session["carrito"];
+                    carrito.Remove(productoId);
+                    BindGrid();
+                    // Actualizar el contador del carrito en el nav
+                    ((SiteMaster)this.Master).UpdateContadorCarrito();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         protected void gvCarrito_RowCommand(object sender, GridViewCommandEventArgs e)
         {

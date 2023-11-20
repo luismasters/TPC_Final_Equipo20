@@ -42,40 +42,6 @@
 </div>
     
     <main>
-<%--        <div class="container">
-            <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
-                <!-- Indicadores de carrusel (opcional) -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                </ol>
-                <!-- Imágenes del carrusel -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="Content/Imagenes/providence-team-merchandising-ropa.jpg" alt="Imagen 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="Content/Imagenes/Ropa-Gamer.jpg" alt="Imagen 2">
-                    </div>
-                    <!-- Controles de carrusel (opcional) -->
-                    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-
-                    </a>
-                    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-
-                    </a>
-                </div>
-                <script>
-                    $(document).ready(function () {
-                        // Inicializa el carrusel
-                        $('#myCarousel').carousel();
-                    });
-                </script>
-            </div>
-        </div>--%>
-
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
 <%--        <input type="text" id="inputBusqueda" placeholder="Buscar productos..." class="form-control" />--%>

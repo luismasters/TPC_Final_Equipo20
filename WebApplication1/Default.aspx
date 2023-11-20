@@ -2,6 +2,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
     <main>
         <div class="container">
             <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
@@ -36,35 +37,38 @@
             </script>
         </div>
 
-        <div class="container mt-4">
-            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
-                <asp:Repeater ID="rptArticulos" runat="server" OnItemCommand="RptArticulos_ItemCommand">
-                    <ItemTemplate>
-                        <div class="card mb-4" style="width: 18rem;">
-                            <img src='<%# Eval("ImagenURL") %>' class="card-img-top" alt="Imagen del artículo">
-                            <div class="card-body">
-                                <h5 class="card-title"><%# Eval("Descripcion") %></h5>
-                                <p class="card-text">Precio: $<%# Eval("Precio") %></p>
-                                <p class="card-text">Stock: <%# Eval("Stock") %></p>
-                                <p class="card-text">Categoría: <%# Eval("Categoria") %></p>
-                                <p class="card-text">Género: <%# Eval("Genero") %></p>
-                                <p class="card-text">Línea: <%# Eval("Linea") %></p>
-                            </div>
-                            <div class="card-footer">
-                                <p></p>
-                            <asp:Button ID="btnAgregarCarrito" runat="server" CssClass="btn btn-primary btn-sm" Text="Agregar al carrito" CommandName="Agregar" CommandArgument='<%# Eval("Id") %>' />
-                            <p></p>
-                            <div class="quantity d-flex justify-content-center align-items-center">
-                                <asp:Button ID="BtnDecrement" runat="server" Text="-" CssClass="btn btn-sm btn-secondary" OnClick="BtnDecrement_Click" UseSubmitBehavior="false" />
-                                <asp:TextBox ID="quantity" runat="server" CssClass="custom-form-control text-center" Text="1" />
-                                <asp:Button ID="BtnIncrement" runat="server" Text="+" CssClass="btn btn-sm btn-secondary" OnClick="BtnIncrement_Click" UseSubmitBehavior="false" />
-                            </div>
-                            <p></p>
-                            </div>
-                        </div>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </div>
-        </div>
-    </main>
+        <main>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <div class="container">     
+                    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                        <asp:Repeater ID="rptArticulos" runat="server" OnItemCommand="RptArticulos_ItemCommand">
+                            <ItemTemplate>
+                                <div class="card mb-4" style="width: 18rem; margin-right: 10px;">
+                                    <img src='<%# Eval("ImagenURL") %>' class="card-img-top" alt="Imagen del artículo" style="width: 230px; height: 250px;">
+                                    <div class="card-body">
+                                        <h6 class="card-title"><%# Eval("Descripcion") %></h6>
+                                        <p class="card-text">$<%# Eval("Precio") %> Stock: <%# Eval("Stock") %></p>
+                                        <p class="card-text">Categoria: <%# Eval("Categoria") %></p>
+                                        <p class="card-text">Genero: <%# Eval("Genero") %></p>
+                                        <p class="card-text">Linea: <%# Eval("Linea") %></p>
+                                    </div>
+                                    <p></p>
+                                    <asp:Button ID="btnAgregarCarrito" runat="server" CssClass="btn btn-primary btn-sm" Text="Agregar al carrito" CommandName="Agregar" CommandArgument='<%# Eval("Id") %>' />
+                                    <p></p>
+                                    <div class="quantity d-flex justify-content-center align-items-center">
+                                        <asp:Button ID="BtnDecrement" runat="server" Text="-" CssClass="btn btn-sm btn-secondary" OnClick="BtnDecrement_Click" UseSubmitBehavior="false" />
+                                        <asp:TextBox ID="quantity" runat="server" CssClass="custom-form-control text-center" Text="1" />
+                                        <asp:Button ID="BtnIncrement" runat="server" Text="+" CssClass="btn btn-sm btn-secondary" OnClick="BtnIncrement_Click" UseSubmitBehavior="false" />
+                                    </div>
+                                    <p></p>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                </div>
+             </ContentTemplate>
+            </asp:UpdatePanel>
+            </main>>
+            </main>
 </asp:Content>
