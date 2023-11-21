@@ -139,22 +139,24 @@ namespace WebApplication1
                 {
                     pnlEmptyCart.Visible = true;
                     gvCarrito.Visible = false;
+                    // Actualiza el total del carrito
+
                 }
                 else
                 {
                     pnlEmptyCart.Visible = false;
                     gvCarrito.Visible = true;
-
-                    // Actualiza el total del carrito
-                    decimal total = dtProductosCarrito.AsEnumerable().Sum(row => row.Field<decimal>("Precio") * row.Field<int>("Cantidad"));
-                    lblTotal.Text = "Total: " + total.ToString("C");
                 }
+
+                decimal total = dtProductosCarrito.AsEnumerable().Sum(row => row.Field<decimal>("Precio") * row.Field<int>("Cantidad"));
+                lblTotal.Text = "Total: " + total.ToString("C");
             }
             else
             {
                 pnlEmptyCart.Visible = true;
                 gvCarrito.Visible = false;
             }
+
         }
         protected void Unnamed_Click(object sender, EventArgs e)
         {
