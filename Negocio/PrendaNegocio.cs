@@ -11,12 +11,13 @@ namespace Negocio
     {
 
         #region metodos listar
-        public List<int> listarIDPrendas() {
+        public List<int> listarIDPrendas()
+        {
 
-            List<int> Ids=new List<int>();
+            List<int> Ids = new List<int>();
             PrendaNegocio prendaNegocio = new PrendaNegocio();
 
-            List<Dominio.Prenda>  prendas= new List<Dominio.Prenda>();
+            List<Dominio.Prenda> prendas = new List<Dominio.Prenda>();
 
             prendas = prendaNegocio.Listar();
 
@@ -27,7 +28,8 @@ namespace Negocio
 
             }
 
-            return Ids; }
+            return Ids;
+        }
 
         public List<Prenda> Listar()
         {
@@ -52,7 +54,7 @@ namespace Negocio
                         prenda.Categoria.Id = (int)datos.Lector["IdCategoria"];
                         prenda.Categoria.Descripcion = datos.Lector["CategoriaDescripcion"].ToString();
                     };
-                    prenda.Genero=new Genero();
+                    prenda.Genero = new Genero();
                     {
                         prenda.Genero.Id = (int)datos.Lector["IdGenero"];
                         prenda.Genero.Descripcion = datos.Lector["Genero"].ToString();
@@ -64,11 +66,12 @@ namespace Negocio
                         prenda.Linea.Descripcion = datos.Lector["Linea"].ToString();
 
                     };
-                    { 
-                    prenda.Imagenes = imagenNegocio.Listar((int)datos.Lector["Id"]);// Corregido aquí
+                    {
+                        prenda.Imagenes = imagenNegocio.Listar((int)datos.Lector["Id"]);// Corregido aquí
 
-                    lista.Add(prenda);
-                }    };
+                        lista.Add(prenda);
+                    }
+                };
 
                 return lista;
             }
@@ -92,11 +95,11 @@ namespace Negocio
                 StringBuilder consulta = new StringBuilder();
                 consulta.Append("SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle FROM Prenda P INNER JOIN Categoria C ON P.IdCategoria = C.Id INNER JOIN Genero G ON P.IdGenero = G.Id INNER JOIN Linea L ON P.IdLinea = L.Id WHERE 1=1");
 
-                if (!string.IsNullOrEmpty(categoria)&& categoria!="Todas")
+                if (!string.IsNullOrEmpty(categoria) && categoria != "Todas")
                     consulta.Append(" AND C.Descripcion LIKE @categoria");
                 if (!string.IsNullOrEmpty(genero))
                     consulta.Append(" AND G.Descripcion LIKE @genero");
-                if (!string.IsNullOrEmpty(linea) && linea!="Todas")
+                if (!string.IsNullOrEmpty(linea) && linea != "Todas")
                     consulta.Append(" AND L.Descripcion LIKE @linea");
                 if (precio.HasValue)
                     consulta.Append(" AND P.Precio <= @precio");
@@ -158,6 +161,68 @@ namespace Negocio
             }
         }
 
+
+        public Prenda BuscarUnaPrenda(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+            Prenda prenda = null;
+
+            try
+            {
+                datos.setearConsulta("SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle " +
+                                    "FROM Prenda P " +
+                                    "INNER JOIN Categoria C ON P.IdCategoria = C.Id " +
+                                    "INNER JOIN Genero G ON P.IdGenero = G.Id " +
+                                    "INNER JOIN Linea L ON P.IdLinea = L.Id " +
+                                    "WHERE P.Id = @id");
+                datos.agregarParametro("@id", id);
+
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    prenda = new Prenda
+                    {
+                        Id = (int)datos.Lector["Id"],
+                        Descripcion = datos.Lector["Descripcion"].ToString(),
+                        Precio = (decimal)datos.Lector["Precio"],
+                        Stock = (int)datos.Lector["Stock"],
+                        Talle = datos.Lector["Talle"].ToString(),
+                        Categoria = new Categoria
+                        {
+                            Id = (int)datos.Lector["IdCategoria"],
+                            Descripcion = datos.Lector["CategoriaDescripcion"].ToString()
+                        },
+                        Genero = new Genero
+                        {
+                            Id = (int)datos.Lector["IdGenero"],
+                            Descripcion = datos.Lector["Genero"].ToString()
+                        },
+                        Linea = new Linea
+                        {
+                            Id = (int)datos.Lector["IdLinea"],
+                            Descripcion = datos.Lector["Linea"].ToString()
+                        }
+                    };
+
+                    prenda.Imagenes = imagenNegocio.Listar(prenda.Id);
+                }
+
+                return prenda;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+
         #endregion
         public void Modificar(Prenda prenda)
         {
@@ -165,12 +230,15 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE Prenda SET Descripcion = @descripcion, Precio = @precio, Talle = @talle, IdCategoria = @idCategoria " +
+                datos.setearConsulta("UPDATE Prenda SET Descripcion = @descripcion, Precio = @precio, Talle = @talle, IdCategoria = @idCategoria, IdLinea = @idLinea, Stock = @stock, IdGenero = @idGenero " +
                                      "WHERE Id = @id");
                 datos.agregarParametro("@descripcion", prenda.Descripcion);
                 datos.agregarParametro("@precio", prenda.Precio);
                 datos.agregarParametro("@talle", prenda.Talle);
                 datos.agregarParametro("@idCategoria", prenda.Categoria.Id);
+                datos.agregarParametro("@idLinea", prenda.Linea.Id);
+                datos.agregarParametro("@stock", prenda.Stock);
+                datos.agregarParametro("@idGenero", prenda.Genero.Id); // Nuevo parámetro para el género
                 datos.agregarParametro("@id", prenda.Id);
 
                 datos.ejecutarAccion();

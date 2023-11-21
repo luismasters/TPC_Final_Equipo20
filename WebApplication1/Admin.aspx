@@ -13,7 +13,7 @@
 
             </div>
             <div class="col-md-4">
-                <asp:ImageButton ImageUrl="~/Content/Imagenes/modificar.png" runat="server" Width="200px" Height="150px" />
+                <asp:ImageButton ImageUrl="~/Content/Imagenes/modificar.png" runat="server" Width="200px" Height="150px" OnClick="Modificar_Click" />
 
                 <p>Actualizar Registro de una prenda</p>            </div>
             <div class="col-md-4">            

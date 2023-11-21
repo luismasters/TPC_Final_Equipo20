@@ -28,6 +28,13 @@ namespace WebApplication1
         {
             Response.Redirect("Alta.aspx");
         }
+
+        protected void Modificar_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Modificar.aspx");
+
+
+        }
     }
 }
 
