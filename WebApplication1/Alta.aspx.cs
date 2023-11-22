@@ -16,8 +16,9 @@ namespace WebApplication1
         public List<Categoria> ListCategoria { get; set; }
         public List<Linea> ListLinea { get; set; }
         public List<Prenda> Listprenda { get; set; }
+        public List<Imagen> ListaImagenes { get; set; }
 
-
+        private int indice = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,10 +38,33 @@ namespace WebApplication1
                 DropListLinea.DataSource = ListLinea;
                 DropListLinea.DataTextField = "Descripcion";
                 DropListLinea.DataBind();
+
+                MostrarElementoActual();
+                Session["IdP"] = false;
+
             }
+
+
             PrendaNegocio pre = new PrendaNegocio();
             Listprenda = pre.Listar();
+            if ((bool)Session["IdP"] == true)
+            {
 
+                ImagenNegocio imagenNegocio = new ImagenNegocio();
+                ListaImagenes = imagenNegocio.Listar(BuscarId(Listprenda) - 1);
+
+
+                foreach (Imagen item in ListaImagenes)
+                {
+                    // Crea un control Image para cada URL de imagen y lo agrega al div imageStrip
+                    System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
+                    img.ImageUrl = item.ImagenURL;
+                    img.Width = new System.Web.UI.WebControls.Unit(150); // Define el ancho deseado para las imágenes
+                    img.Style.Add("margin-right", "10px"); // Agrega margen derecho para separar las imágenes
+                    imageStrip.Controls.Add(img); // Agrega la imagen al contenedor
+                }
+
+            }
         }
 
         protected void BtnAgregarCategoria_Click(object sender, EventArgs e)
@@ -93,6 +117,85 @@ namespace WebApplication1
 
         protected void Registrar_Click(object sender, EventArgs e)
         {
+
+            ImagenNegocio ima = new ImagenNegocio();
+            int id = BuscarId(Listprenda) - 1;
+            List<Imagen> imagenesObtenidas = ima.Listar(id);
+            int cantImg = imagenesObtenidas.Count;
+            string Ruta = Server.MapPath("./Prenda_Img/");
+            txtImage.PostedFile.SaveAs(Ruta + "Prenda-" + id + "-" + (cantImg + 1) + ".jpg");
+            imgNueva.ImageUrl = "~/Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+            Session["rutaImg"] = "./Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+            ima.Agregar((String)Session["rutaImg"], BuscarId(Listprenda) - 1);
+            Session["Idima"] = id;
+
+        }
+
+
+
+        protected int BuscarId(List<Prenda> list)
+        {
+            int proximoID = 1; // Valor predeterminado si la lista está vacía
+            if (list.Count > 0)
+            {
+                // Encuentra el máximo ID actual y luego agrega 1 para obtener el próximo ID disponible
+                proximoID = list.Max(p => p.Id) + 1;
+            }
+
+
+
+            return proximoID;
+        }
+
+        protected void AddImg_Click(object sender, EventArgs e)
+        {
+
+            ImagenNegocio ima = new ImagenNegocio();
+            int id = BuscarId(Listprenda) - 1;
+            List<Imagen> imagenesObtenidas = ima.Listar(id);
+            int cantImg = imagenesObtenidas.Count;
+            string Ruta = Server.MapPath("./Prenda_Img/");
+            txtImage.PostedFile.SaveAs(Ruta + "Prenda-" + id + "-" + (cantImg + 1) + ".jpg");
+            imgNueva.ImageUrl = "~/Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+            Session["rutaImg"] = "./Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+            ima.Agregar((String)Session["rutaImg"], BuscarId(Listprenda) - 1);
+            Session["Idima"] = id;
+
+
+        }
+
+
+        private void MostrarElementoActual()
+        {
+            divElemento1.Visible = false;
+            divElemento2.Visible = false;
+
+            switch (indice)
+            {
+                case 0:
+                    divElemento1.Visible = true;
+                    break;
+                case 1:
+                    divElemento2.Visible = true;
+                    break;
+
+                default:
+                    // Manejo para un índice fuera de rango si es necesario
+                    break;
+            }
+        }
+
+        protected void BtnAnterior_Click(object sender, EventArgs e)
+        {
+            // Lógica para retroceder al elemento anterior
+            indice--; // Reduces the index to go to the previous element
+            MostrarElementoActual();
+        }
+
+        protected void BtnSiguiente_Click(object sender, EventArgs e)
+        {
+
+
             try
             {
                 Prenda prenda = new Prenda();
@@ -130,41 +233,23 @@ namespace WebApplication1
                 prenda.Genero.Descripcion = (DropListGenero.SelectedValue == "Masculino") ? "Masculino" : "Femenino";
 
                 PrendaNegocio prendaNegocio = new PrendaNegocio();
-                ImagenNegocio ima = new ImagenNegocio();
-                int id = BuscarId(Listprenda);
-                List<Imagen> imagenesObtenidas = ima.Listar(id);
-                int cantImg = imagenesObtenidas.Count;
-                string Ruta = Server.MapPath("./Prenda_Img/");
-                txtImage.PostedFile.SaveAs(Ruta + "Prenda-" + id + "-" + (cantImg + 1) + ".jpg");
-                imgNueva.ImageUrl = "~/Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+
                 prendaNegocio.AgregarNuevaPrenda(prenda);
-                ima.Agregar("./Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg", id);
+                Session["IdP"] = true;
 
             }
             catch (Exception ex)
             {
                 // Manejo de la excepción (por ejemplo, mostrar un mensaje de error)
             }
-        }
 
-
-
-        protected int BuscarId(List<Prenda> list)
-        {
-            int proximoID = 1; // Valor predeterminado si la lista está vacía
-            if (list.Count > 0)
-            {
-                // Encuentra el máximo ID actual y luego agrega 1 para obtener el próximo ID disponible
-                proximoID = list.Max(p => p.Id) + 1;
-            }
-
-            proximoID = proximoID;
-
-
-            return proximoID;
+            // Lógica para avanzar al siguiente elemento
+            indice++; // Increases the index to go to the next element
+            MostrarElementoActual();
         }
 
 
     }
 }
+
 
