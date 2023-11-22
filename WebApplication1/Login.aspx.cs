@@ -67,6 +67,7 @@ namespace WebApplication1
         protected void Btn_Registrarse_Click(object sender, EventArgs e)
         {
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+            EmailService emailService = new EmailService();
 
             try
             {
@@ -105,6 +106,8 @@ namespace WebApplication1
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "RegistroExitoso",
                         "alert('Registro exitoso. A continuación será redirigido a la página de inicio.'); " +
                         "limpiarCamposRegistro();", true);
+                    emailService.ArmarCorreo(nuevoUsuario.Email, "Bienvenido a Prendas.Net", "Te damos la bienvenida");
+                    emailService.EnviarMail();
                     if (nuevoUsuario != null)
                     {
                         FormsAuthentication.SetAuthCookie(username, false);
