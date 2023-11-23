@@ -1,0 +1,23 @@
+﻿body {
+}
+
+section {
+    display: flex;
+    width: 100%; /* Utiliza el 100% del ancho disponible */
+    height: auto; /* El alto se ajustará automáticamente según el contenido */
+}
+
+    section img {
+        width: 100%; /* Ocupar todo el ancho disponible */
+        height: auto; /* El alto se ajustará automáticamente según el ancho */
+        object-fit: cover; /* Ajustar la imagen dentro del contenedor */
+        opacity: .8;
+        transition: transform .5s ease, opacity .5s ease; /* Transición para el hover */
+    }
+
+        section img:hover {
+            cursor: zoom-in; /* Cambiar el cursor al hacer hover */
+            transform: scale(1.1); /* Aumentar el tamaño de la imagen al hacer hover */
+            opacity: 1;
+            filter: contrast(120%);
+        }

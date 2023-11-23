@@ -18,10 +18,7 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
-                PrendaNegocio prendaNegocio = new PrendaNegocio();
-                PrendaList = prendaNegocio.Listar();
-                rptArticulos.DataSource = PrendaList;
-                rptArticulos.DataBind();
+               
             }
         }
         public bool UrlExists(string url)

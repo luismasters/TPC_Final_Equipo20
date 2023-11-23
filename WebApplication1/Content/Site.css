@@ -63,3 +63,29 @@ textarea {
     .btn-filtrar-circular:hover {
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Efecto de sombra al pasar el ratón */
     }
+
+section {
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+    section img {
+        width: 0px;
+        flex-grow: 1;
+        object-fit: cover;
+        opacity: .8;
+        transition: .5s ease;
+    }
+
+        section img:hover {
+            cursor: crosshair;
+            width: 300px;
+            opacity: 1;
+            filter: contrast(120%);
+        }
+
+
+.bg-con {
+    background-color:teal
+}
