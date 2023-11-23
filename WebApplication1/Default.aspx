@@ -21,11 +21,11 @@
 
             </div>
 
-            <div class="col-md-6 bg-con" style="height: 700px; color: white; display: flex; flex-direction: column; justify-content: center;">
+            <div class="col-md-6 bg-con text-center" style="height: 700px; color: white;   ">
 
-                <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 230319.png">
-                <h5>Quiénes somos:</h5>
-                <p style="font-size: 20px;">
+<img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 214053.png" style="height:300px; width:300px; border-radius:50%;margin: auto; margin-top:30px; " />                 <h5>Quiénes somos:</h5>
+                <p class="mt-2
+                    " style="font-size: 20px;">
                     Descubre la esencia de SUPERTIENDAS.NET
                 En SUPERTIENDAS.NET, nuestra pasión radica en ofrecerte una experiencia de moda versátil y dinámica. Somos una tienda dedicada a brindar 
                 la mejor selección de prendas de vestir para todos los estilos y ocasiones.
@@ -109,7 +109,7 @@
 
 
     <div class="mt-2 text-center" style="height: 400px; color: white;">
-        <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 223636.png" style="height:100%" />
+        <img src="Content/ImgNegocio/thank-you-doodle-quote-by-Vexels.png" style="height:100%" />
 
     </div>
 

@@ -139,10 +139,12 @@
     <Content Include="Content\Imagenes\providence-team-merchandising-ropa.jpg" />
     <Content Include="Content\Imagenes\Ropa-Gamer.jpg" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 185249.png" />
+    <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 214053.png" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 214200.png" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 223636.png" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 224939.png" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 230319.png" />
+    <Content Include="Content\ImgNegocio\thank-you-doodle-quote-by-Vexels.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\StyleSheet.css" />
     <Content Include="Default.aspx" />
