@@ -14,6 +14,7 @@
     </asp:PlaceHolder>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="estilocss" type="text/css" href="Content/estilocss.css" />
     <link rel="Site" type="text/css" href="Content/Site.css" />
     <link rel="stylesheet" type="text/css" href="~/Content/StyleSheet.css" />
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -46,7 +47,7 @@
 
         <asp:UpdatePanel ID="UpdatePanelCarrito" runat="server">
             <ContentTemplate>
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-con">
                     <div class="container">
                         <!-- Navbar Brand/logo -->
                         <a class="navbar-brand" runat="server" href="~/">SUPER PRENDAS.NET</a>
@@ -97,7 +98,7 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer class="bg-dark text-light">
+            <footer class="bg-con text-light">
                 <div class="container">
                     <div class="row py-3">
                         <!-- Enlaces del footer -->
