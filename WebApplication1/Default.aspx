@@ -39,7 +39,7 @@
             <div class="col-md-6 bg-ca  text-center" style="height: 700px; display: flex; flex-direction: column; justify-content: center;">
 
                 <h5>Nuestra Misión:</h5>
-                <p class="my-2 mx-2" style="font-size: 16px;">
+                <p class="my-5 mx-5" style="font-size: 18px;">
                     En SUPERTIENDAS.NET nos esforzamos por ofrecer una colección única que se adapte a las múltiples facetas de tu vida. Desde lo casual hasta lo formal, desde
                  lo gamer hasta lo deportivo, nos comprometemos a proporcionar ropa que refleje tu personalidad y estilo de vida.
                     <br />
@@ -62,7 +62,7 @@
 
     </div>
 
-    <div class="bg-ca mt-2" style="height: 400px; color: white; display: flex; flex-direction: column; justify-content: center;">
+    <div class="bg-ca mt-2" style="height: 400px; color:rgb(39 37 37); display: flex; flex-direction: column; justify-content: center;">
 
 
         <div class="container">

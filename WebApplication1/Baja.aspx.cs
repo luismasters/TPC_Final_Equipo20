@@ -54,7 +54,7 @@ namespace WebApplication1
 
 
 
-              listPrenda = new List<Prenda>(); // Asigna una lista vacía
+              listPrenda = new List<Prenda>();
               listPrenda.Add(prendaNegocio.BuscarUnaPrenda(idPrenda));
               rptArticulos.DataSource = listPrenda;
               rptArticulos.DataBind();
@@ -87,6 +87,10 @@ namespace WebApplication1
             PrendaNegocio prendaNegocio = new PrendaNegocio();
             prendaNegocio.Eliminar((int)Session["idPrenda"]);
 
+            listPrenda = new List<Prenda>();
+            listPrenda.Clear();
+            rptArticulos.DataSource = listPrenda;
+            rptArticulos.DataBind();
 
 
 

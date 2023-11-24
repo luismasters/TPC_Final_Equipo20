@@ -4,9 +4,9 @@
 
 
 
-    <div class="container">
-        <h2 class="mt-5 mb-5 text-center ">Agregar Nueva Prenda </h2>
-        <div class="container text-white">
+    <div class="container text-white">
+        <h2 class="mb-5 text-center ">Agregar Nueva Prenda </h2>
+        <div class="container ">
             <div class="row justify-content-center">
                 <div class="col-3"></div>
                 <div class="col-md-6" runat="server" id="divElemento1">
@@ -41,18 +41,18 @@
                         <asp:Label Text="Categoria" runat="server" ID="lblCategoria" AssociatedControlID="DropListCategoria" CssClass="mr-2" />
                         <asp:DropDownList CssClass="form-control" ID="DropListCategoria" runat="server">
                         </asp:DropDownList>
-                        <asp:Button runat="server" ID="BtnAgregarCategoria" Text="Agregar Nueva" OnClick="BtnAgregarCategoria_Click" CssClass="btn btn-primary" />
+                        <asp:Button runat="server" ID="BtnAgregarCategoria" Text="Agregar Nueva" OnClick="BtnAgregarCategoria_Click" CssClass="btn btn-warning" />
                         <asp:TextBox runat="server" ID="TxtNuevaCategoria" Visible="false" placeholder="Nueva Categoría" CssClass="form-control mt-2" />
-                        <asp:Button runat="server" ID="BtnNuevaCategoria" Text="Enviar" OnClick="BtnEnviarCategoria_Click" Visible="false" CssClass="btn btn-primary mt-2" OnClientClick="return confirm('¿Estás seguro de querer enviar la nueva categoría?');" />
+                        <asp:Button runat="server" ID="BtnNuevaCategoria" Text="Enviar" OnClick="BtnEnviarCategoria_Click" Visible="false" CssClass="btn btn-warning mt-2" OnClientClick="return confirm('¿Estás seguro de querer enviar la nueva categoría?');" />
                     </div>
 
                     <div class="form-group">
                         <asp:Label Text="Linea" ID="lblLinea" runat="server" AssociatedControlID="DropListLinea" CssClass="mr-2" />
                         <asp:DropDownList CssClass="form-control" runat="server" ID="DropListLinea">
                         </asp:DropDownList>
-                        <asp:Button Text="Agregar Nueva" runat="server" ID="BtnAgregarLinea" OnClick="BtnAgregarLinea_Click" CssClass="btn btn-primary" />
+                        <asp:Button Text="Agregar Nueva" runat="server" ID="BtnAgregarLinea" OnClick="BtnAgregarLinea_Click" CssClass="btn  btn-warning" />
                         <asp:TextBox runat="server" ID="TxtNuevaLinea" Visible="false" placeholder="Nueva Línea" CssClass="form-control mt-2" />
-                        <asp:Button runat="server" ID="BtnNuevaLinea" Text="Enviar" OnClick="BtnEnviarLinea_Click" Visible="false" CssClass="btn btn-primary mt-2" OnClientClick="return confirm('¿Estás seguro de querer enviar la nueva línea?');" />
+                        <asp:Button runat="server" ID="BtnNuevaLinea" Text="Enviar" OnClick="BtnEnviarLinea_Click" Visible="false" CssClass="btn  btn-warning mt-2" OnClientClick="return confirm('¿Estás seguro de querer enviar la nueva línea?');" />
                     </div>
 
                     <div class="form-group">
@@ -69,7 +69,7 @@
         <div class="col-8"></div>
         <div class="col-4">
 
-            <asp:Button runat="server" ID="BtnSiguiente" Text="Guardar y Seguir" OnClick="BtnSiguiente_Click" CssClass="btn btn-primary" />
+            <asp:Button runat="server" ID="BtnSiguiente" Text="Guardar y Seguir" OnClick="BtnSiguiente_Click" CssClass="btn  btn-warning" />
         </div>
     </div>
 </div>
@@ -83,7 +83,13 @@
 
                     <div class="mb-2">
                         <asp:Label CssClass="form-label" Text="Imagen Prenda: carga una imagen desde tu equipo" runat="server" />
-                        <asp:FileUpload type="file" id="txtImage" runat="server" class="form-control" />
+                                <div class="input-group">
+
+                        <asp:FileUpload type="file" id="txtImage" runat="server" class="form-control" />   
+                                    <span class="input-group-btn">
+                                       
+                        <asp:Button Text="Ver" runat="server" CssClass="btn btn-warning" OnClick="Registrar_Click" OnClientClick="return confirmarAlta();" /> 
+                                        </span> </div>
                         <asp:Image ID="imgNueva" ImageUrl="https://img.freepik.com/vector-premium/foto-blanco-icono-simple-azul-plano-sombra-larga-xa_159242-10176.jpg?w=360" runat="server" CssClass="img-fluid mb-2" />
                         <div id="imageStrip" runat="server"></div>
                     </div>
@@ -110,9 +116,8 @@
                     // Llama a la función para mostrar las imágenes al cargar la página
                     window.onload = mostrarImagenes;
                 </script>
-                <asp:Button Text="Agregar otra img" runat="server" CssClass="btn btn-primary" OnClick="AddImg_Click" />
+                <asp:Button Text="Agregar otra img" runat="server" CssClass="btn  btn-warning" OnClick="AddImg_Click" />
 
-                 <asp:Button Text="cargar Imagen" runat="server" CssClass="btn btn-primary" OnClick="Registrar_Click" OnClientClick="return confirmarAlta();" /> 
                 <script>
                     function confirmarAlta() {
                         return confirm("¿Estás seguro de dar de alta esta prenda?");

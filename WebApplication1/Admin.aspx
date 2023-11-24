@@ -5,7 +5,7 @@
 
 
     <div class="container" >
-        <h1 class="mt-5 mb-5 text-center" style="margin-bottom:300px">Administrador </h1>
+        <h1 class="mb-5 text-center" style="margin-bottom:300px">Administrador </h1>
         <div class="row">
             <div class="col-md-4">
                 <asp:ImageButton ImageUrl="~/Content/Imagenes/registro.jpg" runat="server" Width="200px" Height="150px"  OnClick="Alta_Click"/>

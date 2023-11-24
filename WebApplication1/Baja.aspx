@@ -9,7 +9,7 @@
             <h1 class="text-center">Eliminar Prenda</h1>
             <asp:Label Text="Buscar Por Nombre" runat="server" ID="lblDescripcion" />
             <asp:TextBox runat="server" ID="TxtDescripcionB" CssClass="form-control" />
-            <asp:Button Text="Buscar" runat="server" OnClick="Buscar_Click" />
+            <asp:Button Text="Buscar" runat="server" OnClick="Buscar_Click" CssClass="btn btn-warning" />
         </div>
 
         <div class="container text-center">
@@ -17,7 +17,7 @@
                 <div class="col-md-3">
                     <asp:Repeater ID="rptArticulos" runat="server">
                         <ItemTemplate>
-                            <div class="card mb-3" style="width: 300px;">
+                            <div class="card mb-3 bg-ca text-dark" style="width: 300px;">
                                 <div class="row  ">
                                     <div class="col-md-6">
                                         <img src='<%# Eval("ImagenURL") %>' class="img-fluid rounded-start" alt="...">
@@ -31,7 +31,7 @@
                                             <p class="card-text m-0" style="font-size: 12px;">Categoria: <%# Eval("Categoria.Descripcion") %></p>
                                             <p class="card-text m-0" style="font-size: 12px;">Linea: <%# Eval("Linea.Descripcion") %></p>
                                             <p class="card-text m-0" style="font-size: 12px;">Genero: <%# Eval("Genero.Descripcion") %></p>
-                                            <asp:Button ID="Button1" runat="server" CommandName="MostrarDetalle" CommandArgument='<%# Eval("ID") %>' Text="Seleccionar" CssClass="btn btn-primary" OnClick="Seleccionar_Click" />
+                                            <asp:Button ID="Button1" runat="server" CommandName="MostrarDetalle" CommandArgument='<%# Eval("ID") %>' Text="Seleccionar" CssClass="btn  btn-warning" OnClick="Seleccionar_Click" />
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@
 
         <div class="container">
             <div class="col-2">
-                <asp:Button ID="botonEli" Text="Eliminar Prenda" runat="server" OnClick="Eliminar_Click" CssClass="btn btn-primary" Visible="false" />
+                <asp:Button ID="botonEli" Text="Eliminar Prenda" runat="server" OnClick="Eliminar_Click" CssClass="btn btn-warning" Visible="false" />
             </div>
         </div>
 

@@ -6,7 +6,7 @@
     <div class="container">
         <asp:Label Text="Buscar Por Nombre" runat="server" ID="lblDescripcion" />
         <asp:TextBox runat="server" ID="TxtDescripcion" CssClass="form-control" />
-        <asp:Button Text="Buscar" runat="server" OnClick="Buscar_Click" />
+        <asp:Button Text="Buscar" runat="server" OnClick="Buscar_Click" CssClass="btn btn-warning" />
 
 
     </div>
@@ -16,8 +16,8 @@
             <div class="col-md-3">
                 <asp:Repeater ID="rptArticulos" runat="server">
                     <ItemTemplate>
-                        <div class="card mb-3" style="width: 300px;">
-                            <div class="row  ">
+                        <div class="card mb-3 bg-ca text-dark" style="width: 300px;">
+                            <div class="row">
                                 <div class="col-md-6">
                                     <img src='<%# Eval("ImagenURL") %>' class="img-fluid rounded-start" alt="...">
                                 </div>
@@ -35,7 +35,7 @@
 
 
 
-                                        <asp:Button ID="Button1" runat="server" CommandName="MostrarDetalle" CommandArgument='<%# Eval("ID") %>' Text="Seleccionar" CssClass="btn btn-primary" OnClick="Seleccionar_Click" />
+                                        <asp:Button ID="Button1" runat="server" CommandName="MostrarDetalle" CommandArgument='<%# Eval("ID") %>' Text="Seleccionar" CssClass="btn btn-warning" OnClick="Seleccionar_Click" />
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                                     <asp:ListItem Text="Femenino" />
                                 </asp:DropDownList>
                             </div>
-                                <asp:Button ID="BtnModificar" Text="Modificar" runat="server" CssClass="btn btn-primary" OnClientClick="return confirmarAlta();" OnClick="Modificar_Click" Visible="false" />
+                                <asp:Button ID="BtnModificar" Text="Modificar" runat="server" CssClass="btn  btn-warning" OnClientClick="return confirmarAlta();" OnClick="Modificar_Click" Visible="false" />
 
                         </div>
 
