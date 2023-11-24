@@ -2,14 +2,8 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing.Drawing2D;
-using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using static System.Net.WebRequestMethods;
 
 namespace WebApplication1
 {
@@ -113,7 +107,7 @@ namespace WebApplication1
             rptArticulos.DataSource = listPrenda;
             rptArticulos.DataBind();
 
-
+            BtnModificar.Visible = true;
 
         }
 
@@ -217,51 +211,63 @@ namespace WebApplication1
 
             Prenda prenda = new Prenda();
             prenda.Id = (int)Session["idPrenda"];
-            prenda.Descripcion = TxtDescripcionM.Text;
-            prenda.Precio = Convert.ToDecimal(TxtPrecio.Text);
-            prenda.Stock = Convert.ToInt32(TxtStock.Text);
-            prenda.Talle = TxtTalle.Text;
-
-            prenda.Categoria = new Categoria(); // Asegurar que se cree una nueva instancia de Categoria
-            prenda.Linea = new Linea(); // Asegurar que se cree una nueva instancia de Linea
-            prenda.Genero = new Genero(); // Asegurar que se cree una nueva instancia de Genero
-            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            foreach (Categoria item in categoriaNegocio.ObtenerCategorias())
+            if (Session["idPrenda"] == null)
             {
-                if (item.Descripcion == DropListCategoria.Text)
-                {
-                    prenda.Categoria.Id = item.Id;
-                    prenda.Categoria.Descripcion = item.Descripcion;
-                    break; // Terminar el bucle una vez que se encuentre la categoría
-                }
+
+                string script = "alert('buscar y seleccionar la prenda para Modificar ');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
+
             }
-            LineaNegocio lineaNegocio = new LineaNegocio();
-            foreach (var item in lineaNegocio.ObtenerLineas())
+            else
             {
-                if (item.Descripcion == DropListLinea.Text)
+
+
+                prenda.Descripcion = TxtDescripcionM.Text;
+                prenda.Precio = Convert.ToDecimal(TxtPrecio.Text);
+                prenda.Stock = Convert.ToInt32(TxtStock.Text);
+                prenda.Talle = TxtTalle.Text;
+
+                prenda.Categoria = new Categoria(); // Asegurar que se cree una nueva instancia de Categoria
+                prenda.Linea = new Linea(); // Asegurar que se cree una nueva instancia de Linea
+                prenda.Genero = new Genero(); // Asegurar que se cree una nueva instancia de Genero
+                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+                foreach (Categoria item in categoriaNegocio.ObtenerCategorias())
                 {
-                    prenda.Linea.Id = item.Id;
-                    prenda.Linea.Descripcion = item.Descripcion;
-                    break; // Terminar el bucle una vez que se encuentre la línea
+                    if (item.Descripcion == DropListCategoria.Text)
+                    {
+                        prenda.Categoria.Id = item.Id;
+                        prenda.Categoria.Descripcion = item.Descripcion;
+                        break; // Terminar el bucle una vez que se encuentre la categoría
+                    }
                 }
+                LineaNegocio lineaNegocio = new LineaNegocio();
+                foreach (var item in lineaNegocio.ObtenerLineas())
+                {
+                    if (item.Descripcion == DropListLinea.Text)
+                    {
+                        prenda.Linea.Id = item.Id;
+                        prenda.Linea.Descripcion = item.Descripcion;
+                        break; // Terminar el bucle una vez que se encuentre la línea
+                    }
+                }
+
+                prenda.Genero.Id = (DropListGenero.SelectedValue == "Masculino") ? 1 : 2;
+                prenda.Genero.Descripcion = (DropListGenero.SelectedValue == "Masculino") ? "Masculino" : "Femenino";
+
+
+                PrendaNegocio prendaNegocio = new PrendaNegocio();
+
+                prendaNegocio.Modificar(prenda);
+
+
+
+                listPrenda = new List<Prenda>(); // Asigna una lista vacía
+                listPrenda.Add(prendaNegocio.BuscarUnaPrenda((int)Session["idPrenda"]));
+                rptArticulos.DataSource = listPrenda;
+                rptArticulos.DataBind();
+
+
             }
-
-            prenda.Genero.Id = (DropListGenero.SelectedValue == "Masculino") ? 1 : 2;
-            prenda.Genero.Descripcion = (DropListGenero.SelectedValue == "Masculino") ? "Masculino" : "Femenino";
-
-
-            PrendaNegocio prendaNegocio = new PrendaNegocio();
-
-            prendaNegocio.Modificar(prenda);
-
-
-
-            listPrenda = new List<Prenda>(); // Asigna una lista vacía
-            listPrenda.Add(prendaNegocio.BuscarUnaPrenda((int)Session["idPrenda"]));
-            rptArticulos.DataSource = listPrenda;
-            rptArticulos.DataBind();
-
-
         }
     }
 }

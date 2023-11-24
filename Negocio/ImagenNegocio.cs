@@ -92,7 +92,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Delete From IMAGENES Where id = @id");
+                datos.setearConsulta("Delete From IMAGENES Where idPrenda = @id");
                 datos.agregarParametro("@id", id);
                 datos.ejecutarAccion();
             }

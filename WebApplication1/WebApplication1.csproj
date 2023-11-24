@@ -115,6 +115,7 @@
     <Content Include="Acerca.aspx" />
     <Content Include="Admin.aspx" />
     <Content Include="Alta.aspx" />
+    <Content Include="Baja.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Checkout.aspx" />
     <Content Include="Contacto.aspx" />
@@ -150,6 +151,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Formulario web1.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 171835.png" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 172056.png" />
@@ -249,6 +251,13 @@
       <DependentUpon>Alta.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Baja.aspx.cs">
+      <DependentUpon>Baja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Baja.aspx.designer.cs">
+      <DependentUpon>Baja.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Carrito.aspx.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -284,6 +293,13 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Formulario web1.aspx.cs">
+      <DependentUpon>Formulario web1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Formulario web1.aspx.designer.cs">
+      <DependentUpon>Formulario web1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

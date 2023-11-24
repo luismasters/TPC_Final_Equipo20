@@ -16,12 +16,12 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Seguridad.esAdmin(Session["usuario"]))
+           /* if (!Seguridad.esAdmin(Session["usuario"]))
             {
                 Session.Add("error", "Se requiere permiso de admin para ingresar a esta página");
                 Response.Redirect("Error.aspx");
-            }
-
+            } */
+           
         }
 
         protected void Alta_Click(object sender, ImageClickEventArgs e)
@@ -32,6 +32,13 @@ namespace WebApplication1
         protected void Modificar_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("Modificar.aspx");
+
+
+        }
+
+        protected void Unnamed_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Baja.aspx");
 
 
         }

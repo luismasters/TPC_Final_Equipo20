@@ -314,7 +314,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
 
             try
-            {
+            {   
                 datos.setearConsulta("DELETE FROM Prenda WHERE Id = @id");
                 datos.agregarParametro("@id", id);
                 datos.ejecutarAccion();

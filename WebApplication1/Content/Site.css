@@ -2,7 +2,7 @@
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
   
-    background-color:dimgray
+    background-color:rgb(39 37 37)
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
@@ -86,6 +86,9 @@ section {
 
 
 .bg-con {
-    background-color:rgb(23,23,23)
+    background-color:rgb(7, 33, 33)
 }
 
+.bg-ca {
+    background-color: rgb(9, 164, 164)
+}

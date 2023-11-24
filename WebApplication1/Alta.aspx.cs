@@ -118,16 +118,27 @@ namespace WebApplication1
         protected void Registrar_Click(object sender, EventArgs e)
         {
 
-            ImagenNegocio ima = new ImagenNegocio();
-            int id = BuscarId(Listprenda) - 1;
-            List<Imagen> imagenesObtenidas = ima.Listar(id);
-            int cantImg = imagenesObtenidas.Count;
-            string Ruta = Server.MapPath("./Prenda_Img/");
-            txtImage.PostedFile.SaveAs(Ruta + "Prenda-" + id + "-" + (cantImg + 1) + ".jpg");
-            imgNueva.ImageUrl = "~/Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
-            Session["rutaImg"] = "./Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
-            ima.Agregar((String)Session["rutaImg"], BuscarId(Listprenda) - 1);
-            Session["Idima"] = id;
+            if (txtImage.HasFile == true)
+            {
+
+                ImagenNegocio ima = new ImagenNegocio();
+                int id = BuscarId(Listprenda) - 1;
+                List<Imagen> imagenesObtenidas = ima.Listar(id);
+                int cantImg = imagenesObtenidas.Count;
+
+                string Ruta = Server.MapPath("./Prenda_Img/");
+                txtImage.PostedFile.SaveAs(Ruta + "Prenda-" + id + "-" + (cantImg + 1) + ".jpg");
+                imgNueva.ImageUrl = "~/Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+                Session["rutaImg"] = "./Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+                ima.Agregar((String)Session["rutaImg"], BuscarId(Listprenda) - 1);
+                Session["Idima"] = id;
+            }
+
+            else
+            {
+                string script = "alert('debes Seleccionar una imagen');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
+            }
 
         }
 
@@ -150,17 +161,27 @@ namespace WebApplication1
         protected void AddImg_Click(object sender, EventArgs e)
         {
 
-            ImagenNegocio ima = new ImagenNegocio();
-            int id = BuscarId(Listprenda) - 1;
-            List<Imagen> imagenesObtenidas = ima.Listar(id);
-            int cantImg = imagenesObtenidas.Count;
-            string Ruta = Server.MapPath("./Prenda_Img/");
-            txtImage.PostedFile.SaveAs(Ruta + "Prenda-" + id + "-" + (cantImg + 1) + ".jpg");
-            imgNueva.ImageUrl = "~/Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
-            Session["rutaImg"] = "./Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
-            ima.Agregar((String)Session["rutaImg"], BuscarId(Listprenda) - 1);
-            Session["Idima"] = id;
+            if (txtImage.HasFile == true)
+            {
 
+                ImagenNegocio ima = new ImagenNegocio();
+                int id = BuscarId(Listprenda) - 1;
+                List<Imagen> imagenesObtenidas = ima.Listar(id);
+                int cantImg = imagenesObtenidas.Count;
+
+                string Ruta = Server.MapPath("./Prenda_Img/");
+                txtImage.PostedFile.SaveAs(Ruta + "Prenda-" + id + "-" + (cantImg + 1) + ".jpg");
+                imgNueva.ImageUrl = "~/Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+                Session["rutaImg"] = "./Prenda_Img/Prenda-" + id + "-" + (cantImg + 1) + ".jpg";
+                ima.Agregar((String)Session["rutaImg"], BuscarId(Listprenda) - 1);
+                Session["Idima"] = id;
+            }
+
+            else
+            {
+                string script = "alert('debes Seleccionar una imagen');";
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
+            }
 
         }
 

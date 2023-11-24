@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+    <div class="text-white">
     <div class="container">
         <asp:Label Text="Buscar Por Nombre" runat="server" ID="lblDescripcion" />
         <asp:TextBox runat="server" ID="TxtDescripcion" CssClass="form-control" />
@@ -24,7 +25,7 @@
                                     <div class="card-body">
                                         <h6 class="card-title" style="font-size:12px;" ><%# Eval("Descripcion") %></h6>
                                         <p class="card-text m-0"  style="font-size:12px;">Codigo: <%# Eval("ID") %></p>
-                         <p class="card-text m-0"  style="font-size:12px";>Precio<%# FormatearPrecio(Eval("Precio")) %></p>
+                         <p class="card-text m-0"  style="font-size:12px";>Precio<%#FormatearPrecio(Eval("Precio")) %></p>
                           <p class="card-text m-0"  style="font-size:12px;">Talle: <%# Eval("Talle") %></p>
                           <p class="card-text m-0"  style="font-size:12px;">Stock: <%# Eval("Stock") %></p>
                         <p class="card-text m-0" style="font-size:12px;">Categoria: <%# Eval("Categoria.Descripcion") %></p>
@@ -94,7 +95,7 @@
                                     <asp:ListItem Text="Femenino" />
                                 </asp:DropDownList>
                             </div>
-                                <asp:Button Text="Modificar" runat="server" CssClass="btn btn-primary" OnClientClick="return confirmarAlta();" OnClick="Modificar_Click" />
+                                <asp:Button ID="BtnModificar" Text="Modificar" runat="server" CssClass="btn btn-primary" OnClientClick="return confirmarAlta();" OnClick="Modificar_Click" Visible="false" />
 
                         </div>
 
@@ -131,5 +132,5 @@
         </div>
     </div>
 
-
+</div>
 </asp:Content>

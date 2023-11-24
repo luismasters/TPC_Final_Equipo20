@@ -12,7 +12,7 @@
         <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 172346.png" />
     </section>
 
-    <div class="container">
+    <div class="container text-dark">
 
         <div class="row">
 
@@ -21,11 +21,11 @@
 
             </div>
 
-            <div class="col-md-6 bg-con text-center" style="height: 700px; color: white;   ">
+            <div class="col-md-6 bg-ca text-center" style="height: 700px;  ">
 
 <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 214053.png" style="height:300px; width:300px; border-radius:50%;margin: auto; margin-top:30px; " />                 <h5>Quiénes somos:</h5>
                 <p class="mt-2
-                    " style="font-size: 20px;">
+                    " style="font-size: 16px;">
                     Descubre la esencia de SUPERTIENDAS.NET
                 En SUPERTIENDAS.NET, nuestra pasión radica en ofrecerte una experiencia de moda versátil y dinámica. Somos una tienda dedicada a brindar 
                 la mejor selección de prendas de vestir para todos los estilos y ocasiones.
@@ -36,10 +36,10 @@
         </div>
         <div class="row">
 
-            <div class="col-md-6 bg-con" style="height: 700px; color: white; display: flex; flex-direction: column; justify-content: center;">
+            <div class="col-md-6 bg-ca  text-center" style="height: 700px; display: flex; flex-direction: column; justify-content: center;">
 
                 <h5>Nuestra Misión:</h5>
-                <p class="my-2 mx-2" style="font-size: 20px;">
+                <p class="my-2 mx-2" style="font-size: 16px;">
                     En SUPERTIENDAS.NET nos esforzamos por ofrecer una colección única que se adapte a las múltiples facetas de tu vida. Desde lo casual hasta lo formal, desde
                  lo gamer hasta lo deportivo, nos comprometemos a proporcionar ropa que refleje tu personalidad y estilo de vida.
                     <br />
@@ -62,7 +62,7 @@
 
     </div>
 
-    <div class="bg-con mt-2" style="height: 400px; color: white; display: flex; flex-direction: column; justify-content: center;">
+    <div class="bg-ca mt-2" style="height: 400px; color: white; display: flex; flex-direction: column; justify-content: center;">
 
 
         <div class="container">

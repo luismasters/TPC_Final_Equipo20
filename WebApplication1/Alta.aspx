@@ -6,7 +6,7 @@
 
     <div class="container">
         <h2 class="mt-5 mb-5 text-center ">Agregar Nueva Prenda </h2>
-        <div class="container">
+        <div class="container text-white">
             <div class="row justify-content-center">
                 <div class="col-3"></div>
                 <div class="col-md-6" runat="server" id="divElemento1">
@@ -69,7 +69,7 @@
         <div class="col-8"></div>
         <div class="col-4">
 
-            <asp:Button runat="server" ID="BtnSiguiente" Text="Siguiente" OnClick="BtnSiguiente_Click" CssClass="btn btn-primary" />
+            <asp:Button runat="server" ID="BtnSiguiente" Text="Guardar y Seguir" OnClick="BtnSiguiente_Click" CssClass="btn btn-primary" />
         </div>
     </div>
 </div>
@@ -83,7 +83,7 @@
 
                     <div class="mb-2">
                         <asp:Label CssClass="form-label" Text="Imagen Prenda: carga una imagen desde tu equipo" runat="server" />
-                        <input type="file" id="txtImage" runat="server" class="form-control" />
+                        <asp:FileUpload type="file" id="txtImage" runat="server" class="form-control" />
                         <asp:Image ID="imgNueva" ImageUrl="https://img.freepik.com/vector-premium/foto-blanco-icono-simple-azul-plano-sombra-larga-xa_159242-10176.jpg?w=360" runat="server" CssClass="img-fluid mb-2" />
                         <div id="imageStrip" runat="server"></div>
                     </div>
