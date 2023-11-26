@@ -20,13 +20,16 @@ namespace WebApplication1
             if (!IsPostBack)
             {
                 DataBind();
-                
-            }
+                if (Session["usuario"] != null)
+                {
+                    Response.Redirect("Perfil.aspx");
+                    return;
+                }
 
-            // Si el usuario ya está logueado, redirige al perfil
-            if (Session["usuario"] != null)
-            {
-                Response.Redirect("Perfil.aspx"); 
+            //// Si el usuario ya está logueado, redirige al perfil
+            //if (Session["usuario"] != null)
+            //{
+            //    Response.Redirect("Perfil.aspx"); 
             }
         }
 
@@ -39,7 +42,6 @@ namespace WebApplication1
                 string username = loginUser.Text;
                 string password = loginPassword.Text;
 
-                // Validación básica
                 if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
                 {
                     lblError.Text = "Nombre de usuario y contraseña son requeridos.";
@@ -51,7 +53,10 @@ namespace WebApplication1
                 {
                     FormsAuthentication.SetAuthCookie(username, false);
                     Session.Add("usuario", usuario);
+
+                    // Redirige a la página de perfil del usuario
                     Response.Redirect("Perfil.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 }
                 else
                 {
