@@ -12,7 +12,11 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-    
+            if (!Seguridad.sesionActiva(Session["usuario"]))
+            {
+                Session.Add("error", "Debes ingresar con tu usuario para realizar la compra");
+                Response.Redirect("Login.aspx");
+            }
         }
     }
 }

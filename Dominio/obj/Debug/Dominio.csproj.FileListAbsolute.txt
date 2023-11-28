@@ -4,12 +4,6 @@ C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.cspr
 C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.dll
 C:\Users\luism\Desktop\ASP\TPC\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.pdb
-E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\bin\Debug\Dominio.dll
-E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\bin\Debug\Dominio.pdb
-E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
-E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
-E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.dll
-E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.pdb
 C:\Users\luism\Desktop\ASP\Nueva carpeta\TPC_Final_Equipo20\Dominio\bin\Debug\Dominio.dll
 C:\Users\luism\Desktop\ASP\Nueva carpeta\TPC_Final_Equipo20\Dominio\bin\Debug\Dominio.pdb
 C:\Users\luism\Desktop\ASP\Nueva carpeta\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
@@ -40,3 +34,9 @@ C:\Users\luism\Documents\GitHub\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.csp
 C:\Users\luism\Documents\GitHub\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\luism\Documents\GitHub\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.dll
 C:\Users\luism\Documents\GitHub\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.pdb
+E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\bin\Debug\Dominio.dll
+E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\bin\Debug\Dominio.pdb
+E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.csproj.AssemblyReference.cache
+E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.dll
+E:\Desktop\Pancho\Programación\UTN Tecnicatura\2023-02\Programacion III\tp-final\TPC_Final_Equipo20\Dominio\obj\Debug\Dominio.pdb

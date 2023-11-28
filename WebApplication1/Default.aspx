@@ -3,8 +3,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-
-
     <section>
         <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 171835.png" />
         <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 185249.png" />
@@ -13,61 +11,43 @@
     </section>
 
     <div class="container text-dark">
-
         <div class="row">
-
             <div class="col-md-6" style="height: 700px; padding: 0; margin: 0;">
                 <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 172756.png" class="img-fluid" style="width: 100%; height: 100%" />
-
             </div>
-
-            <div class="col-md-6 bg-ca text-center" style="height: 700px;  ">
-
-<img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 214053.png" style="height:300px; width:300px; border-radius:50%;margin: auto; margin-top:30px; " />                 <h5>Quiénes somos:</h5>
+            <div class="col-md-6 bg-ca text-center" style="height: 700px;">
+                <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 214053.png" style="height: 300px; width: 300px; border-radius: 50%; margin: auto; margin-top: 30px;" />
+                <h5>Quiénes somos:</h5>
                 <p class="mt-2
-                    " style="font-size: 16px;">
+                    "
+                    style="font-size: 16px;">
                     Descubre la esencia de SUPERTIENDAS.NET
                 En SUPERTIENDAS.NET, nuestra pasión radica en ofrecerte una experiencia de moda versátil y dinámica. Somos una tienda dedicada a brindar 
                 la mejor selección de prendas de vestir para todos los estilos y ocasiones.
                 </p>
-
             </div>
-
         </div>
         <div class="row">
-
             <div class="col-md-6 bg-ca  text-center" style="height: 700px; display: flex; flex-direction: column; justify-content: center;">
-
                 <h5>Nuestra Misión:</h5>
                 <p class="my-5 mx-5" style="font-size: 18px;">
                     En SUPERTIENDAS.NET nos esforzamos por ofrecer una colección única que se adapte a las múltiples facetas de tu vida. Desde lo casual hasta lo formal, desde
                  lo gamer hasta lo deportivo, nos comprometemos a proporcionar ropa que refleje tu personalidad y estilo de vida.
                     <br />
-
                     Variedad de Categorías y Líneas:
                     <br />
                     Nuestra amplia gama de categorías incluye remeras, pantalones, camisas, buzos, camperas y mucho más. Además, ofrecemos diversas líneas 
        que abarcan desde la moda casual para el día a día hasta la elegancia formal, pasando por la frescura de la moda veraniega y la autenticidad de la moda gamer.
                 </p>
-
             </div>
-
             <div class="col-md-6" style="height: 700px; padding: 0; margin: 0;">
-
                 <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 224939.png" class="img-fluid" style="width: 100%; height: 100%;" />
             </div>
-
         </div>
-
-
     </div>
-
-    <div class="bg-ca mt-2" style="height: 400px; color:rgb(39 37 37); display: flex; flex-direction: column; justify-content: center;">
-
-
+    <div class="bg-ca mt-2" style="height: 400px; color: rgb(39 37 37); display: flex; flex-direction: column; justify-content: center;">
         <div class="container">
             <div class="row">
-
                 <div class="col-md-3 text-center">
                     <i class="bi bi-credit-card-2-back"></i>
                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
@@ -76,7 +56,6 @@
                     </svg>
                     <p>Acepatmos tu Tarjeta de Credito</p>
                 </div>
-
                 <div class="col-md-3 text-center">
                     <i class="bi bi-shop"></i>
                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
@@ -91,7 +70,6 @@
                     </svg>
                     <p>Envios a Todo el Pais</p>
                 </div>
-
                 <div class="col-md-3 text-center">
                     <i class="bi bi-line"></i>
                     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-line" viewBox="0 0 16 16">
@@ -99,20 +77,10 @@
                     </svg>
                     <p>Atencion en Linea Personalizada</p>
                 </div>
-
-
             </div>
         </div>
-
-
     </div>
-
-
     <div class="mt-2 text-center" style="height: 400px; color: white;">
-        <img src="Content/ImgNegocio/thank-you-doodle-quote-by-Vexels.png" style="height:100%" />
-
+        <img src="Content/ImgNegocio/thank-you-doodle-quote-by-Vexels.png" style="height: 100%" />
     </div>
-
-
-
 </asp:Content>

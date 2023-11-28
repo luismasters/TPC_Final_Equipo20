@@ -29,7 +29,17 @@ namespace Negocio
             email.To.Add(emailDestino);
             email.Subject = asunto;
             email.IsBodyHtml = true;
-            email.Body = "<h1>Bienvenido a SuperPrendas.Net</h1>";
+            email.Body = cuerpo;
+        }
+        
+        public void RecibirCorreo(string remitente, string nombre, string apellido, string telefono, string mensaje)
+        {
+            email = new MailMessage();
+            email.From = new MailAddress("casilladecontacto@superprendas.net");
+            email.To.Add("casilladecontacto@superprendas.net");
+            email.Subject = "Contacto de usuario";
+            email.IsBodyHtml= true;
+            email.Body = "<h4>Apellido y nombre de contacto: </h4>" + nombre + " " + apellido + " " + "<h4>Datos de contacto: </h4>" + telefono + " " + remitente + "<h4>Mensaje: </h4> " + mensaje;
         }
 
         public void EnviarMail()

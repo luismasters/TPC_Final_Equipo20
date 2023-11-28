@@ -151,7 +151,6 @@
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="Formulario web1.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 171835.png" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 172056.png" />
@@ -293,13 +292,6 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Formulario web1.aspx.cs">
-      <DependentUpon>Formulario web1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Formulario web1.aspx.designer.cs">
-      <DependentUpon>Formulario web1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -50,10 +50,12 @@
                     </div>
 
                     <div>
-                        <asp:Label ID="lblErrorRegistro" runat="server" CssClass="text-danger"></asp:Label></div>
+                        <asp:Label ID="lblErrorRegistro" runat="server" CssClass="text-danger"></asp:Label>
+                    </div>
 
                     <div>
-                        <asp:Button ID="BtnRegistrarse" runat="server" CssClass="btn btn-success" Text="Registrarse" OnClick="Btn_Registrarse_Click" /></div>
+                        <asp:Button ID="BtnRegistrarse" runat="server" CssClass="btn btn-success" Text="Registrarse" OnClick="Btn_Registrarse_Click" />
+                    </div>
 
                 </div>
             </div>
