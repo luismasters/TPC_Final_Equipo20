@@ -45,6 +45,7 @@
     <Compile Include="Genero.cs" />
     <Compile Include="Imagen.cs" />
     <Compile Include="Linea.cs" />
+    <Compile Include="MedioPago.cs" />
     <Compile Include="Prenda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stock.cs" />

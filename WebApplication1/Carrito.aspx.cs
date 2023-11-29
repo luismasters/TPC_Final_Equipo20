@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication1
 {
-    public partial class About : Page
+    public partial class Carrito : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,9 +24,21 @@ namespace WebApplication1
         }
         protected void btnCheckout_Click(object sender, EventArgs e)
         {
-            if (!Seguridad.sesionActiva(Session["usuario"]))
-                Response.Redirect("Login.aspx");
-            else Response.Redirect("Checkout.aspx");
+            if (gvCarrito.Rows.Count > 0)
+            {
+                if (!Seguridad.sesionActiva(Session["usuario"]))
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Checkout.aspx");
+                    var carrito = ObtenerProductosPorIds((Dictionary<int, int>)Session["carrito"]);
+                    Session["carritoCheckout"] = carrito;
+                    Response.Redirect("Checkout.aspx");
+                }
+            }
+            
         }
         protected void btnVolver_Click(object sender, EventArgs e)
         {

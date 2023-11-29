@@ -11,7 +11,7 @@
     </section>
 
     <div class="container text-dark">
-        <div class="row">
+        <div class="row">   
             <div class="col-md-6" style="height: 700px; padding: 0; margin: 0;">
                 <img src="Content/ImgNegocio/Captura de pantalla 2023-11-22 172756.png" class="img-fluid" style="width: 100%; height: 100%" />
             </div>
