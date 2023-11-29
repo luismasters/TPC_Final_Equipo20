@@ -24,6 +24,18 @@ namespace WebApplication1
                 DataBind();
             }
         }
+        protected bool EsAdmin()
+        {
+            if (Seguridad.esAdmin(Session["usuario"]))
+            {
+                return true;
+            }
+            return false;
+        }
+        protected void BtnOpcionAdmin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Admin");
+        }
         protected string ObtenerNombreUsuario()
         {
             if (Session["usuario"] != null)
