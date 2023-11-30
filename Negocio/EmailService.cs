@@ -15,11 +15,9 @@ namespace Negocio
 
         public EmailService()
         {
-            server = new SmtpClient("sandbox.smtp.mailtrap.io", 2525);
-            server.Credentials = new NetworkCredential("a2536de6e58be0", "88ad8cf94278c9");
+            server = new SmtpClient("smtp.gmail.com", 587);
+            server.Credentials = new NetworkCredential("superprendasprogramacion@gmail.com", "fkdlwwvtaxeflezj");
             server.EnableSsl = true;
-            server.Port = 2525;
-            server.Host = "sandbox.smtp.mailtrap.io";
         }
 
         public void ArmarCorreo(string emailDestino, string asunto, string cuerpo)
@@ -31,14 +29,14 @@ namespace Negocio
             email.IsBodyHtml = true;
             email.Body = cuerpo;
         }
-        
+
         public void RecibirCorreo(string remitente, string nombre, string apellido, string telefono, string mensaje)
         {
             email = new MailMessage();
             email.From = new MailAddress("casilladecontacto@superprendas.net");
-            email.To.Add("casilladecontacto@superprendas.net");
+            email.To.Add("superprendasprogramacion@gmail.com");
             email.Subject = "Contacto de usuario";
-            email.IsBodyHtml= true;
+            email.IsBodyHtml = true;
             email.Body = "<h4>Apellido y nombre de contacto: </h4>" + nombre + " " + apellido + " " + "<h4>Datos de contacto: </h4>" + telefono + " " + remitente + "<h4>Mensaje: </h4> " + mensaje;
         }
 
