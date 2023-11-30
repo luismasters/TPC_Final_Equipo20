@@ -195,6 +195,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Button BtnModificar;
 
         /// <summary>
+        /// Control HiddenFieldURL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldURL;
+
+        /// <summary>
         /// Control lblMensaje.
         /// </summary>
         /// <remarks>
@@ -210,7 +219,7 @@ namespace WebApplication1
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputFile txtImage;
+        protected global::System.Web.UI.WebControls.FileUpload txtImage;
 
         /// <summary>
         /// Control imgNueva.

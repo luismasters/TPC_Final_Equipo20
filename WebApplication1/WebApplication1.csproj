@@ -149,6 +149,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\StyleSheet.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DetallePrenda.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -285,6 +286,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetallePrenda.aspx.cs">
+      <DependentUpon>DetallePrenda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetallePrenda.aspx.designer.cs">
+      <DependentUpon>DetallePrenda.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

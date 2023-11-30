@@ -31,10 +31,6 @@
                         <p class="card-text m-0" style="font-size:12px;">Categoria: <%# Eval("Categoria.Descripcion") %></p>
                        <p class="card-text m-0" style="font-size:12px;">Linea: <%# Eval("Linea.Descripcion") %></p>
                         <p class="card-text m-0" style="font-size:12px;">Genero: <%# Eval("Genero.Descripcion") %></p>
-
-
-
-
                                         <asp:Button ID="Button1" runat="server" CommandName="MostrarDetalle" CommandArgument='<%# Eval("ID") %>' Text="Seleccionar" CssClass="btn btn-warning" OnClick="Seleccionar_Click" />
                                     </div>
                                 </div>
@@ -42,14 +38,8 @@
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
-
             </div>
-
-
-
-
             <div class="col-md-9">
-
 
                 <div class="container">
                     <h4 class="text-center col-md-6">Modificar</h4>
@@ -98,25 +88,48 @@
                                 <asp:Button ID="BtnModificar" Text="Modificar" runat="server" CssClass="btn  btn-warning" OnClientClick="return confirmarAlta();" OnClick="Modificar_Click" Visible="false" />
 
                         </div>
+                        <asp:HiddenField runat="server" ID="HiddenFieldURL" />
+
 
                         <div class="col-md-8">
     <div class="mb-2"><asp:Label ID="lblMensaje" runat="server" Visible="false"></asp:Label>
 
         <asp:Label CssClass="form-label" Text="Imagen: carga una imagen desde tu equipo" runat="server" />
         <div class="input-group">
-            <input type="file" id="txtImage" runat="server" class="form-control"  />
+         <asp:FileUpload type="file" id="txtImage" runat="server" class="form-control" />   
+
             <span class="input-group-btn">
-                <asp:Button Text="Ver Imagen Seleccionada" runat="server" onclick="Ver_Click" CssClass="btn btn-secondary" />    <asp:Button Text="Guardar Imagen" runat="server" onclick="GuardarImg_Click" CssClass="btn btn-success" />
+                <asp:Button Text="Ver Imagen Seleccionada" runat="server" onclick="Ver_Click" CssClass="btn btn-secondary" />   
+                <asp:Button Text="Guardar Imagen" runat="server" onclick="GuardarImg_Click" CssClass="btn btn-success" />
 
             </span>
         </div>
         <asp:Image ID="imgNueva" ImageUrl="https://img.freepik.com/vector-premium/foto-blanco-icono-simple-azul-plano-sombra-larga-xa_159242-10176.jpg?w=360" runat="server" CssClass="img-fluid mb-2" />
     </div>
+   <% if (Session["ListaImagenes"] != null && Session["ListaImagenes"] is List<Dominio.Imagen> listaImagenes) { %>
+    <div class="additional-images">
+        <!-- Mostrar imágenes adicionales -->
+        <% foreach (var imagen in listaImagenes) { %>
+            <img  src="<%= imagen.ImagenURL %>" class="additional-img" alt="Imagen adicional del artículo" style="height:100px;width:100px;margin:5px;cursor:pointer; border-radius:10px" onclick="cambiarImagen('<%= imagen.ImagenURL %>')" />
+        <% } %>
+    </div>
+<% } %>
     <script>
         function confirmarAlta() {
             return confirm("¿Estás seguro de Modificar esta prenda?");
         }
     </script>
+
+
+                            
+                            <script>
+                                function cambiarImagen(nuevaImagenUrl) {
+                                    var imagenPrincipal = document.getElementById('<%= imgNueva.ClientID %>');
+                                        imagenPrincipal.src = nuevaImagenUrl;
+                                        document.getElementById('<%= HiddenFieldURL.ClientID %>').value = nuevaImagenUrl;
+
+                                }
+                            </script>
 </div>
 
                     </div>
@@ -124,9 +137,6 @@
                         <a href="Default.aspx" class="mb-2">Salir</a>
                     </div>
                 </div>
-
-
-
 
             </div>
         </div>

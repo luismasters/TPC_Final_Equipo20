@@ -52,18 +52,16 @@
                         <div class="card mb-4 bg-ca" style="width: 18rem; margin-right: 10px;">
                             <img src='<%# Eval("ImagenURL") %>' class="card-img-top" alt="Imagen del artículo" style="width: 100%; height: 250px;">
                             <div class="card-body text-center">
-                                <h6 class="card-title"><%# Eval("Descripcion") %></h6>
+                                <h6 class="card-title" style="color:rgb(250 199 1)"><%# Eval("Descripcion") %></h6>
                                 <p class="card-text" style="font-size:25px;">$<%# Eval("Precio") %> </p>
                                 <p class="card-text" >Unidades:<%# Eval("Stock") %></p>
 
                             </div>
                           
                             <div class="quantity d-flex justify-content-center align-items-center">
-                            <asp:Button ID="btnAgregarCarrito" runat="server" CssClass="btn btn-warning btn-sm" Text="Agregar al carrito" CommandName="Agregar" CommandArgument='<%# Eval("Id") %>' style="margin-right:3px" />
-
-                                <asp:Button ID="BtnDecrement" runat="server" Text="-" CssClass="btn btn-sm btn-Light" OnClick="BtnDecrement_Click" UseSubmitBehavior="false" />
-                                <asp:TextBox ID="quantity" runat="server" CssClass="custom-form-control text-center" Text="1" />
-                                <asp:Button ID="BtnIncrement" runat="server" Text="+" CssClass="btn btn-sm btn-Light" OnClick="BtnIncrement_Click" UseSubmitBehavior="false" />
+                                 <p></p>
+ <a class="btn btn-warning btn-sm" href='<%# "DetallePrenda.aspx?id=" + Eval("Id") %>'>Ver</a>
+ <p></p>
                             </div>
                             <p></p>
                         </div>
@@ -73,5 +71,9 @@
         </div>
      </ContentTemplate>
     </asp:UpdatePanel>
+
+        <div  style="height:50px">
+
+        </div>
     </main>
 </asp:Content>

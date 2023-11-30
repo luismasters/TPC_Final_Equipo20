@@ -31,7 +31,6 @@ namespace WebApplication1
             string linea = null;
             decimal? precio = null;
 
-
             listPrenda = prenda.ListarConFiltro(cate, genero, linea, precio, Nombre);
             rptArticulos.DataSource = listPrenda;
             rptArticulos.DataBind();
@@ -101,6 +100,8 @@ namespace WebApplication1
             }
             Session["idPrenda"] = idPrenda;
 
+            Session["ListaImagenes"] = imageList;
+
 
             listPrenda = new List<Prenda>(); // Asigna una lista vacía
             listPrenda.Add(prendaNegocio.BuscarUnaPrenda(idPrenda));
@@ -144,26 +145,29 @@ namespace WebApplication1
         protected void GuardarImg_Click(object sender, EventArgs e)
         {
 
-            if (Session["idPrenda"] == null)
+            string imageURL = HiddenFieldURL.Value;
+
+
+
+            string parteARemover = "./Prenda_Img/";
+            string resultado = imageURL.Replace(parteARemover, "");
+
+            if (txtImage.HasFile)
             {
 
-                // Código para mostrar una alerta en el navegador del cliente
-                string script = "alert('No se puede guardar la imagen: No se ha seleccionado ninguna prenda.');";
+                int idPrenda = (int)Session["idPrenda"];
+                txtImage.PostedFile.SaveAs(Server.MapPath(parteARemover + resultado)); // Guardar el archivo en la ubicación deseada
+                                                                                       //Actualizar la URL de la imagen mostrada en el control asp:Image
+                imgNueva.ImageUrl = "~/Prenda_Img/" + resultado;
+                Session["RutaPrendaActual"] = "./Prenda_Img/" + resultado;
+                // Mostrar un mensaje de éxito
+                string script = "alert('La imagen se guardó con éxito.');";
                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
-
             }
             else
             {
-
-
-                ImagenNegocio ima = new ImagenNegocio();
-                int idPrenda = (int)Session["idPrenda"];
-
-
-
-
-                ima.Agregar((string)Session["RutaPrendaActual"], idPrenda);
-                string script = "alert('La imagen se guardo con exito');";
+                // Mostrar una alerta si no se seleccionó ningún archivo
+                string script = "alert('No se ha seleccionado ningún archivo.');";
                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
             }
 
