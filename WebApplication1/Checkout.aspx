@@ -17,6 +17,7 @@
         <asp:Label ID="lblMedioPago" runat="server" Text="Seleccione Medio de Pago: "></asp:Label>
         <asp:DropDownList ID="ddlMediosPago" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlMediosPago_SelectedIndexChanged">
         </asp:DropDownList>
+          <br />
     </asp:Panel>
     <asp:Panel ID="pnlTarjeta" runat="server" Visible="false">
         <div>
@@ -35,7 +36,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlCuotas" runat="server" Visible="false">
-        <div>   
+        <div>
             <label>Cuotas:</label>
             <asp:DropDownList ID="ddlCuotas" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCuotas_SelectedIndexChanged">
                 <asp:ListItem Text="1 cuota" Value="1"></asp:ListItem>
@@ -45,51 +46,76 @@
             </asp:DropDownList>
         </div>
     </asp:Panel>
+      <br />
+    <asp:CheckBox ID="chkEnvioDomicilio" runat="server" Text="Envio a domicilio" AutoPostBack="true" OnCheckedChanged="chkEnvioDomicilio_CheckedChanged" />
+      <br />
+    <asp:Panel ID="pnlDatosEnvio" runat="server" Visible="false">
+        <label for="txtDireccion">Dirección:</label>
+        <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
+        <br />
+        <label for="txtCiudad">Ciudad:</label>
+        <asp:DropDownList ID="ddlCiudades" runat="server"></asp:DropDownList>
+        <br />
+        <label for="txtTelefono">Teléfono de contacto:</label>
+        <asp:TextBox ID="txtTelefono" runat="server" onkeypress="return soloNumeros(event);" MaxLength="12" />
+    </asp:Panel>
+      <br />
+    <asp:Label ID="lblTotalConRecargo" runat="server" Text="Total con recargos: "></asp:Label>
 
-<script type="text/javascript">
-    function formatoTarjeta(input) {
-        var numTarjeta = input.value.replace(/\D/g, '');
-        numTarjeta = numTarjeta.replace(/(\d{4})(?=\d)/g, '$1 ');
-        input.value = numTarjeta;
-    }
-</script>
-<script type="text/javascript">
-    function formatoFechaVencimiento(input) {
-        var valor = input.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
-        var mes = valor.slice(0, 2);
-        var anio = valor.slice(2, 4);
 
-        if (mes.length === 2) {
-            if (parseInt(mes) < 1 || parseInt(mes) > 12) {
-                mes = '01'; // Ajustar el mes si está fuera del rango
+    <script type="text/javascript">
+        function formatoTarjeta(input) {
+            var numTarjeta = input.value.replace(/\D/g, '');
+            numTarjeta = numTarjeta.replace(/(\d{4})(?=\d)/g, '$1 ');
+            input.value = numTarjeta;
+        }
+    </script>
+    <script type="text/javascript">
+        function formatoFechaVencimiento(input) {
+            var valor = input.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+            var mes = valor.slice(0, 2);
+            var anio = valor.slice(2, 4);
+
+            if (mes.length === 2) {
+                if (parseInt(mes) < 1 || parseInt(mes) > 12) {
+                    mes = '01'; // Ajustar el mes si está fuera del rango
+                }
             }
+
+            if (anio.length === 2) {
+                if (parseInt(anio) < 23) {
+                    anio = '23'; // Ajustar el año si está fuera del rango
+                }
+            }
+
+            var fechaFormateada = mes + '/' + anio;
+            input.value = fechaFormateada;
         }
 
-        if (anio.length === 2) {
-            if (parseInt(anio) < 23) {
-                anio = '23'; // Ajustar el año si está fuera del rango
+        function validarEntradaFechaVencimiento(event) {
+            // Permitir las teclas de navegación (flechas, inicio, fin) y la tecla de retroceso
+            if (event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 36 || event.keyCode == 35) {
+                return true;
+            }
+
+            // Convertir el código de tecla a carácter
+            var ch = String.fromCharCode(event.keyCode);
+
+            // Verificar si el carácter es numérico
+            if (!/^\d$/.test(ch)) {
+                event.preventDefault();  // Cancelar la entrada no válida
             }
         }
-
-        var fechaFormateada = mes + '/' + anio;
-        input.value = fechaFormateada;
-    }
-
-    function validarEntradaFechaVencimiento(event) {
-        // Permitir las teclas de navegación (flechas, inicio, fin) y la tecla de retroceso
-        if (event.keyCode == 8 || event.keyCode == 37 || event.keyCode == 39 || event.keyCode == 36 || event.keyCode == 35) {
+    </script>
+    <script type="text/javascript">
+        function soloNumeros(e) {
+            var charCode = (e.which) ? e.which : event.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
             return true;
         }
-
-        // Convertir el código de tecla a carácter
-        var ch = String.fromCharCode(event.keyCode);
-
-        // Verificar si el carácter es numérico
-        if (!/^\d$/.test(ch)) {
-            event.preventDefault();  // Cancelar la entrada no válida
-        }
-    }
-</script>
+    </script>
 </asp:Content>
 
 

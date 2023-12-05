@@ -25,15 +25,46 @@ namespace WebApplication1
                     gvCarritoCheckout.DataBind();
                     decimal total = carrito.AsEnumerable().Sum(row => row.Field<decimal>("Precio") * row.Field<int>("Cantidad"));
                     lblTotal.Text = "Total: " + total.ToString("C");
+
+                    
                 }
                 CargarMediosPago();
+                CargarCiudadesEnvio();
+                PrecioTotalConRecargos();
             }
+        }
+        private void PrecioTotalConRecargos()
+        {
+            decimal totalConRecargo = CalcularPrecioTotalConEnvio();
+            lblTotalConRecargo.Text = "Total con recargos: " + totalConRecargo.ToString("C");
         }
         private decimal ObtenerPrecioTotal()
         {
+                
                 var carrito = (DataTable)Session["carritoCheckout"];
                 decimal total = carrito.AsEnumerable().Sum(row => row.Field<decimal>("Precio") * row.Field<int>("Cantidad"));
                 return total;           
+        }
+        private decimal CalcularPrecioTotalConEnvio()
+        {
+            decimal precioTotal = ObtenerPrecioTotal();
+            if (chkEnvioDomicilio.Checked)
+            {
+                int idCiudad = Convert.ToInt32(ddlCiudades.SelectedValue);
+                CiudadNegocio negocio = new CiudadNegocio();
+                CiudadEnvio ciudad = negocio.ObtenerCiudadPorId(idCiudad);
+
+                if (ciudad != null)
+                {
+                    precioTotal += ciudad.PrecioEnvio;
+                }
+            }
+            if (pnlCuotas.Visible)
+            {
+                int cuotas = Convert.ToInt32(ddlCuotas.SelectedValue);
+                precioTotal = CalculoCuotas(cuotas);
+            }
+            return precioTotal;
         }
 
         private void CargarMediosPago()
@@ -46,7 +77,17 @@ namespace WebApplication1
             ddlMediosPago.DataValueField = "IDPago";
             ddlMediosPago.DataBind();
         }
+        private void CargarCiudadesEnvio()
+        {
+            CiudadNegocio negocio = new CiudadNegocio();
+            List<CiudadEnvio> ciudadEnvio = negocio.Listar();
 
+            ddlCiudades.DataSource = ciudadEnvio;
+            ddlCiudades.DataTextField = "DescripcionConPrecio"; 
+            ddlCiudades.DataValueField = "IDCiudad";
+            ddlCiudades.DataBind();
+
+        }
         protected void ddlMediosPago_SelectedIndexChanged(object sender, EventArgs e)
         {
             string medioPagoSeleccionado = ddlMediosPago.SelectedItem.Text;
@@ -96,6 +137,10 @@ namespace WebApplication1
             {
                 listItem.Text = $"{cuotas} cuotas (total {precioTotalConAumento:C})";
             }
+        }
+        protected void chkEnvioDomicilio_CheckedChanged(object sender, EventArgs e)
+        {
+            pnlDatosEnvio.Visible = chkEnvioDomicilio.Checked;
         }
 
     }
