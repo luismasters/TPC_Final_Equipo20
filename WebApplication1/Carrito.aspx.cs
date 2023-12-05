@@ -32,7 +32,6 @@ namespace WebApplication1
                 }
                 else
                 {
-                    Response.Redirect("Checkout.aspx");
                     var carrito = ObtenerProductosPorIds((Dictionary<int, int>)Session["carrito"]);
                     Session["carritoCheckout"] = carrito;
                     Response.Redirect("Checkout.aspx");

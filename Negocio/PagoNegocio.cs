@@ -20,8 +20,8 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     MedioPago medioPago = new MedioPago();
-                    medioPago.IDPago = (int)datos.Lector["IDPago"];
-                    medioPago.Descripcion = datos.Lector["Descripcion"].ToString();
+                    medioPago.IDPago = Convert.ToInt32(datos.Lector["IDPago"]);
+                    medioPago.Descripcion = Convert.ToString(datos.Lector["Descripcion"]);
                     lista.Add(medioPago);
                 }
                 return lista;
