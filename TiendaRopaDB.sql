@@ -56,6 +56,12 @@ CREATE TABLE Usuario (
     Email VARCHAR(255) NOT NULL 
 );
 
+CREATE TABLE Stock (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    IdPrenda INT NOT NULL FOREIGN KEY REFERENCES Prenda(Id),
+    Cantidad INT NOT NULL CHECK (Cantidad >= 0)
+)
+
 
 insert into Categoria (Descripcion) values ('Remeras')
 insert into Categoria (Descripcion) values ('Buzos')
