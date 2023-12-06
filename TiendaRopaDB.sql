@@ -51,7 +51,7 @@ CREATE TABLE Rol (
 CREATE TABLE Usuario (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     NombreUsuario VARCHAR(50) NOT NULL UNIQUE,
-    Contraseña VARCHAR(50) NOT NULL,
+    Pass VARCHAR(50) NOT NULL,
     IdRol INT NOT NULL FOREIGN KEY REFERENCES Rol(Id),
     Email VARCHAR(255) NOT NULL 
 );
@@ -112,7 +112,7 @@ INNER JOIN Linea L ON P.IdLinea = L.Id;
 
 INSERT INTO Rol (Nombre) VALUES ('Administrador');
 INSERT INTO Rol (Nombre) VALUES ('Comprador');
-INSERT INTO Usuario (NombreUsuario, Contraseña, IdRol, Email) VALUES ('prueba', '123', 2, 'prueba@prueba.com');
+INSERT INTO Usuario (NombreUsuario, Pass, IdRol, Email) VALUES ('prueba', '123', 2, 'prueba@prueba.com');
 
 select * from linea
 select * from genero
@@ -121,7 +121,7 @@ select * from Usuario
 select * from Rol
 delete from usuario where id=6;
 DECLARE @NombreUsuario NVARCHAR(100) = 'pruebaprueba',
-        @Contraseña NVARCHAR(100) = '123123',
+        @Pass NVARCHAR(100) = '123123',
         @IdRol INT = 2,
         @Email NVARCHAR(100) = 'prueba@pruebaprueba.com';
-INSERT INTO Usuario (NombreUsuario, Contraseña, IdRol, Email) VALUES (@NombreUsuario, @Contraseña, @IdRol, @Email)
+INSERT INTO Usuario (NombreUsuario, Pass, IdRol, Email) VALUES (@NombreUsuario, @Pass, @IdRol, @Email)

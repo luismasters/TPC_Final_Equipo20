@@ -14,7 +14,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Select Id, NombreUsuario, Contraseña, IdRol from Usuario Where NombreUsuario=@user and Contraseña=@pass");
+                datos.setearConsulta("Select Id, NombreUsuario, Pass, IdRol from Usuario Where NombreUsuario=@user and Pass=@pass");
                 datos.agregarParametro("@user", username);
                 datos.agregarParametro("@pass", password);
                 datos.ejecutarLectura();
@@ -25,7 +25,7 @@ namespace Negocio
                     {
                         Id = (int)datos.Lector["Id"],
                         User = datos.Lector["NombreUsuario"].ToString(),
-                        Pass = datos.Lector["Contraseña"].ToString(),
+                        Pass = datos.Lector["Pass"].ToString(),
                         TipoUsuario = (int)(datos.Lector["IdRol"]) == 1 ? TipoUsuario.NORMAL : TipoUsuario.ADMIN
                     };
                 }
@@ -46,9 +46,9 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO Usuario (NombreUsuario, Contraseña, IdRol, Email) VALUES (@NombreUsuario, @Contraseña, @IdRol, @Email)");
+                datos.setearConsulta("INSERT INTO Usuario (NombreUsuario, Pass, IdRol, Email) VALUES (@NombreUsuario, @Pass, @IdRol, @Email)");
                 datos.agregarParametro("@NombreUsuario", usuario.User);
-                datos.agregarParametro("@Contraseña", usuario.Pass);
+                datos.agregarParametro("@Pass", usuario.Pass);
                 datos.agregarParametro("@IdRol", usuario.TipoUsuario);
                 datos.agregarParametro("@Email", usuario.Email);
                 datos.ejecutarAccion();
