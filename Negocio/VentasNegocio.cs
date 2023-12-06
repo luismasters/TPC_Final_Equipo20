@@ -23,7 +23,7 @@ namespace Negocio
                     ventas.IDVenta = (int)datos.Lector["IDVenta"];
                     ventas.IDUsuario = (int)datos.Lector["IDUsuario"];
                     ventas.MedioPago = (int)datos.Lector["MedioPago"];
-                    ventas.PrecioTotal = (int)datos.Lector["PrecioTotal"];
+                    ventas.PrecioTotal = (decimal)datos.Lector["PrecioTotal"];
                     ventas.Pagado = (bool)datos.Lector["Pagado"];
                 }
                 return lista;

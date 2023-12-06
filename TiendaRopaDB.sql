@@ -111,6 +111,10 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
+--Modificar columna PrecioTotal por float
+
+ALTER TABLE Ventas MODIFY COLUMN PrecioTotal FLOAT;
+
 CREATE TABLE [dbo].[Ventas](
 	[IDVenta] [int] IDENTITY(1,1) NOT NULL,
 	[IDUsuario] [int] NOT NULL,
@@ -213,3 +217,4 @@ DECLARE @NombreUsuario NVARCHAR(100) = 'pruebaprueba',
         @IdRol INT = 2,
         @Email NVARCHAR(100) = 'prueba@pruebaprueba.com';
 INSERT INTO Usuario (NombreUsuario, Pass, IdRol, Email) VALUES (@NombreUsuario, @Pass, @IdRol, @Email)
+

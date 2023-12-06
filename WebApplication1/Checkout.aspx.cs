@@ -30,24 +30,12 @@ namespace WebApplication1
                 }
                 CargarMediosPago();
                 CargarCiudadesEnvio();
-                PrecioTotalConRecargos();
             }
         }
-        private void PrecioTotalConRecargos()
-        {
-            decimal totalConRecargo = CalcularPrecioTotalConEnvio();
-            lblTotalConRecargo.Text = "Total con recargos: " + totalConRecargo.ToString("C");
-        }
-        private decimal ObtenerPrecioTotal()
-        {
-                
-                var carrito = (DataTable)Session["carritoCheckout"];
-                decimal total = carrito.AsEnumerable().Sum(row => row.Field<decimal>("Precio") * row.Field<int>("Cantidad"));
-                return total;           
-        }
-        private decimal CalcularPrecioTotalConEnvio()
+        private decimal PrecioTotalConRecargos()
         {
             decimal precioTotal = ObtenerPrecioTotal();
+
             if (chkEnvioDomicilio.Checked)
             {
                 int idCiudad = Convert.ToInt32(ddlCiudades.SelectedValue);
@@ -59,14 +47,23 @@ namespace WebApplication1
                     precioTotal += ciudad.PrecioEnvio;
                 }
             }
+
             if (pnlCuotas.Visible)
             {
                 int cuotas = Convert.ToInt32(ddlCuotas.SelectedValue);
                 precioTotal = CalculoCuotas(cuotas);
             }
+
             return precioTotal;
         }
-
+        private decimal ObtenerPrecioTotal()
+        {
+                
+                var carrito = (DataTable)Session["carritoCheckout"];
+                decimal total = carrito.AsEnumerable().Sum(row => row.Field<decimal>("Precio") * row.Field<int>("Cantidad"));
+                return total;           
+        }
+        
         private void CargarMediosPago()
         {
             PagoNegocio negocio = new PagoNegocio();
@@ -137,10 +134,19 @@ namespace WebApplication1
             {
                 listItem.Text = $"{cuotas} cuotas (total {precioTotalConAumento:C})";
             }
+            lblTotalConRecargo.Text = "Total con recargos: " + PrecioTotalConRecargos().ToString("C");
+
         }
         protected void chkEnvioDomicilio_CheckedChanged(object sender, EventArgs e)
         {
             pnlDatosEnvio.Visible = chkEnvioDomicilio.Checked;
+            lblTotalConRecargo.Text = "Total con recargos: " + PrecioTotalConRecargos().ToString("C");
+        }
+        protected void btnCancelarCompra_Click(object sender, EventArgs e)
+        {
+            Session.Remove("carritoCheckout");
+            Session.Remove("carrito");            
+            Response.Redirect("Default.aspx");
         }
 
     }

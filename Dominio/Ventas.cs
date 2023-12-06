@@ -12,7 +12,7 @@ namespace Dominio
         public int IDVenta {  get; set; }
         public int IDUsuario {  get; set; }
         public int MedioPago {  get; set; }
-        public int PrecioTotal {  get; set; }
+        public decimal PrecioTotal {  get; set; }
         public bool Pagado {get; set; }
 
     }

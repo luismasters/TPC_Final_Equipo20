@@ -17,7 +17,7 @@
         <asp:Label ID="lblMedioPago" runat="server" Text="Seleccione Medio de Pago: "></asp:Label>
         <asp:DropDownList ID="ddlMediosPago" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlMediosPago_SelectedIndexChanged">
         </asp:DropDownList>
-          <br />
+        <br />
     </asp:Panel>
     <asp:Panel ID="pnlTarjeta" runat="server" Visible="false">
         <div>
@@ -46,9 +46,9 @@
             </asp:DropDownList>
         </div>
     </asp:Panel>
-      <br />
+    <br />
     <asp:CheckBox ID="chkEnvioDomicilio" runat="server" Text="Envio a domicilio" AutoPostBack="true" OnCheckedChanged="chkEnvioDomicilio_CheckedChanged" />
-      <br />
+    <br />
     <asp:Panel ID="pnlDatosEnvio" runat="server" Visible="false">
         <label for="txtDireccion">Dirección:</label>
         <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
@@ -59,8 +59,12 @@
         <label for="txtTelefono">Teléfono de contacto:</label>
         <asp:TextBox ID="txtTelefono" runat="server" onkeypress="return soloNumeros(event);" MaxLength="12" />
     </asp:Panel>
-      <br />
-    <asp:Label ID="lblTotalConRecargo" runat="server" Text="Total con recargos: "></asp:Label>
+    <br />
+    <asp:Label ID="lblTotalConRecargo" runat="server" Text="Total con recargos: " AutoPostBack="true"></asp:Label>
+    <br />
+    <br />
+    <asp:Button ID="btnCancelarCompra" runat="server" Text="Cancelar Compra" CssClass="btn btn-danger"
+        OnClientClick="return confirm('¿Estás seguro de que deseas cancelar la compra?');" OnClick="btnCancelarCompra_Click" />
 
 
     <script type="text/javascript">
