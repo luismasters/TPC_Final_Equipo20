@@ -9,11 +9,11 @@ namespace Dominio
     public class Ventas
     {
         public Ventas() { }
+        public int IDVenta {  get; set; }
+        public int IDUsuario {  get; set; }
+        public int MedioPago {  get; set; }
+        public int PrecioTotal {  get; set; }
+        public bool Pagado {get; set; }
 
-        public int IDVenta { get; set; }
-        public Usuario IDUsuario { get; set; }
-        public MedioPago MedioPago { get; set; }
-        public int PrecioTotal { get; set; }
-        public bool Pagado {  get; set; }
     }
 }
