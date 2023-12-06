@@ -153,6 +153,11 @@ ALTER TABLE Ventas MODIFY COLUMN PrecioTotal FLOAT;
 alter table Ventas add IDEnvio int
 alter table Envios add constraint fk_Ventas_Envios foreign key (IDEnvio) references Envios (IDEnvio)
 
+Insert into CiudadEnvio values ('Ciudad Autonoma de Buenos Aires', 1500, 'GBA Sur', 2000, 'GBA Norte', 2000, 'GBA Oeste', 2000, 'Rosario', 3000, 'Cordoba', 3500)
+
+Insert into MedioPago values ('Efectivo', 'Debito', 'Credito')
+
+
 ---
 
 insert into Categoria (Descripcion) values ('Remeras')
