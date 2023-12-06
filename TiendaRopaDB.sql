@@ -62,6 +62,88 @@ CREATE TABLE Stock (
     Cantidad INT NOT NULL CHECK (Cantidad >= 0)
 )
 
+CREATE TABLE [dbo].[CiudadEnvio](
+	[IDCiudad] [int] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](100) NOT NULL,
+	[PrecioEnvio] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IDCiudad] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[DetalleVentas](
+	[IDDetalle] [int] IDENTITY(1,1) NOT NULL,
+	[IDVenta] [int] NOT NULL,
+	[IDPrenda] [int] NOT NULL,
+	[Cantidad] [int] NOT NULL,
+	[PrecioUnitario] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IDDetalle] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[Envios](
+	[IDEnvio] [int] IDENTITY(1,1) NOT NULL,
+	[IDVenta] [int] NOT NULL,
+	[IDUsuario] [int] NOT NULL,
+	[Direccion] [varchar](200) NOT NULL,
+	[Telefono] [varchar](30) NULL,
+	[Observaciones] [varchar](300) NULL,
+	[Entregado] [bit] NULL,
+	[IDCiudad] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IDEnvio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[MedioPago](
+	[IDPago] [tinyint] IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](50) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IDPago] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[Ventas](
+	[IDVenta] [int] IDENTITY(1,1) NOT NULL,
+	[IDUsuario] [int] NOT NULL,
+	[MedioPago] [tinyint] NOT NULL,
+	[PrecioTotal] [int] NOT NULL,
+	[Pagado] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IDVenta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[DetalleVentas]  WITH CHECK ADD FOREIGN KEY([IDPrenda])
+REFERENCES [dbo].[Prenda] ([Id])
+GO
+ALTER TABLE [dbo].[DetalleVentas]  WITH CHECK ADD FOREIGN KEY([IDVenta])
+REFERENCES [dbo].[Ventas] ([IDVenta])
+GO
+ALTER TABLE [dbo].[Envios]  WITH CHECK ADD FOREIGN KEY([IDCiudad])
+REFERENCES [dbo].[CiudadEnvio] ([IDCiudad])
+GO
+ALTER TABLE [dbo].[Envios]  WITH CHECK ADD FOREIGN KEY([IDUsuario])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[Envios]  WITH CHECK ADD FOREIGN KEY([IDVenta])
+REFERENCES [dbo].[Ventas] ([IDVenta])
+GO
+ALTER TABLE [dbo].[Ventas]  WITH CHECK ADD FOREIGN KEY([IDUsuario])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[Ventas]  WITH CHECK ADD FOREIGN KEY([MedioPago])
+REFERENCES [dbo].[MedioPago] ([IDPago])
+
 
 insert into Categoria (Descripcion) values ('Remeras')
 insert into Categoria (Descripcion) values ('Buzos')
