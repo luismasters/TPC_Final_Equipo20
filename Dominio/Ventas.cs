@@ -14,6 +14,7 @@ namespace Dominio
         public int MedioPago {  get; set; }
         public decimal PrecioTotal {  get; set; }
         public bool Pagado {get; set; }
+        public int IDEnvio { get; set; }
 
     }
 }

@@ -15,7 +15,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado from Ventas");
+                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado, IDEnvio from Ventas");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -25,6 +25,7 @@ namespace Negocio
                     ventas.MedioPago = (int)datos.Lector["MedioPago"];
                     ventas.PrecioTotal = (decimal)datos.Lector["PrecioTotal"];
                     ventas.Pagado = (bool)datos.Lector["Pagado"];
+                    ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
                 }
                 return lista;
             }
@@ -39,19 +40,19 @@ namespace Negocio
             }
         }
 
-        public int RegistrarVenta(Ventas venta)
+        public void RegistrarVenta(Ventas venta)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Insert into Ventas values (@IDUsuario, @MedioPago, @PrecioTotal, @Pagado)");
+                datos.setearConsulta("Insert into Ventas values (@IDUsuario, @MedioPago, @PrecioTotal, @Pagado, @IDEnvio)");
                 datos.agregarParametro("@IDUsuario", venta.IDUsuario);
                 datos.agregarParametro("@MedioPago", venta.MedioPago);
                 datos.agregarParametro("@PrecioTotal", venta.PrecioTotal);
                 datos.agregarParametro("@Pagado", venta.Pagado);
+                datos.agregarParametro("IDEnvio", venta.IDEnvio);
 
-                int ventaId = (int)datos.ejecutarAccionReturn();
-                return ventaId;
+                datos.ejecutarLectura();
             }
             catch (Exception ex)
             {
@@ -64,5 +65,6 @@ namespace Negocio
             }
 
         }
+        
     }
 }

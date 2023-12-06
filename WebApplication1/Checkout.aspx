@@ -53,11 +53,17 @@
         <label for="txtDireccion">Dirección:</label>
         <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
         <br />
+         <br />
         <label for="txtCiudad">Ciudad:</label>
-        <asp:DropDownList ID="ddlCiudades" runat="server"></asp:DropDownList>
+        <asp:DropDownList ID="ddlCiudades" runat="server" OnSelectedIndexChanged="ddlCiudades_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
         <br />
+         <br />
         <label for="txtTelefono">Teléfono de contacto:</label>
         <asp:TextBox ID="txtTelefono" runat="server" onkeypress="return soloNumeros(event);" MaxLength="12" />
+        <br />
+         <br />
+        <label for ="txtObservaciones">Observaciones</label>
+        <asp:TextBox ID="txtObservaciones" runat="server" TextMode="MultiLine"></asp:TextBox>
     </asp:Panel>
     <br />
     <asp:Label ID="lblTotalConRecargo" runat="server" Text="Total con recargos: " AutoPostBack="true"></asp:Label>
@@ -65,7 +71,8 @@
     <br />
     <asp:Button ID="btnCancelarCompra" runat="server" Text="Cancelar Compra" CssClass="btn btn-danger"
         OnClientClick="return confirm('¿Estás seguro de que deseas cancelar la compra?');" OnClick="btnCancelarCompra_Click" />
-
+    <asp:Button ID="btnConfirmarCompra" runat="server" Text="Confirmar Compra" CssClass="btn btn-success"
+        OnClientClick="return confirm('¿Confirmar la compra?');" OnClick="btnConfirmarCompra_Click" />
 
     <script type="text/javascript">
         function formatoTarjeta(input) {

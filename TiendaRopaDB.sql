@@ -111,9 +111,8 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
---Modificar columna PrecioTotal por float
 
-ALTER TABLE Ventas MODIFY COLUMN PrecioTotal FLOAT;
+
 
 CREATE TABLE [dbo].[Ventas](
 	[IDVenta] [int] IDENTITY(1,1) NOT NULL,
@@ -148,6 +147,13 @@ GO
 ALTER TABLE [dbo].[Ventas]  WITH CHECK ADD FOREIGN KEY([MedioPago])
 REFERENCES [dbo].[MedioPago] ([IDPago])
 
+--Modificaciones tabla ventas (6/12/2023)
+
+ALTER TABLE Ventas MODIFY COLUMN PrecioTotal FLOAT;
+alter table Ventas add IDEnvio int
+alter table Envios add constraint fk_Ventas_Envios foreign key (IDEnvio) references Envios (IDEnvio)
+
+---
 
 insert into Categoria (Descripcion) values ('Remeras')
 insert into Categoria (Descripcion) values ('Buzos')

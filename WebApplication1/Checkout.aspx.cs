@@ -17,6 +17,10 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
+                if (!Seguridad.sesionActiva(Session["usuario"]))
+                {
+                    Response.Redirect("Login.aspx");
+                }
                 if (Session["carritoCheckout"] != null)
                 {
                     var carrito = (DataTable)Session["carritoCheckout"];
@@ -26,7 +30,7 @@ namespace WebApplication1
                     decimal total = carrito.AsEnumerable().Sum(row => row.Field<decimal>("Precio") * row.Field<int>("Cantidad"));
                     lblTotal.Text = "Total: " + total.ToString("C");
 
-                    
+
                 }
                 CargarMediosPago();
                 CargarCiudadesEnvio();
@@ -35,6 +39,12 @@ namespace WebApplication1
         private decimal PrecioTotalConRecargos()
         {
             decimal precioTotal = ObtenerPrecioTotal();
+
+            if (pnlCuotas.Visible)
+            {
+                int cuotas = Convert.ToInt32(ddlCuotas.SelectedValue);
+                precioTotal = CalculoCuotas(cuotas);
+            }
 
             if (chkEnvioDomicilio.Checked)
             {
@@ -48,22 +58,15 @@ namespace WebApplication1
                 }
             }
 
-            if (pnlCuotas.Visible)
-            {
-                int cuotas = Convert.ToInt32(ddlCuotas.SelectedValue);
-                precioTotal = CalculoCuotas(cuotas);
-            }
-
             return precioTotal;
         }
         private decimal ObtenerPrecioTotal()
         {
-                
-                var carrito = (DataTable)Session["carritoCheckout"];
-                decimal total = carrito.AsEnumerable().Sum(row => row.Field<decimal>("Precio") * row.Field<int>("Cantidad"));
-                return total;           
+
+            var carrito = (DataTable)Session["carritoCheckout"];
+            decimal total = carrito.AsEnumerable().Sum(row => row.Field<decimal>("Precio") * row.Field<int>("Cantidad"));
+            return total;
         }
-        
         private void CargarMediosPago()
         {
             PagoNegocio negocio = new PagoNegocio();
@@ -80,7 +83,7 @@ namespace WebApplication1
             List<CiudadEnvio> ciudadEnvio = negocio.Listar();
 
             ddlCiudades.DataSource = ciudadEnvio;
-            ddlCiudades.DataTextField = "DescripcionConPrecio"; 
+            ddlCiudades.DataTextField = "DescripcionConPrecio";
             ddlCiudades.DataValueField = "IDCiudad";
             ddlCiudades.DataBind();
 
@@ -92,7 +95,6 @@ namespace WebApplication1
 
             pnlTarjeta.Visible = false;
             pnlCuotas.Visible = false;
-
 
             if (medioPagoSeleccionado == "Debito")
             {
@@ -145,9 +147,71 @@ namespace WebApplication1
         protected void btnCancelarCompra_Click(object sender, EventArgs e)
         {
             Session.Remove("carritoCheckout");
-            Session.Remove("carrito");            
+            Session.Remove("carrito");
             Response.Redirect("Default.aspx");
         }
+        protected void ConfirmarVenta()
+        {
+            VentasNegocio negocio = new VentasNegocio();
+            Ventas venta = new Ventas();
 
+            try
+            {
+                venta.IDEnvio = 1;
+                venta.IDUsuario = ((Usuario)Session["usuario"]).Id;
+                if (int.TryParse(ddlMediosPago.SelectedValue, out int idMedioPago)) venta.MedioPago = idMedioPago;
+                venta.PrecioTotal = PrecioTotalConRecargos();
+                if (ddlMediosPago.SelectedItem.Text == "Debito" || ddlMediosPago.SelectedItem.Text == "Credito")
+                {
+                    venta.Pagado = true;
+                }
+                else
+                {
+                    venta.Pagado = false;
+                }
+                
+                negocio.RegistrarVenta(venta);   
+           
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        protected void ConfirmarEnvio()
+        {
+            EnviosNegocio negocio = new EnviosNegocio();
+            Envios envio = new Envios();
+            try
+            {
+                envio.IDVenta = 7;
+                envio.IDUsuario = ((Usuario)Session["usuario"]).Id;
+                envio.Direccion = txtDireccion.Text;
+                envio.Telefono = txtTelefono.Text;
+                envio.Observaciones = txtObservaciones.Text;
+                envio.Entregado = false;
+                if (int.TryParse(ddlCiudades.SelectedValue, out int idCiudad)) envio.IDCiudad = idCiudad;
+                
+                negocio.RegistrarEnvio(envio);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        protected void btnConfirmarCompra_Click(object sender, EventArgs e)
+        {
+            if (chkEnvioDomicilio.Checked)
+            {
+                ConfirmarEnvio();
+            }
+
+        }
+        protected void ddlCiudades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            pnlDatosEnvio.Visible = chkEnvioDomicilio.Checked;
+            lblTotalConRecargo.Text = "Total con recargos: " + PrecioTotalConRecargos().ToString("C");
+        }
     }
 }
