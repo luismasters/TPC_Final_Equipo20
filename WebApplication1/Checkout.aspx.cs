@@ -157,7 +157,7 @@ namespace WebApplication1
 
             try
             {
-                venta.IDEnvio = 1;
+
                 venta.IDUsuario = ((Usuario)Session["usuario"]).Id;
                 if (int.TryParse(ddlMediosPago.SelectedValue, out int idMedioPago)) venta.MedioPago = idMedioPago;
                 venta.PrecioTotal = PrecioTotalConRecargos();
@@ -169,9 +169,17 @@ namespace WebApplication1
                 {
                     venta.Pagado = false;
                 }
-                
-                negocio.RegistrarVenta(venta);   
-           
+                negocio.RegistrarVenta(venta);
+
+                int idVenta = negocio.ObtenerIdVenta();
+                int idEnvio = 0;
+
+                if (chkEnvioDomicilio.Checked)
+                {
+                    idEnvio = ConfirmarEnvio(idVenta);
+                    negocio.RegistrarEnvio(idEnvio, idVenta);
+                }
+
             }
             catch (Exception ex)
             {
@@ -179,21 +187,23 @@ namespace WebApplication1
                 throw ex;
             }
         }
-        protected void ConfirmarEnvio()
+        protected int ConfirmarEnvio(int idVenta)
         {
             EnviosNegocio negocio = new EnviosNegocio();
             Envios envio = new Envios();
             try
             {
-                envio.IDVenta = 7;
+                envio.IDVenta = idVenta;
                 envio.IDUsuario = ((Usuario)Session["usuario"]).Id;
                 envio.Direccion = txtDireccion.Text;
                 envio.Telefono = txtTelefono.Text;
                 envio.Observaciones = txtObservaciones.Text;
                 envio.Entregado = false;
                 if (int.TryParse(ddlCiudades.SelectedValue, out int idCiudad)) envio.IDCiudad = idCiudad;
-                
+
                 negocio.RegistrarEnvio(envio);
+                int idEnvio = negocio.ObtenerIdEnvio();
+                return idEnvio;
             }
             catch (Exception ex)
             {
@@ -202,10 +212,7 @@ namespace WebApplication1
         }
         protected void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
-            if (chkEnvioDomicilio.Checked)
-            {
-                ConfirmarEnvio();
-            }
+            ConfirmarVenta();
 
         }
         protected void ddlCiudades_SelectedIndexChanged(object sender, EventArgs e)

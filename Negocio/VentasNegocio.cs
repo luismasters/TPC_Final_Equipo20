@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -65,6 +66,50 @@ namespace Negocio
             }
 
         }
-        
+        public int ObtenerIdVenta()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            int idVenta = 0;
+            try
+            {
+                datos.setearConsulta("SELECT TOP 1 IDVenta FROM Ventas ORDER BY IDVenta DESC;");
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    idVenta = (int)datos.Lector["IDVenta"];
+                }
+                return idVenta;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void RegistrarEnvio(int idEnvio, int idVenta)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Update Ventas set IDEnvio = @IDEnvio where IDVenta = @IDVenta");
+                datos.agregarParametro("@IDEnvio", idEnvio);
+                datos.agregarParametro("IDVenta", idVenta);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }
