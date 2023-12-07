@@ -9,6 +9,45 @@ namespace Negocio
 {
     public class UsuarioNegocio
     {
+        public List<Usuario> Listar()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Usuario> listaUsuarios = new List<Usuario>();
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, NombreUsuario, Pass, IdRol, Email FROM Usuario");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Usuario usuario = new Usuario
+                    {
+                        Id = (int)datos.Lector["Id"],
+                        User = datos.Lector["NombreUsuario"].ToString(),
+                        Pass = datos.Lector["Pass"].ToString(),
+                        Email = datos.Lector["Email"].ToString(),
+                        TipoUsuario = (int)datos.Lector["IdRol"] == 1 ? TipoUsuario.NORMAL : TipoUsuario.ADMIN
+                        // Asegúrate de adaptar TipoUsuario según tu definición en el Dominio
+                    };
+
+                    listaUsuarios.Add(usuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            return listaUsuarios;
+        }
+
+
+
         public Usuario Loguear(string username, string password)
         {
             AccesoDatos datos = new AccesoDatos();

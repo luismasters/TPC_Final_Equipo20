@@ -14,6 +14,7 @@ namespace WebApplication1
 
         public List<MedioPago> listaMedioPago { get; set; }
         public List<Envios> listaEnvios { get; set; }
+        public List <Usuario> listaUsuario { get; set; }
 
 
 
@@ -68,6 +69,24 @@ namespace WebApplication1
                 if (item.IDEnvio == IdEnvio)
                 {
                     return item.Direccion;
+                }
+            }
+
+            return "No disponible"; // O un valor por defecto si no se encuentra la descripción
+        }
+
+        protected string ObtenerUsuario(object User)
+        {
+            int Idusuario = Convert.ToInt32(User);
+
+            UsuarioNegocio user = new UsuarioNegocio();
+            listaUsuario = user.Listar();
+
+            foreach (Dominio.Usuario item in listaUsuario)
+            {
+                if (item.Id == Idusuario)
+                {
+                    return item.User + "Email "+item.Email;
                 }
             }
 
