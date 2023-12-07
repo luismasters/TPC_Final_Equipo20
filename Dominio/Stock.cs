@@ -11,6 +11,8 @@ namespace Dominio
         public int Id { get; set; }
         public int IdPrenda { get; set; }
         public int Cantidad { get; set; }
-      
+        public string Talle { get; set; }
+
+
     }
 }

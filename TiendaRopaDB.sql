@@ -59,7 +59,8 @@ CREATE TABLE Usuario (
 CREATE TABLE Stock (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     IdPrenda INT NOT NULL FOREIGN KEY REFERENCES Prenda(Id),
-    Cantidad INT NOT NULL CHECK (Cantidad >= 0)
+    Cantidad INT NOT NULL CHECK (Cantidad >= 0),
+    Talle VARCHAR(10) NOT NULL,
 )
 
 CREATE TABLE [dbo].[CiudadEnvio](

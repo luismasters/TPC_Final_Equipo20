@@ -11,9 +11,11 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO Stock (IdPrenda, Cantidad) VALUES (@IdPrenda, @Cantidad)");
+                datos.setearConsulta("INSERT INTO Stock (IdPrenda, Cantidad, Talle) VALUES (@IdPrenda, @Cantidad, @Talle)");
                 datos.agregarParametro("@IdPrenda", stock.IdPrenda);
                 datos.agregarParametro("@Cantidad", stock.Cantidad);
+                datos.agregarParametro("@Talle", stock.Talle);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -31,7 +33,8 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Stock SET Cantidad = @Cantidad WHERE IdPrenda = @IdPrenda");
+                datos.setearConsulta("UPDATE Stock SET Cantidad = @Cantidad, Talle = @Talle WHERE IdPrenda = @IdPrenda AND Talle = @Talle");
+                datos.agregarParametro("@Talle", stock.Talle);
                 datos.agregarParametro("@Cantidad", stock.Cantidad);
                 datos.agregarParametro("@IdPrenda", stock.IdPrenda);
                 datos.ejecutarAccion();
@@ -68,6 +71,25 @@ namespace Negocio
                 }
 
                 return stock;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void EliminarStock(int idPrenda)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("DELETE FROM Stock WHERE IdPrenda = @IdPrenda");
+                datos.agregarParametro("@IdPrenda", idPrenda);
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
