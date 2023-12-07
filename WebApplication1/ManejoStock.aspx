@@ -17,19 +17,19 @@
 
 
               <div class="tab-content" id="stockTabsContent">
-<!-- Pestaña Agregar -->
+                    <!-- Pestaña Agregar -->
                 <div class="tab-pane fade show active" id="agregar" role="tabpanel" aria-labelledby="agregar-tab">
                     <h3>Agregar Nuevo Lote</h3>
                     <div class="form-group">
                         <label for="ddlPrendasAgregar">Prenda:</label>
-                        <asp:DropDownList ID="ddlPrendasAgregar" runat="server" CssClass="form-control"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlPrendasAgregar" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPrendasAgregar_SelectedIndexChanged" CssClass="form-control"></asp:DropDownList>
                     </div>
                     <div class="form-group">
                         <label for="txtCantidadAgregar">Cantidad:</label>
                         <asp:TextBox ID="txtCantidadAgregar" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <label for="ddlTallesAgregar">Talle:</label>
+                        <label for="ddlTalles">Talle:</label>
                         <asp:DropDownList ID="ddlTalles" runat="server" CssClass="form-control"></asp:DropDownList>
                     </div>
                     <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-primary" Text="Agregar" OnClick="btnAgregar_Click" />

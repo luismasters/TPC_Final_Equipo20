@@ -110,8 +110,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Id, IdPrenda, Cantidad, Lote FROM Stock WHERE IdPrenda = @IdPrenda AND Lote = @Lote");
-                datos.agregarParametro("@IdPrenda", idPrenda);
+                datos.setearConsulta("SELECT Id, IdPrenda, Cantidad, Talle, Lote FROM Stock WHERE Lote = @Lote");
                 datos.agregarParametro("@Lote", lote);
                 datos.ejecutarLectura();
 
@@ -122,6 +121,7 @@ namespace Negocio
                         Id = (int)datos.Lector["Id"],
                         IdPrenda = (int)datos.Lector["IdPrenda"],
                         Cantidad = (int)datos.Lector["Cantidad"],
+                        Talle = datos.Lector["Talle"].ToString(),
                         Lote = datos.Lector["Lote"].ToString()
                     };
                 }
