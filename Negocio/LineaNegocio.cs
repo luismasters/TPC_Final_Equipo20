@@ -52,8 +52,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                // Manejar la excepción según tus necesidades.
-                // Puedes lanzarla nuevamente si deseas que el controlador de eventos la maneje.
+
                 throw ex;
             }
 

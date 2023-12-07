@@ -11,7 +11,7 @@ namespace WebApplication1
 {
 
 
-    public partial class Stock
+    public partial class StockManagement
     {
 
         /// <summary>
@@ -31,6 +31,33 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPrendas;
+
+        /// <summary>
+        /// Control loteModificar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl loteModificar;
+
+        /// <summary>
+        /// Control ddlLote.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLote;
+
+        /// <summary>
+        /// Control talleAgregar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl talleAgregar;
 
         /// <summary>
         /// Control ddlTalles.

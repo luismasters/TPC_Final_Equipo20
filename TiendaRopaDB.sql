@@ -61,6 +61,7 @@ CREATE TABLE Stock (
     IdPrenda INT NOT NULL FOREIGN KEY REFERENCES Prenda(Id),
     Cantidad INT NOT NULL CHECK (Cantidad >= 0),
     Talle VARCHAR(10) NOT NULL,
+    Lote VARCHAR(50) NOT NULL,
 )
 
 CREATE TABLE [dbo].[CiudadEnvio](

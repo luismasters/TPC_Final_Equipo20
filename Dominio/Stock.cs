@@ -12,7 +12,7 @@ namespace Dominio
         public int IdPrenda { get; set; }
         public int Cantidad { get; set; }
         public string Talle { get; set; }
-
+        public string Lote { get; set; }
 
     }
 }
