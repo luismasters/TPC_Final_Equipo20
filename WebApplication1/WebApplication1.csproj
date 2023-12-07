@@ -163,6 +163,7 @@
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 172636.png" />
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 172756.png" />
     <Content Include="Login.aspx" />
+    <Content Include="ManejoStock.aspx" />
     <Content Include="Modificar.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="ReporteVentas.aspx" />
@@ -224,7 +225,6 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="Stock.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -313,6 +313,13 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManejoStock.aspx.cs">
+      <DependentUpon>ManejoStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManejoStock.aspx.designer.cs">
+      <DependentUpon>ManejoStock.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Modificar.aspx.cs">
       <DependentUpon>Modificar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -348,13 +355,6 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Stock.aspx.cs">
-      <DependentUpon>Stock.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Stock.aspx.designer.cs">
-      <DependentUpon>Stock.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

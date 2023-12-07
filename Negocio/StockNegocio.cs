@@ -171,6 +171,60 @@ namespace Negocio
             return lotes;
         }
 
+        public void EliminarStockPorLote(string lote)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("DELETE FROM Stock WHERE Lote = @Lote");
+                datos.agregarParametro("@Lote", lote);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public Stock ObtenerStockPorLote(string lote)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Stock stock = null;
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, IdPrenda, Cantidad, Talle, Lote FROM Stock WHERE Lote = @Lote");
+                datos.agregarParametro("@Lote", lote);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    stock = new Stock
+                    {
+                        Id = (int)datos.Lector["Id"],
+                        IdPrenda = (int)datos.Lector["IdPrenda"],
+                        Cantidad = (int)datos.Lector["Cantidad"],
+                        Talle = datos.Lector["Talle"].ToString(),
+                        Lote = datos.Lector["Lote"].ToString()
+                    };
+                }
+                return stock;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
+
 }
+
 
