@@ -16,5 +16,8 @@ namespace Dominio
         public bool Pagado {get; set; }
         public int IDEnvio { get; set; }
 
+        public string NombreUsuario { get; set; }
+
+
     }
 }

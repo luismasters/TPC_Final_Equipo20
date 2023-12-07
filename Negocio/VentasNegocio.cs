@@ -23,11 +23,11 @@ namespace Negocio
                     Ventas ventas = new Ventas();
                     ventas.IDVenta = (int)datos.Lector["IDVenta"];
                     ventas.IDUsuario = (int)datos.Lector["IDUsuario"];
-                    ventas.MedioPago = (int)datos.Lector["MedioPago"];
-                    ventas.PrecioTotal = (decimal)datos.Lector["PrecioTotal"];
+                    ventas.MedioPago = Convert.ToInt32(datos.Lector["MedioPago"]);
+                    ventas.PrecioTotal = Convert.ToDecimal (datos.Lector["PrecioTotal"]);
                     ventas.Pagado = (bool)datos.Lector["Pagado"];
                     ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
-                }
+                    lista.Add(ventas);                }
                 return lista;
             }
             catch (Exception ex)
@@ -74,15 +74,23 @@ namespace Negocio
             {
                 datos.setearConsulta("SELECT TOP 1 IDVenta FROM Ventas ORDER BY IDVenta DESC;");
                 datos.ejecutarLectura();
-                while (datos.Lector.Read())
+
+                if (datos.Lector.HasRows) // Verificar si hay filas devueltas
                 {
-                    idVenta = (int)datos.Lector["IDVenta"];
-                }
+                    while (datos.Lector.Read())
+                    {
+                        idVenta = (int)datos.Lector["IDVenta"];
+                    }
                 return idVenta;
+
+
+                }
+                else { return 1; }
+               
+
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -90,7 +98,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void RegistrarEnvio(int idEnvio, int idVenta)
+            public void RegistrarEnvio(int idEnvio, int idVenta)
         {
             AccesoDatos datos = new AccesoDatos();
             try

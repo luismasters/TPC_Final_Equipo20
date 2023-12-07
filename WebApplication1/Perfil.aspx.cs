@@ -48,6 +48,13 @@ namespace WebApplication1
             }
             return "";
         }
+
+        protected void BtnVerVentas_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ReporteVentas");
+        }
+
+
         protected void BtnCerrarSesion_Click(object sender, EventArgs e)
         {
             // Cerrar la sesión y redirigir a la página de inicio de sesión

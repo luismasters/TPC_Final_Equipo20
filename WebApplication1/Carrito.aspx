@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Carrito" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Carrito.aspx.cs" Inherits="WebApplication1.Carrito" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <main aria-labelledby="title">
+    <main aria-labelledby="title" class="container">
         <h2 id="title"><%: Title %></h2>
 
         <h3>Productos en tu carrito:</h3>

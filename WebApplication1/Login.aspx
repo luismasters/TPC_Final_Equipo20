@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebApplication1.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container mt-5">
+    
+    <div class="container pt-5 ">
         <div class="row">
             <!-- Formulario de Inicio de Sesión -->
             <div class="col-md-6">

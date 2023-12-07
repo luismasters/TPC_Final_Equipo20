@@ -28,6 +28,8 @@ namespace Negocio
                     envio.Observaciones = (string)datos.Lector["Observaciones"];
                     envio.Entregado = (bool)datos.Lector["Entregado"];
                     envio.IDCiudad = (int)datos.Lector["IDCiudad"];
+
+                    lista.Add(envio);
                 }
                 return lista;
             }
