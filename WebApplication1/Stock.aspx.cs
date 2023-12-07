@@ -36,6 +36,8 @@ namespace WebApplication1
             ddlPrendas.DataTextField = "Descripcion";
             ddlPrendas.DataValueField = "Id";
             ddlPrendas.DataBind();
+
+            ddlPrendas.AutoPostBack = true;
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -106,7 +108,42 @@ namespace WebApplication1
             }
 
         }
+        protected void ddlPrendas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int idPrendaSeleccionada = int.Parse(ddlPrendas.SelectedValue);
+            PrendaNegocio prendaNegocio = new PrendaNegocio();
+            Prenda prendaSeleccionada = prendaNegocio.BuscarUnaPrenda(idPrendaSeleccionada);
 
+            if (prendaSeleccionada.Categoria.Id == 1 || prendaSeleccionada.Categoria.Id == 2 || prendaSeleccionada.Categoria.Id == 3)
+            {
+                LlenarTallesRemerasBuzos();
+            }
+            else if (prendaSeleccionada.Categoria.Id == 4)
+            {
+                LlenarTallesPantalones();
+            }
+        }
+        private void LlenarTallesRemerasBuzos()
+        {
+            ddlTalles.Items.Clear();
+            ddlTalles.Items.Add(new ListItem("XS", "XS"));
+            ddlTalles.Items.Add(new ListItem("S", "S"));
+            ddlTalles.Items.Add(new ListItem("M", "M"));
+            ddlTalles.Items.Add(new ListItem("L", "L"));
+            ddlTalles.Items.Add(new ListItem("XL", "XL"));
+            ddlTalles.Items.Add(new ListItem("XXL", "XXL"));
+        }
+
+        private void LlenarTallesPantalones()
+        {
+            ddlTalles.Items.Clear();
+            ddlTalles.Items.Add(new ListItem("32", "32"));
+            ddlTalles.Items.Add(new ListItem("34", "34"));
+            ddlTalles.Items.Add(new ListItem("36", "26"));
+            ddlTalles.Items.Add(new ListItem("38", "38"));
+            ddlTalles.Items.Add(new ListItem("40", "40"));
+            ddlTalles.Items.Add(new ListItem("42", "42"));
+        }
 
 
     }

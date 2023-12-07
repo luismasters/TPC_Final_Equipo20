@@ -10,7 +10,9 @@
     <form id="formStock" runat="server" class="container mt-5">
         <div class="form-group">
             <label for="ddlPrendas">Prenda:</label>
-            <asp:DropDownList ID="ddlPrendas" runat="server" CssClass="form-control"></asp:DropDownList>
+                <asp:DropDownList ID="ddlPrendas" runat="server" CssClass="form-control"
+                    OnSelectedIndexChanged="ddlPrendas_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+
         </div>
         <div class="form-group">
             <label for="ddlTalles">Talle:</label>
