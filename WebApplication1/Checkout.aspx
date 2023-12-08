@@ -21,15 +21,15 @@
     </asp:Panel>
     <asp:Panel ID="pnlTarjeta" runat="server" Visible="false">
         <div>
-            <label>Número de Tarjeta:</label>
+            <label>Número de Tarjeta *:</label>
             <asp:TextBox ID="txtNumTarjeta" runat="server" oninput="formatoTarjeta(this);" MaxLength="19"></asp:TextBox>
         </div>
         <div>
-            <label>Fecha de Vencimiento:</label>
+            <label>Fecha de Vencimiento *:</label>
             <asp:TextBox ID="txtFechaVencimiento" runat="server" placeholder="MM/YY" oninput="formatoFechaVencimiento(this);" MaxLength="5"></asp:TextBox>
         </div>
         <div>
-            <label>Código de Seguridad:</label>
+            <label>Código de Seguridad *:</label>
             <asp:TextBox ID="txtCodigoSeguridad" runat="server" TextMode="Password" MaxLength="3"></asp:TextBox>
         </div>
 
@@ -50,7 +50,7 @@
     <asp:CheckBox ID="chkEnvioDomicilio" runat="server" Text="Envio a domicilio" AutoPostBack="true" OnCheckedChanged="chkEnvioDomicilio_CheckedChanged" />
     <br />
     <asp:Panel ID="pnlDatosEnvio" runat="server" Visible="false">
-        <label for="txtDireccion">Dirección:</label>
+        <label for="txtDireccion">Dirección *:</label>
         <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
         <br />
          <br />
@@ -67,6 +67,8 @@
     </asp:Panel>
     <br />
     <asp:Label ID="lblTotalConRecargo" runat="server" Text="Total con recargos: " AutoPostBack="true"></asp:Label>
+    <br />
+    <asp:Label ID="lblObligatorio" runat="server" Text="Los campos identificados con * son obligatorios" Visible="false" style="color: red;"></asp:Label> 
     <br />
     <br />
     <asp:Button ID="btnCancelarCompra" runat="server" Text="Cancelar Compra" CssClass="btn btn-danger"

@@ -212,13 +212,42 @@ namespace WebApplication1
         }
         protected void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
-            ConfirmarVenta();
-
+            if (Validaciones())
+            {
+                ConfirmarVenta();
+                Response.Redirect("Default.aspx");
+            }
         }
         protected void ddlCiudades_SelectedIndexChanged(object sender, EventArgs e)
         {
             pnlDatosEnvio.Visible = chkEnvioDomicilio.Checked;
             lblTotalConRecargo.Text = "Total con recargos: " + PrecioTotalConRecargos().ToString("C");
+        }
+        protected bool Validaciones()
+        {
+            if(pnlTarjeta.Visible)
+            {
+                string nroTarjeta = txtNumTarjeta.Text;
+                string fechaVencimiento = txtFechaVencimiento.Text;
+                string codigoSeguridad = txtCodigoSeguridad.Text;
+                if (nroTarjeta.Length != 19 || fechaVencimiento.Length != 5 || codigoSeguridad.Length != 3)
+                {
+                    lblObligatorio.Visible = true;
+                    return false;
+                }
+                return true;
+            }
+            if (pnlDatosEnvio.Visible)
+            {
+                string direccion = txtDireccion.Text;
+                if (string.IsNullOrWhiteSpace(direccion))
+                {
+                    lblObligatorio.Visible = true;
+                    return false;
+                }
+            }
+            
+            return true;
         }
     }
 }
