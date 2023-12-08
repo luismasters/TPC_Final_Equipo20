@@ -114,6 +114,7 @@
   <ItemGroup>
     <Content Include="Acerca.aspx" />
     <Content Include="Admin.aspx" />
+    <Content Include="Agradecimiento.aspx" />
     <Content Include="Alta.aspx" />
     <Content Include="Baja.aspx" />
     <Content Include="Carrito.aspx" />
@@ -244,6 +245,13 @@
     </Compile>
     <Compile Include="Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agradecimiento.aspx.cs">
+      <DependentUpon>Agradecimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agradecimiento.aspx.designer.cs">
+      <DependentUpon>Agradecimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Alta.aspx.cs">
       <DependentUpon>Alta.aspx</DependentUpon>

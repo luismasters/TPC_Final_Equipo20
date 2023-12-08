@@ -53,22 +53,22 @@
         <label for="txtDireccion">Dirección *:</label>
         <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
         <br />
-         <br />
+        <br />
         <label for="txtCiudad">Ciudad:</label>
         <asp:DropDownList ID="ddlCiudades" runat="server" OnSelectedIndexChanged="ddlCiudades_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
         <br />
-         <br />
+        <br />
         <label for="txtTelefono">Teléfono de contacto:</label>
         <asp:TextBox ID="txtTelefono" runat="server" onkeypress="return soloNumeros(event);" MaxLength="12" />
         <br />
-         <br />
-        <label for ="txtObservaciones">Observaciones</label>
+        <br />
+        <label for="txtObservaciones">Observaciones</label>
         <asp:TextBox ID="txtObservaciones" runat="server" TextMode="MultiLine"></asp:TextBox>
     </asp:Panel>
     <br />
     <asp:Label ID="lblTotalConRecargo" runat="server" Text="Total con recargos: " AutoPostBack="true"></asp:Label>
     <br />
-    <asp:Label ID="lblObligatorio" runat="server" Text="Los campos identificados con * son obligatorios" Visible="false" style="color: red;"></asp:Label> 
+    <asp:Label ID="lblObligatorio" runat="server" Text="Los campos identificados con * son obligatorios" Visible="false" Style="color: red;"></asp:Label>
     <br />
     <br />
     <asp:Button ID="btnCancelarCompra" runat="server" Text="Cancelar Compra" CssClass="btn btn-danger"
@@ -76,14 +76,14 @@
     <asp:Button ID="btnConfirmarCompra" runat="server" Text="Confirmar Compra" CssClass="btn btn-success"
         OnClientClick="return confirm('¿Confirmar la compra?');" OnClick="btnConfirmarCompra_Click" />
 
-    <script type="text/javascript">
+    <script>
+
         function formatoTarjeta(input) {
             var numTarjeta = input.value.replace(/\D/g, '');
             numTarjeta = numTarjeta.replace(/(\d{4})(?=\d)/g, '$1 ');
             input.value = numTarjeta;
         }
-    </script>
-    <script type="text/javascript">
+
         function formatoFechaVencimiento(input) {
             var valor = input.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
             var mes = valor.slice(0, 2);
@@ -119,8 +119,7 @@
                 event.preventDefault();  // Cancelar la entrada no válida
             }
         }
-    </script>
-    <script type="text/javascript">
+
         function soloNumeros(e) {
             var charCode = (e.which) ? e.which : event.keyCode;
             if (charCode > 31 && (charCode < 48 || charCode > 57)) {

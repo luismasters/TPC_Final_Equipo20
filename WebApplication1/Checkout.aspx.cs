@@ -210,12 +210,77 @@ namespace WebApplication1
                 throw ex;
             }
         }
+        protected string CuerpoPago(string medioPago, string cuotas)
+        {
+            string cuerpoPago = "";
+            if(medioPago == "Efectivo")
+            {
+                cuerpoPago = " a abonar en efectivo en puntos de venta o a contraentrega";
+                return cuerpoPago;
+            }
+            if(medioPago == "Debito")
+            {
+                cuerpoPago = " abonado con tarjeta de débito";
+                return cuerpoPago;
+            }
+            if(medioPago == "Credito")
+            {
+                cuerpoPago = " abonado con tarjeta de crédito en " + cuotas + " cuotas";
+                return cuerpoPago;
+            }
+            return cuerpoPago;
+        }
+        protected string DatosEnvio(string direccion, string telefono)
+        {
+            string cuerpoEnvio = "Envío a domicilio: " + direccion + ". Teléfono de contacto: " + telefono;
+            return cuerpoEnvio;
+        }
+        protected void CorreoConfirmacion()
+        {
+
+            EmailService email = new EmailService();
+            string destinatario = ((Usuario)Session["usuario"]).Email;
+            string nombre = ((Usuario)Session["usuario"]).User;
+            string medioPago = ddlMediosPago.SelectedItem.Text;
+            string cuotas = "";
+            string direccion = txtDireccion.Text;
+            string telefono = txtTelefono.Text;
+            string precioTotal = PrecioTotalConRecargos().ToString();
+            if (ddlCuotas.Visible) cuotas = ddlCuotas.SelectedValue;
+            string datosEnvio = "";
+            string cuerpoPago = CuerpoPago(medioPago, cuotas);
+            if (pnlDatosEnvio.Visible == true)
+            {
+                datosEnvio = DatosEnvio(direccion, telefono);
+            }
+            else
+            {
+                datosEnvio = "Retira por local de cercanía";
+            }
+            
+
+            var carrito = (DataTable)Session["carritoCheckout"];
+            string descripcionPrenda = "";
+            string cantidad = "";
+            foreach (DataRow row in carrito.Rows)
+            {
+                descripcionPrenda = row["Descripcion"].ToString();
+                cantidad = row["Cantidad"].ToString();
+            }
+
+            string cuerpo = "Gracias " + nombre + " por comprar en SuperPrendas.Net <p> Usted compró " + cantidad +  " " + descripcionPrenda + cuerpoPago + " , por un total de $" + precioTotal + "<p>" + datosEnvio;
+            email.ArmarCorreo(destinatario, "Detalle de su compra", cuerpo);
+            email.EnviarMail();
+        }
         protected void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
             if (Validaciones())
             {
                 ConfirmarVenta();
-                Response.Redirect("Default.aspx");
+                CorreoConfirmacion();
+                Session["carritoCheckout"] = null;
+                Session["carrito"] = null;
+                Response.Redirect("Agradecimiento.aspx");
             }
         }
         protected void ddlCiudades_SelectedIndexChanged(object sender, EventArgs e)

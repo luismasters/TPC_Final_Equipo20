@@ -53,7 +53,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Select Id, NombreUsuario, Pass, IdRol from Usuario Where NombreUsuario=@user and Pass=@pass");
+                datos.setearConsulta("Select Id, NombreUsuario, Pass, IdRol, Email from Usuario Where NombreUsuario=@user and Pass=@pass");
                 datos.agregarParametro("@user", username);
                 datos.agregarParametro("@pass", password);
                 datos.ejecutarLectura();
@@ -65,6 +65,7 @@ namespace Negocio
                         Id = (int)datos.Lector["Id"],
                         User = datos.Lector["NombreUsuario"].ToString(),
                         Pass = datos.Lector["Pass"].ToString(),
+                        Email = datos.Lector["Email"].ToString(),
                         TipoUsuario = (int)(datos.Lector["IdRol"]) == 1 ? TipoUsuario.NORMAL : TipoUsuario.ADMIN
                     };
                 }
