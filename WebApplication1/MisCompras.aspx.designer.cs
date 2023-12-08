@@ -11,16 +11,16 @@ namespace WebApplication1
 {
 
 
-    public partial class ReporteVentas
+    public partial class MisCompras
     {
 
         /// <summary>
-        /// rptVentas control.
+        /// rptCompras control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptVentas;
+        protected global::System.Web.UI.WebControls.Repeater rptCompras;
     }
 }

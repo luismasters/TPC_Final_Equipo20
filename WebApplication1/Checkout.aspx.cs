@@ -169,6 +169,13 @@ namespace WebApplication1
                 {
                     venta.Pagado = false;
                 }
+                var carrito = (DataTable)Session["carritoCheckout"];
+                string descripcionPrenda = "";
+                foreach (DataRow row in carrito.Rows)
+                {
+                    descripcionPrenda = descripcionPrenda + " " + row["Cantidad"].ToString() + " " + row["Descripcion"].ToString() + " Talle " + row["Talle"].ToString();
+                }
+                venta.Descripcion = descripcionPrenda;
                 negocio.RegistrarVenta(venta);
 
                 int idVenta = negocio.ObtenerIdVenta();
@@ -261,14 +268,12 @@ namespace WebApplication1
 
             var carrito = (DataTable)Session["carritoCheckout"];
             string descripcionPrenda = "";
-            string cantidad = "";
-            foreach (DataRow row in carrito.Rows)
+                 foreach (DataRow row in carrito.Rows)
             {
-                descripcionPrenda = row["Descripcion"].ToString();
-                cantidad = row["Cantidad"].ToString();
+                descripcionPrenda = descripcionPrenda + " " + row["Cantidad"].ToString() + " " + row["Descripcion"].ToString() + " Talle " + row["Talle"].ToString();
             }
 
-            string cuerpo = "Gracias " + nombre + " por comprar en SuperPrendas.Net <p> Usted compró " + cantidad +  " " + descripcionPrenda + cuerpoPago + " , por un total de $" + precioTotal + "<p>" + datosEnvio;
+            string cuerpo = "Gracias " + nombre + " por comprar en SuperPrendas.Net <p> Usted compró "  + descripcionPrenda + cuerpoPago + " , por un total de $" + precioTotal + "<p>" + datosEnvio;
             email.ArmarCorreo(destinatario, "Detalle de su compra", cuerpo);
             email.EnviarMail();
         }

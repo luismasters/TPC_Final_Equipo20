@@ -5,6 +5,7 @@
     <asp:GridView ID="gvCarritoCheckout" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false">
         <Columns>
             <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
+            <asp:BoundField DataField="Talle" HeaderText="Talle" />
             <asp:BoundField DataField="Precio" HeaderText="Precio unitario" DataFormatString="{0:C}" />
             <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
         </Columns>

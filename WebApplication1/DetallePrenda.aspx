@@ -20,9 +20,6 @@
                     <p><strong>Categoria:</strong> <%= prenda.Categoria%></p>
                     <p><strong>Linea:</strong> <%= prenda.Linea%></p>
                     <p><strong>Stock:</strong> <%= prenda.Stock%></p>
-
-
-
                     <div class="quantity align-items-center">
                         <asp:Button ID="btnDecrement" runat="server" Text="-" CssClass="btn btn-sm btn-warning" OnClick="btnDecrement_Click" UseSubmitBehavior="false" />
                         <asp:TextBox ID="quantity" runat="server" CssClass="custom-form-control text-center" Text="1" />
@@ -33,7 +30,7 @@
                 </div>
                 <% } %>
                 <% } %>
-                <a href="Default.aspx" class="btn btn-secondary btn-sm">Volver</a>
+                <a href="Productos.aspx" class="btn btn-secondary btn-sm">Volver</a>
             </div>
             <div class="col-md-6 text-center bg-ca">
                 <% foreach (Dominio.Prenda prenda in (List<Dominio.Prenda>)Session["ArticuloList"])
@@ -95,20 +92,4 @@
             }
         </script>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </asp:Content>

@@ -16,7 +16,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado, IDEnvio from Ventas");
+                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado, IDEnvio, Descripcion from Ventas");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -24,10 +24,12 @@ namespace Negocio
                     ventas.IDVenta = (int)datos.Lector["IDVenta"];
                     ventas.IDUsuario = (int)datos.Lector["IDUsuario"];
                     ventas.MedioPago = Convert.ToInt32(datos.Lector["MedioPago"]);
-                    ventas.PrecioTotal = Convert.ToDecimal (datos.Lector["PrecioTotal"]);
+                    ventas.PrecioTotal = Convert.ToDecimal(datos.Lector["PrecioTotal"]);
                     ventas.Pagado = (bool)datos.Lector["Pagado"];
                     ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
-                    lista.Add(ventas);                }
+                    ventas.Descripcion = (string)datos.Lector["Descripcion"];
+                    lista.Add(ventas);
+                }
                 return lista;
             }
             catch (Exception ex)
@@ -40,18 +42,51 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public List<Ventas> ListarPorUsuario(int id)
+        {
+            List<Ventas> lista = new List<Ventas>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado, IDEnvio, Descripcion from Ventas where @IDUsuario = IDUsuario");
+                datos.agregarParametro("@IDUsuario", id);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Ventas ventas = new Ventas();
+                    ventas.IDVenta = (int)datos.Lector["IDVenta"];
+                    ventas.IDUsuario = (int)datos.Lector["IDUsuario"];
+                    ventas.MedioPago = Convert.ToInt32(datos.Lector["MedioPago"]);
+                    ventas.PrecioTotal = Convert.ToDecimal(datos.Lector["PrecioTotal"]);
+                    ventas.Pagado = (bool)datos.Lector["Pagado"];
+                    ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
+                    ventas.Descripcion = (datos.Lector["Descripcion"] as string) ?? "";
+                    lista.Add(ventas);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void RegistrarVenta(Ventas venta)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Insert into Ventas values (@IDUsuario, @MedioPago, @PrecioTotal, @Pagado, @IDEnvio)");
+                datos.setearConsulta("Insert into Ventas values (@IDUsuario, @MedioPago, @PrecioTotal, @Pagado, @IDEnvio, @Descripcion)");
                 datos.agregarParametro("@IDUsuario", venta.IDUsuario);
                 datos.agregarParametro("@MedioPago", venta.MedioPago);
                 datos.agregarParametro("@PrecioTotal", venta.PrecioTotal);
                 datos.agregarParametro("@Pagado", venta.Pagado);
                 datos.agregarParametro("IDEnvio", venta.IDEnvio);
+                datos.agregarParametro("@Descripcion", venta.Descripcion);
 
                 datos.ejecutarLectura();
             }
@@ -81,12 +116,12 @@ namespace Negocio
                     {
                         idVenta = (int)datos.Lector["IDVenta"];
                     }
-                return idVenta;
+                    return idVenta;
 
 
                 }
                 else { return 1; }
-               
+
 
             }
             catch (Exception ex)
@@ -98,7 +133,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-            public void RegistrarEnvio(int idEnvio, int idVenta)
+        public void RegistrarEnvio(int idEnvio, int idVenta)
         {
             AccesoDatos datos = new AccesoDatos();
             try

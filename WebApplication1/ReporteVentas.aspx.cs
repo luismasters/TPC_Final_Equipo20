@@ -21,6 +21,10 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                Response.Redirect("Login.aspx");
+            }
             if (!IsPostBack)
             {
                 MostrarVentas();

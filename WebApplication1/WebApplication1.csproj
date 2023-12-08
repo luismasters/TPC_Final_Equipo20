@@ -165,6 +165,7 @@
     <Content Include="Content\ImgNegocio\Captura de pantalla 2023-11-22 172756.png" />
     <Content Include="Login.aspx" />
     <Content Include="ManejoStock.aspx" />
+    <Content Include="MisCompras.aspx" />
     <Content Include="Modificar.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="ReporteVentas.aspx" />
@@ -327,6 +328,13 @@
     </Compile>
     <Compile Include="ManejoStock.aspx.designer.cs">
       <DependentUpon>ManejoStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MisCompras.aspx.cs">
+      <DependentUpon>MisCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MisCompras.aspx.designer.cs">
+      <DependentUpon>MisCompras.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modificar.aspx.cs">
       <DependentUpon>Modificar.aspx</DependentUpon>

@@ -149,7 +149,7 @@ GO
 ALTER TABLE [dbo].[Ventas]  WITH CHECK ADD FOREIGN KEY([MedioPago])
 REFERENCES [dbo].[MedioPago] ([IDPago])
 
---Modificaciones tabla ventas (6/12/2023)
+--Modificaciones tabla Ventas (6/12/2023)
 
 ALTER TABLE Ventas MODIFY COLUMN PrecioTotal FLOAT;
 alter table Ventas add IDEnvio int
@@ -159,8 +159,11 @@ Insert into CiudadEnvio values ('Ciudad Autonoma de Buenos Aires', 1500, 'GBA Su
 
 Insert into MedioPago values ('Efectivo', 'Debito', 'Credito')
 
+---Modificaciones tabla Ventas (8/12/2023)
 
----
+alter table Ventas add Descripcion varchar (1000)
+
+--
 
 insert into Categoria (Descripcion) values ('Remeras')
 insert into Categoria (Descripcion) values ('Buzos')

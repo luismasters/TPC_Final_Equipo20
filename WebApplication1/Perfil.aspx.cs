@@ -54,6 +54,10 @@ namespace WebApplication1
             Response.Redirect("~/ReporteVentas");
         }
 
+        protected void BtnMisCompras_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/MisCompras");
+        }
 
         protected void BtnCerrarSesion_Click(object sender, EventArgs e)
         {

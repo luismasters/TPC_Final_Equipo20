@@ -15,7 +15,7 @@ namespace Dominio
         public decimal PrecioTotal {  get; set; }
         public bool Pagado {get; set; }
         public int IDEnvio { get; set; }
-
+        public string Descripcion { get; set; }
         public string NombreUsuario { get; set; }
 
 

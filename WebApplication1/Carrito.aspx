@@ -5,13 +5,14 @@
         <h2 id="title"><%: Title %></h2>
 
         <h3>Productos en tu carrito:</h3>
-
+      
         <!-- Tabla para mostrar los productos en el carrito -->
         <div class="table-responsive">
             <asp:GridView ID="gvCarrito" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" DataKeyNames="ID" EmptyDataText="Tu carrito está vacío." OnRowDeleting="gvCarrito_RowDeleting" OnRowCommand="gvCarrito_RowCommand">
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="ID" />
                     <asp:BoundField DataField="Descripcion" HeaderText="Descripcion del Producto" />
+                    <asp:BoundField DataField="Talle" HeaderText="Talle" />
                     <asp:BoundField DataField="Precio" HeaderText="Precio Unitario" DataFormatString="{0:C}" />
                     <asp:TemplateField HeaderText="Cantidad">
                         <ItemTemplate>
@@ -32,7 +33,7 @@
         <br />
         <asp:Label ID="lblTotal" runat="server" Text="Total: "></asp:Label>
         <br />
-        <asp:Button ID="btnCheckout" runat="server" Text="Proceder al Pago" OnClick="btnCheckout_Click"/>
+        <asp:Button ID="btnCheckout" runat="server" Text="Proceder al Pago" OnClick="btnCheckout_Click" />
         <p></p>
         <asp:Button ID="btnVolver" runat="server" Text="Volver al catalogo" OnClick="btnVolver_Click" />
         <asp:Button Text="Cerrar Sesion" runat="server" OnClick="Unnamed_Click" />
