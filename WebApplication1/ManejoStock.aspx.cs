@@ -17,8 +17,13 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
+
                 CargarPrendas();
                 CargarLotes();
+
+                gvStock.DataSource = _stockNegocio.ListarStock();
+                gvStock.DataBind();
+
             }
         }
 
@@ -29,7 +34,9 @@ namespace WebApplication1
 
             ddlPrendasAgregar.DataSource = listaPrendas;
             ddlPrendasModificar.DataSource = listaPrendas;
-            foreach (var ddl in new[] { ddlPrendasAgregar, ddlPrendasModificar })
+            ddlPrendaEliminar.DataSource = listaPrendas;
+
+            foreach (var ddl in new[] { ddlPrendasAgregar, ddlPrendasModificar, ddlPrendaEliminar })
             {
                 ddl.DataTextField = "Descripcion";
                 ddl.DataValueField = "Id";
@@ -39,16 +46,31 @@ namespace WebApplication1
 
         private void CargarLotes()
         {
-            List<Stock> lotes = _stockNegocio.ObtenerLotesPorPrenda(-1); // -1 para 'todos los lotes'
-            ddlLoteModificar.DataSource = lotes;
-            ddlLoteModificar.DataTextField = "Lote"; 
-            ddlLoteModificar.DataValueField = "Lote";
-            ddlLoteModificar.DataBind(); 
+            StockNegocio stockNegocio = new StockNegocio();
+            List<Stock> lotes = _stockNegocio.ObtenerLotes();
 
-            if (!lotes.Any())
+            foreach (var ddl in new[] { ddlLoteModificar, ddlLoteEliminar })
             {
-                
+                ddl.DataSource = lotes;
+                ddl.DataTextField = "Lote";
+                ddl.DataValueField = "Lote";
+                ddl.DataBind();
+            }
+
+            if (lotes.Any())
+            {
+                foreach (var ddl in new[] { ddlLoteModificar, ddlLoteEliminar })
+                {
+                    ddl.DataSource = lotes;
+                    ddl.DataTextField = "Lote";
+                    ddl.DataValueField = "Lote";
+                    ddl.DataBind();
+                }
+            }
+            else
+            {
                 ddlLoteModificar.Items.Insert(0, new ListItem("No hay lotes disponibles", ""));
+                ddlLoteEliminar.Items.Insert(0, new ListItem("No hay lotes disponibles", ""));
             }
         }
 
@@ -72,7 +94,7 @@ namespace WebApplication1
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
-            
+
             string lote = ddlLoteModificar.SelectedValue;
             int idPrenda = int.Parse(ddlPrendasModificar.SelectedValue);
             int cantidad = int.Parse(txtCantidadModificar.Text);
@@ -96,6 +118,8 @@ namespace WebApplication1
             string lote = ddlLoteEliminar.SelectedValue;
             _stockNegocio.EliminarStockPorLote(lote);
             MostrarMensaje("Stock eliminado exitosamente");
+
+            CargarLotes();
         }
 
         protected void ddlLoteModificar_SelectedIndexChanged(object sender, EventArgs e)
@@ -104,6 +128,7 @@ namespace WebApplication1
             Stock stockExistente = _stockNegocio.ObtenerStockPorLote(loteSeleccionado);
             if (stockExistente != null)
             {
+                CargarTallesSegunPrenda(stockExistente.Lote, ddlTallesModificar);
                 ddlPrendasModificar.SelectedValue = stockExistente.IdPrenda.ToString();
                 ddlTallesModificar.SelectedValue = stockExistente.Talle;
                 txtCantidadModificar.Text = stockExistente.Cantidad.ToString();
@@ -127,10 +152,16 @@ namespace WebApplication1
             Stock stockExistente = _stockNegocio.ObtenerStockPorLote(loteSeleccionado);
             if (stockExistente != null)
             {
-                lblPrendaEliminar.Text = stockExistente.IdPrenda.ToString();
-                lblTalleEliminar.Text = stockExistente.Talle;
-                lblCantidadEliminar.Text = stockExistente.Cantidad.ToString();
+                CargarTallesSegunPrenda(stockExistente.Lote, ddlTalleEliminar);
+                ddlPrendaEliminar.SelectedValue = stockExistente.IdPrenda.ToString();
+                ddlTalleEliminar.SelectedValue = stockExistente.Talle.ToString();
+                txtCantidadEliminar.Text = stockExistente.Cantidad.ToString();
+
+                ddlPrendaEliminar.Enabled = false;
+                ddlTalleEliminar.Enabled = false;
+                txtCantidadEliminar.ReadOnly = true;
             }
+
         }
 
         private string GenerarNuevoLote()
@@ -150,36 +181,41 @@ namespace WebApplication1
             PrendaNegocio prendaNegocio = new PrendaNegocio();
             Prenda prendaSeleccionada = prendaNegocio.BuscarUnaPrenda(idPrendaSeleccionada);
 
-            if (prendaSeleccionada.Categoria.Id == 1 || prendaSeleccionada.Categoria.Id == 2 || prendaSeleccionada.Categoria.Id == 3)
+        }
+
+        private void LlenarTallesRemerasBuzos(DropDownList ddl)
+        {
+            ddl.Items.Clear();
+
+            var talles = new List<string> { "XS", "S", "M", "L", "XL", "XXL" };
+            foreach (var talle in talles)
             {
-                LlenarTallesRemerasBuzos();
+                ddl.Items.Add(new ListItem(talle, talle));
             }
-            else if (prendaSeleccionada.Categoria.Id == 4)
+        }
+        private void LlenarTallesPantalones(DropDownList ddl)
+        {
+            ddl.Items.Clear();
+
+            var talles = new List<int> { 32, 34, 36, 38, 40, 42 };
+            foreach (var talle in talles)
             {
-                LlenarTallesPantalones();
+                ddl.Items.Add(new ListItem(talle.ToString(), talle.ToString()));
             }
         }
 
-        private void LlenarTallesRemerasBuzos()
+        private void CargarTallesSegunPrenda(string lote, DropDownList ddlTalles)
         {
-            ddlTalles.Items.Clear();
-            ddlTalles.Items.Add(new ListItem("XS", "XS"));
-            ddlTalles.Items.Add(new ListItem("S", "S"));
-            ddlTalles.Items.Add(new ListItem("M", "M"));
-            ddlTalles.Items.Add(new ListItem("L", "L"));
-            ddlTalles.Items.Add(new ListItem("XL", "XL"));
-            ddlTalles.Items.Add(new ListItem("XXL", "XXL"));
-        }
+            int idCategoria = _stockNegocio.ObtenerCategoriaPrenda(lote);
 
-        private void LlenarTallesPantalones()
-        {
-            ddlTalles.Items.Clear();
-            ddlTalles.Items.Add(new ListItem("32", "32"));
-            ddlTalles.Items.Add(new ListItem("34", "34"));
-            ddlTalles.Items.Add(new ListItem("36", "36"));
-            ddlTalles.Items.Add(new ListItem("38", "38"));
-            ddlTalles.Items.Add(new ListItem("40", "40"));
-            ddlTalles.Items.Add(new ListItem("42", "42"));
+            if (idCategoria == 4)
+            {
+                LlenarTallesPantalones(ddlTalles);
+            }
+            else
+            {
+                LlenarTallesRemerasBuzos(ddlTalles);
+            }
         }
     }
 }

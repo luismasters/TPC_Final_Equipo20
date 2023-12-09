@@ -15,6 +15,15 @@ namespace WebApplication1
     {
 
         /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
         /// Control ddlPrendasAgregar.
         /// </summary>
         /// <remarks>
@@ -105,31 +114,31 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.DropDownList ddlLoteEliminar;
 
         /// <summary>
-        /// Control lblPrendaEliminar.
+        /// Control ddlPrendaEliminar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPrendaEliminar;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPrendaEliminar;
 
         /// <summary>
-        /// Control lblTalleEliminar.
+        /// Control ddlTalleEliminar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTalleEliminar;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTalleEliminar;
 
         /// <summary>
-        /// Control lblCantidadEliminar.
+        /// Control txtCantidadEliminar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCantidadEliminar;
+        protected global::System.Web.UI.WebControls.TextBox txtCantidadEliminar;
 
         /// <summary>
         /// Control btnEliminar.
@@ -139,5 +148,14 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnEliminar;
+
+        /// <summary>
+        /// Control gvStock.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvStock;
     }
 }

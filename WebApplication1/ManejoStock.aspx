@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManejoStock.aspx.cs" Inherits="WebApplication1.ManejoStock" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+           <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
 
         <div class="container mt-5">
         <!-- Aquí comienza el contenido de la pestaña -->
@@ -12,6 +15,9 @@
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" id="eliminar-tab" data-toggle="tab" href="#eliminar" role="tab" aria-controls="eliminar" aria-selected="false">Eliminar</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" id="listarStock-tab" data-toggle="tab" href="#listarStock" role="tab" aria-controls="listarStock" aria-selected="false">Listar Stock</a>
                   </li>
               </ul>
 
@@ -35,56 +41,83 @@
                     <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-primary" Text="Agregar" OnClick="btnAgregar_Click" />
                 </div>
 
-            </div>
+            
 
-                <!-- Pestaña Modificar -->
-                    <div class="tab-pane fade" id="modificar" role="tabpanel" aria-labelledby="modificar-tab">
-                        <h3>Modificar Lote Existente</h3>
+                    <!-- Pestaña Modificar -->
+                        <div class="tab-pane fade" id="modificar" role="tabpanel" aria-labelledby="modificar-tab">
+                            <h3>Modificar Lote Existente</h3>
+                            <div class="form-group">
+                                <label for="ddlLoteModificar">Lote:</label>
+                                <asp:DropDownList ID="ddlLoteModificar" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlLoteModificar_SelectedIndexChanged"></asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlPrendasModificar">Prenda:</label>
+                                <asp:DropDownList ID="ddlPrendasModificar" runat="server" CssClass="form-control"></asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlTallesModificar">Talle:</label>
+                                <asp:DropDownList ID="ddlTallesModificar" runat="server" CssClass="form-control"></asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtCantidadModificar">Cantidad:</label>
+                                <asp:TextBox ID="txtCantidadModificar" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-secondary" Text="Modificar" OnClick="btnModificar_Click" />
+                        </div>
+
+
+
+
+                    <!-- Pestaña Eliminar -->
+                    <div class="tab-pane fade" id="eliminar" role="tabpanel" aria-labelledby="eliminar-tab">
+                        <h3>Eliminar Lote Existente</h3>
                         <div class="form-group">
-                            <label for="ddlLoteModificar">Lote:</label>
-                            <asp:DropDownList ID="ddlLoteModificar" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlLoteModificar_SelectedIndexChanged"></asp:DropDownList>
+                            <label for="ddlLoteEliminar">Lote:</label>
+                            <asp:DropDownList ID="ddlLoteEliminar" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlLoteEliminar_SelectedIndexChanged"></asp:DropDownList>
                         </div>
                         <div class="form-group">
-                            <label for="ddlPrendasModificar">Prenda:</label>
-                            <asp:DropDownList ID="ddlPrendasModificar" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <label for="lblPrendaEliminar">Prenda:</label>
+                            <asp:DropDownList ID="ddlPrendaEliminar" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlLoteEliminar_SelectedIndexChanged" ></asp:DropDownList>
                         </div>
                         <div class="form-group">
-                            <label for="ddlTallesModificar">Talle:</label>
-                            <asp:DropDownList ID="ddlTallesModificar" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <label for="lblTalleEliminar">Talle:</label>
+                            <asp:DropDownList ID="ddlTalleEliminar" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlLoteEliminar_SelectedIndexChanged"></asp:DropDownList>
                         </div>
                         <div class="form-group">
-                            <label for="txtCantidadModificar">Cantidad:</label>
-                            <asp:TextBox ID="txtCantidadModificar" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                            <label for="lblCantidadEliminar">Cantidad:</label>
+                            <asp:TextBox ID="txtCantidadEliminar" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlLoteEliminar_SelectedIndexChanged"></asp:TextBox>
                         </div>
-                        <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-secondary" Text="Modificar" OnClick="btnModificar_Click" />
+                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClientClick="return confirm('¿Está seguro de que desea eliminar este lote?');" OnClick="btnEliminar_Click" />
+
+                  </div>
+
+                  <!-- Pestaña Listar Stock -->
+                    <div class="tab-pane fade" id="listarStock" role="tabpanel" aria-labelledby="listarStock-tab">
+                        <h3>Listado de Stock</h3>
+                        <div class="table-responsive">
+                            <asp:GridView ID="gvStock" runat="server" AutoGenerateColumns="False" CssClass="table"  style="color: white;">
+                                <Columns>
+                                    <asp:BoundField DataField="DescripcionPrenda" HeaderText="Descripción Prenda" />
+                                    <asp:BoundField DataField="Talle" HeaderText="Talle" />
+                                    <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                                    <asp:BoundField DataField="DescripcionCategoria" HeaderText="Categoría" />
+                                    <asp:BoundField DataField="Lote" HeaderText="Lote" />
+                                </Columns>
+                            </asp:GridView>
+                        </div>
                     </div>
+
+        </div>
+    </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
 
 
 
-
-                <!-- Pestaña Eliminar -->
-                <div class="tab-pane fade" id="eliminar" role="tabpanel" aria-labelledby="eliminar-tab">
-                    <h3>Eliminar Lote Existente</h3>
-                    <div class="form-group">
-                        <label for="ddlLoteEliminar">Lote:</label>
-                        <asp:DropDownList ID="ddlLoteEliminar" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlLoteEliminar_SelectedIndexChanged"></asp:DropDownList>
-                    </div>
-                    <div class="form-group">
-                        <label for="lblPrendaEliminar">Prenda:</label>
-                        <asp:Label ID="lblPrendaEliminar" runat="server" CssClass="form-control"></asp:Label>
-                    </div>
-                    <div class="form-group">
-                        <label for="lblTalleEliminar">Talle:</label>
-                        <asp:Label ID="lblTalleEliminar" runat="server" CssClass="form-control"></asp:Label>
-                    </div>
-                    <div class="form-group">
-                        <label for="lblCantidadEliminar">Cantidad:</label>
-                        <asp:Label ID="lblCantidadEliminar" runat="server" CssClass="form-control"></asp:Label>
-                    </div>
-                    <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClientClick="return confirm('¿Está seguro de que desea eliminar este lote?');" OnClick="btnEliminar_Click" />                 </div>
-            </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+
 
 </asp:Content>

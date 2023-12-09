@@ -2,11 +2,50 @@
 using Dominio;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Negocio
 {
     public class StockNegocio
     {
+
+        public List<StockViewModel> ListarStock()
+        {
+            List<StockViewModel> lotes = new List<StockViewModel>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT S.Id, P.Descripcion AS DescripcionPrenda, S.Talle, S.Cantidad, C.Descripcion AS DescripcionCategoria, S.Lote FROM STOCK AS S INNER JOIN PRENDA AS P ON S.IdPrenda=P.Id INNER JOIN Categoria AS C ON P.IdCategoria=C.Id");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    lotes.Add(new StockViewModel
+                    {
+                        Id = (int)datos.Lector["Id"],
+                        DescripcionPrenda = datos.Lector["DescripcionPrenda"].ToString(),
+                        Talle = datos.Lector["Talle"].ToString(),
+                        Cantidad = (int)datos.Lector["Cantidad"],
+                        DescripcionCategoria = datos.Lector["DescripcionCategoria"].ToString(),
+                        Lote = datos.Lector["Lote"].ToString()
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            return lotes;
+        }
+
+    
+
         public void AgregarStock(Stock stock)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -35,10 +74,11 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Stock SET Cantidad = @Cantidad, Lote=@Lote WHERE IdPrenda = @IdPrenda AND Lote=@Lote");
-                datos.agregarParametro("@Lote", stock.Lote);
+                datos.setearConsulta("UPDATE Stock SET Cantidad = @Cantidad, Talle = @Talle, IdPrenda =@IdPrenda WHERE Lote = @Lote");
                 datos.agregarParametro("@Cantidad", stock.Cantidad);
+                datos.agregarParametro("@Talle", stock.Talle);
                 datos.agregarParametro("@IdPrenda", stock.IdPrenda);
+                datos.agregarParametro("@Lote", stock.Lote);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -51,28 +91,20 @@ namespace Negocio
             }
         }
 
-        public Stock ObtenerStockPorPrenda(int idPrenda)
+        public int ObtenerCategoriaPrenda(string lote)
         {
             AccesoDatos datos = new AccesoDatos();
-            Stock stock = null;
-
+            int categoria = -1;
             try
             {
-                datos.setearConsulta("SELECT Id, IdPrenda, Cantidad FROM Stock WHERE IdPrenda = @IdPrenda");
-                datos.agregarParametro("@IdPrenda", idPrenda);
+                datos.setearConsulta("SELECT c.Id FROM Categoria AS c INNER JOIN Prenda AS p ON c.Id = p.IdCategoria INNER JOIN Stock AS s ON s.IdPrenda = p.Id WHERE s.Lote = @lote");
+                datos.agregarParametro("@lote", lote);
                 datos.ejecutarLectura();
 
-                if (datos.Lector.Read())
+                if (datos.Lector.Read()) 
                 {
-                    stock = new Stock
-                    {
-                        Id = (int)datos.Lector["Id"],
-                        IdPrenda = (int)datos.Lector["IdPrenda"],
-                        Cantidad = (int)datos.Lector["Cantidad"]
-                    };
+                    categoria = (int)datos.Lector["Id"];
                 }
-
-                return stock;
             }
             catch (Exception ex)
             {
@@ -82,51 +114,19 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+
+            return categoria;
         }
 
-        public void EliminarStock(int idPrenda)
+
+        public void EliminarStock(string lote)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("DELETE FROM Stock WHERE IdPrenda = @IdPrenda");
-                datos.agregarParametro("@IdPrenda", idPrenda);
-                datos.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-
-        public Stock ObtenerStockPorLote(int idPrenda, string lote)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            Stock stock = null;
-
-            try
-            {
-                datos.setearConsulta("SELECT Id, IdPrenda, Cantidad, Talle, Lote FROM Stock WHERE Lote = @Lote");
+                datos.setearConsulta("DELETE FROM Stock WHERE Lote = @Lote");
                 datos.agregarParametro("@Lote", lote);
-                datos.ejecutarLectura();
-
-                if (datos.Lector.Read())
-                {
-                    stock = new Stock
-                    {
-                        Id = (int)datos.Lector["Id"],
-                        IdPrenda = (int)datos.Lector["IdPrenda"],
-                        Cantidad = (int)datos.Lector["Cantidad"],
-                        Talle = datos.Lector["Talle"].ToString(),
-                        Lote = datos.Lector["Lote"].ToString()
-                    };
-                }
-
-                return stock;
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -138,15 +138,15 @@ namespace Negocio
             }
         }
 
-        public List<Stock> ObtenerLotesPorPrenda(int idPrenda)
+        public List<Stock> ObtenerLotes()
         {
             List<Stock> lotes = new List<Stock>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT Id, IdPrenda, Cantidad, Talle, Lote FROM Stock WHERE IdPrenda = @IdPrenda");
-                datos.agregarParametro("@IdPrenda", idPrenda);
+                datos.setearConsulta("SELECT * FROM Stock");
                 datos.ejecutarLectura();
+
 
                 while (datos.Lector.Read())
                 {
@@ -168,9 +168,11 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+
             return lotes;
         }
 
+      
         public void EliminarStockPorLote(string lote)
         {
             AccesoDatos datos = new AccesoDatos();

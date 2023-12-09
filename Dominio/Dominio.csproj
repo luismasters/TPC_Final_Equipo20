@@ -51,6 +51,7 @@
     <Compile Include="Prenda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stock.cs" />
+    <Compile Include="StockViewModel.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Ventas.cs" />
   </ItemGroup>
