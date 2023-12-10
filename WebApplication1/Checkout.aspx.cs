@@ -11,8 +11,10 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication1
 {
+
     public partial class Checkout : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -178,8 +180,12 @@ namespace WebApplication1
                 venta.Descripcion = descripcionPrenda;
                 negocio.RegistrarVenta(venta);
 
+
                 int idVenta = negocio.ObtenerIdVenta();
                 int idEnvio = 0;
+
+                AgregarDetalles(idVenta);
+
 
                 if (chkEnvioDomicilio.Checked)
                 {
@@ -220,17 +226,17 @@ namespace WebApplication1
         protected string CuerpoPago(string medioPago, string cuotas)
         {
             string cuerpoPago = "";
-            if(medioPago == "Efectivo")
+            if (medioPago == "Efectivo")
             {
                 cuerpoPago = " a abonar en efectivo en puntos de venta o a contraentrega";
                 return cuerpoPago;
             }
-            if(medioPago == "Debito")
+            if (medioPago == "Debito")
             {
                 cuerpoPago = " abonado con tarjeta de débito";
                 return cuerpoPago;
             }
-            if(medioPago == "Credito")
+            if (medioPago == "Credito")
             {
                 cuerpoPago = " abonado con tarjeta de crédito en " + cuotas + " cuotas";
                 return cuerpoPago;
@@ -264,16 +270,16 @@ namespace WebApplication1
             {
                 datosEnvio = "Retira por local de cercanía";
             }
-            
+
 
             var carrito = (DataTable)Session["carritoCheckout"];
             string descripcionPrenda = "";
-                 foreach (DataRow row in carrito.Rows)
+            foreach (DataRow row in carrito.Rows)
             {
                 descripcionPrenda = descripcionPrenda + " " + row["Cantidad"].ToString() + " " + row["Descripcion"].ToString() + " Talle " + row["Talle"].ToString();
             }
 
-            string cuerpo = "Gracias " + nombre + " por comprar en SuperPrendas.Net <p> Usted compró "  + descripcionPrenda + cuerpoPago + " , por un total de $" + precioTotal + "<p>" + datosEnvio;
+            string cuerpo = "Gracias " + nombre + " por comprar en SuperPrendas.Net <p> Usted compró " + descripcionPrenda + cuerpoPago + " , por un total de $" + precioTotal + "<p>" + datosEnvio;
             email.ArmarCorreo(destinatario, "Detalle de su compra", cuerpo);
             email.EnviarMail();
         }
@@ -295,7 +301,7 @@ namespace WebApplication1
         }
         protected bool Validaciones()
         {
-            if(pnlTarjeta.Visible)
+            if (pnlTarjeta.Visible)
             {
                 string nroTarjeta = txtNumTarjeta.Text;
                 string fechaVencimiento = txtFechaVencimiento.Text;
@@ -316,8 +322,50 @@ namespace WebApplication1
                     return false;
                 }
             }
-            
+
             return true;
         }
+
+        protected void AgregarDetalles(int IDVenta)
+        {
+            // Asegúrate de tener acceso al DataTable 'carrito'
+            if (Session["carritoCheckout"] != null)
+            {
+                var carrito = (DataTable)Session["carritoCheckout"];
+
+                foreach (DataRow fila in carrito.Rows)
+                {
+                    int IDprenda = Convert.ToInt32(fila["Id"]);
+                    int Cantidad = Convert.ToInt32(fila["Cantidad"]);
+                    decimal PrecioUnitario = Convert.ToDecimal(fila["Precio"]);
+
+
+
+                    DetalleVenta detalleVenta = new DetalleVenta();
+                    detalleVenta.IDVenta = IDVenta;
+                    detalleVenta.IDPrenda = IDprenda;
+                    detalleVenta.Cantidad = Cantidad;
+                    detalleVenta.PrecioUnitario = PrecioUnitario;
+
+                    DetalleVentasNegocio detalleVentasNegocio = new DetalleVentasNegocio();
+                    detalleVentasNegocio.RegistrarDetalleVenta(detalleVenta);
+
+
+
+
+
+                }
+            }
+            else
+            {
+            }
+        }
+
+
+
+
     }
+
+
+
 }
