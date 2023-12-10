@@ -339,16 +339,15 @@ namespace WebApplication1
                     int Cantidad = Convert.ToInt32(fila["Cantidad"]);
                     decimal PrecioUnitario = Convert.ToDecimal(fila["Precio"]);
 
+                    Dominio.DetalleVenta detalle = new Dominio.DetalleVenta();
 
-
-                    DetalleVenta detalleVenta = new DetalleVenta();
-                    detalleVenta.IDVenta = IDVenta;
-                    detalleVenta.IDPrenda = IDprenda;
-                    detalleVenta.Cantidad = Cantidad;
-                    detalleVenta.PrecioUnitario = PrecioUnitario;
+                    detalle.IDVenta = IDVenta;
+                    detalle.IDPrenda = IDprenda;
+                    detalle.Cantidad = Cantidad;
+                    detalle.PrecioUnitario = PrecioUnitario;
 
                     DetalleVentasNegocio detalleVentasNegocio = new DetalleVentasNegocio();
-                    detalleVentasNegocio.RegistrarDetalleVenta(detalleVenta);
+                    detalleVentasNegocio.RegistrarDetalleVenta(detalle);
 
 
 

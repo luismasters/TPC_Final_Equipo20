@@ -27,7 +27,7 @@
                         </p>
 
 
-                        <a href="#" class="btn btn-warning">Detalle Venta</a>
+                        <asp:Button Text="Ver Detalle" runat="server" class="btn btn-warning" OnClick="VerDetalle_Click" CommandName="VerDetalle" CommandArgument='<%# Eval("idVenta") %>'  />
                     </div>
                 </div>
 

@@ -27,7 +27,7 @@ namespace Negocio
                     ventas.PrecioTotal = Convert.ToDecimal(datos.Lector["PrecioTotal"]);
                     ventas.Pagado = (bool)datos.Lector["Pagado"];
                     ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
-                    ventas.Descripcion = (string)datos.Lector["Descripcion"];
+                    ventas.Descripcion = (datos.Lector["Descripcion"]as string)??"";
                     lista.Add(ventas);
                 }
                 return lista;
