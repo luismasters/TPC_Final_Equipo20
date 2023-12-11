@@ -99,5 +99,18 @@ namespace WebApplication1
             }
             return "A entregar";
         }
+
+        protected void VerDetalle_Click(object sender, EventArgs e)
+        {
+            // Obtener el botón que desencadenó el evento
+            Button btnVerDetalle = (Button)sender;
+
+            // Obtener el ID de la venta del CommandArgument del botón
+            string idVenta = btnVerDetalle.CommandArgument;
+
+            // Redirigir a la página de detalles con el ID de la venta
+            Response.Redirect($"DetalleVenta.aspx?ID={idVenta}");
+        }
     }
+
 }
