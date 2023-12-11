@@ -90,7 +90,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
+        
         public int ObtenerCategoriaPrenda(string lote)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -148,21 +148,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        //public void ObtenerStockPrenda(int idPrenda)
-        //{
-        //    AccesoDatos datos = new AccesoDatos();
-        //    try
-        //    {
-        //        datos.setearConsulta("Select COALESCE(Cantidad, 'Sin Stock') as Cantidad, COALESCE(Talle, 'Sin Stock') as Talle from Stock where IdPrenda = @IdPrenda");
-        //        datos.agregarParametro("IdPrenda", idPrenda);
-               
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        throw ex;
-        //    }
-        //}
+        
         public void EliminarStock(string lote)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -181,7 +167,27 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void ActualizarStockVenta(int idPrenda, string talle, int cantidad)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Stock SET Cantidad = Cantidad - @Cantidad WHERE IDPrenda = @IdPrenda AND Talle = @Talle");
+                datos.agregarParametro("@IdPrenda", idPrenda);
+                datos.agregarParametro("@Talle", talle);
+                datos.agregarParametro("@Cantidad", cantidad);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public List<Stock> ObtenerLotes()
         {
             List<Stock> lotes = new List<Stock>();

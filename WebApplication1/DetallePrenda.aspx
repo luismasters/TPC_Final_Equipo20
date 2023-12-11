@@ -71,6 +71,8 @@
                     </div>
                     <p></p>
                     <asp:Button ID="btnAgregarCarrito" runat="server" CssClass="btn btn-warning btn-sm" Text="Agregar al carrito" OnClick="btnAgregarCarrito_Click" Visible="false" />
+                    <p></p>
+                    <asp:Label ID="lblMensajeError" runat="server"></asp:Label>
                 </div>
                 <% } %>
                 <% } %>

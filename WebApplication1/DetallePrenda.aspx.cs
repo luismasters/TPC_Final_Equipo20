@@ -139,7 +139,7 @@ namespace WebApplication1
                 {
                     // Muestra un mensaje de error al usuario
                     // Puedes mostrarlo en un Label, MessageBox, etc.
-                    // Ejemplo: lblMensajeError.Text = "La cantidad ingresada no es válida o supera el stock disponible.";
+                    lblMensajeError.Text = "La cantidad ingresada no es válida o supera el stock disponible.";
                 }
             }
             else

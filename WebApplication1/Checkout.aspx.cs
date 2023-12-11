@@ -156,10 +156,10 @@ namespace WebApplication1
         {
             VentasNegocio negocio = new VentasNegocio();
             Ventas venta = new Ventas();
+            StockNegocio stockNegocio = new StockNegocio();
 
             try
             {
-
                 venta.IDUsuario = ((Usuario)Session["usuario"]).Id;
                 if (int.TryParse(ddlMediosPago.SelectedValue, out int idMedioPago)) venta.MedioPago = idMedioPago;
                 venta.PrecioTotal = PrecioTotalConRecargos();
@@ -176,6 +176,10 @@ namespace WebApplication1
                 foreach (DataRow row in carrito.Rows)
                 {
                     descripcionPrenda = descripcionPrenda + " " + row["Cantidad"].ToString() + " " + row["Descripcion"].ToString() + " Talle " + row["Talle"].ToString();
+                    int idPrendaStock = (int)row["Id"];
+                    string talleStock = row["Talle"].ToString();
+                    int cantidadStock = (int)row["Cantidad"];
+                    stockNegocio.ActualizarStockVenta(idPrendaStock, talleStock, cantidadStock);
                 }
                 venta.Descripcion = descripcionPrenda;
                 negocio.RegistrarVenta(venta);
@@ -185,7 +189,6 @@ namespace WebApplication1
                 int idEnvio = 0;
 
                 AgregarDetalles(idVenta);
-
 
                 if (chkEnvioDomicilio.Checked)
                 {
