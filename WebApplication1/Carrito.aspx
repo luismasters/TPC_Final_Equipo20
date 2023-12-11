@@ -10,9 +10,7 @@
         <div class="table-responsive">
             <asp:GridView ID="gvCarrito" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" DataKeyNames="ID" EmptyDataText="Tu carrito está vacío." OnRowDeleting="gvCarrito_RowDeleting" OnRowCommand="gvCarrito_RowCommand">
                 <Columns>
-                    <asp:BoundField DataField="Id" HeaderText="ID" />
                     <asp:BoundField DataField="Descripcion" HeaderText="Descripcion del Producto" />
-                    <asp:BoundField DataField="Talle" HeaderText="Talle" />
                     <asp:BoundField DataField="Precio" HeaderText="Precio Unitario" DataFormatString="{0:C}" />
                     <asp:TemplateField HeaderText="Cantidad">
                         <ItemTemplate>

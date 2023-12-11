@@ -1,4 +1,5 @@
-﻿using Dominio;
+﻿using Antlr.Runtime.Misc;
+using Dominio;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace WebApplication1
                 {
                     IDArt = Convert.ToInt32(idParametro);
                     Session["IDArt"] = IDArt;
+                    InicializarListaStock(IDArt);
+                    ManejarVisibilidadControles();
                 }
                 PrendaNegocio negocio = new PrendaNegocio();
                 ArticuloList = negocio.Listar();
@@ -33,11 +36,15 @@ namespace WebApplication1
                 ImagenNegocio ima = new ImagenNegocio();
                 ListImagenes = ima.Listar(IDArt);
                 Session["ListImagenes"] = ListImagenes;
+
             }
         }
-
-
-
+        private void InicializarListaStock(int idPrenda)
+        {
+            StockNegocio stockNegocio = new StockNegocio();
+            List<Stock> listaStock = stockNegocio.ObtenerStockPrenda(idPrenda);
+            Session["ListaStock"] = listaStock;
+        }
         protected void btnDecrement_Click(object sender, EventArgs e)
         {
             // Obtén el botón que desencadenó el evento.
@@ -56,7 +63,28 @@ namespace WebApplication1
                 }
             }
         }
+        private void ManejarVisibilidadControles()
+        {
+            List<Stock> listaStock = (List<Stock>)Session["ListaStock"];
 
+            // Manejar la visibilidad de los controles según la condición deseada
+            if (listaStock != null && listaStock.Count > 1)
+            {
+                // Mostrar los controles
+                btnDecrement.Visible = true;
+                quantity.Visible = true;
+                btnIncrement.Visible = true;
+                btnAgregarCarrito.Visible = true;
+            }
+            else
+            {
+                // Ocultar los controles
+                btnDecrement.Visible = false;
+                quantity.Visible = false;
+                btnIncrement.Visible = false;
+                btnAgregarCarrito.Visible = false;
+            }
+        }
         protected void btnIncrement_Click(object sender, EventArgs e)
         {
             // Obtén el botón que desencadenó el evento.
@@ -81,28 +109,60 @@ namespace WebApplication1
             // Obtén el TextBox asociado al botón.
             TextBox quantity = (TextBox)btnAgregarCarrito.Parent.FindControl("quantity");
 
-            int productoId = (int)Session["IDArt"]; // Obtén el ID del artículo de tu modelo, puede variar según la estructura real.
+            // Obtén la cantidad ingresada
+            if (int.TryParse(quantity.Text, out int cantidadAgregada))
+            {
+                // Obtén la cantidad disponible en el stock
+                List<Stock> listaStock = (List<Stock>)Session["ListaStock"];
+                int cantidadDisponible = ObtenerCantidadDisponibleDesdeListaStock(listaStock);
 
-            int cantidadAgregada = int.Parse(quantity.Text);
+                // Verifica si la cantidad agregada es menor o igual a la cantidad disponible en el stock
+                if (cantidadAgregada > 0 && cantidadAgregada <= cantidadDisponible)
+                {
+                    // Agrega la cantidad al carrito
+                    int productoId = (int)Session["IDArt"];
+                    var carrito = ObtenerCarrito();
 
+                    if (carrito.ContainsKey(productoId))
+                    {
+                        carrito[productoId] += cantidadAgregada;
+                    }
+                    else
+                    {
+                        carrito[productoId] = cantidadAgregada;
+                    }
+
+                    // Actualiza el contador del carrito
+                    ((SiteMaster)this.Master).UpdateContadorCarrito();
+                }
+                else
+                {
+                    // Muestra un mensaje de error al usuario
+                    // Puedes mostrarlo en un Label, MessageBox, etc.
+                    // Ejemplo: lblMensajeError.Text = "La cantidad ingresada no es válida o supera el stock disponible.";
+                }
+            }
+            else
+            {
+                // Muestra un mensaje de error al usuario indicando que la cantidad no es válida
+                // Ejemplo: lblMensajeError.Text = "La cantidad ingresada no es válida.";
+            }
+        }
+
+        private Dictionary<int, int> ObtenerCarrito()
+        {
             // Inicializa el carrito como un diccionario si aún no se ha hecho.
             if (Session["carrito"] == null)
             {
                 Session["carrito"] = new Dictionary<int, int>();
             }
 
-            var carrito = (Dictionary<int, int>)Session["carrito"];
+            return (Dictionary<int, int>)Session["carrito"];
+        }
 
-            if (carrito.ContainsKey(productoId))
-            {
-                carrito[productoId] += cantidadAgregada; // Incrementa la cantidad si ya existe en el carrito.
-            }
-            else
-            {
-                carrito[productoId] = cantidadAgregada; // Si es la primera vez que se agrega, la cantidad es 1.
-            }
-
-            ((SiteMaster)this.Master).UpdateContadorCarrito();
+        private int ObtenerCantidadDisponibleDesdeListaStock(List<Stock> listaStock)
+        {
+            return listaStock?.Sum(stock => stock.Cantidad) ?? 0;
         }
     }
 }

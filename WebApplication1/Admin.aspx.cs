@@ -20,8 +20,8 @@ namespace WebApplication1
             {
                 Session.Add("error", "Se requiere permiso de admin para ingresar a esta página");
                 Response.Redirect("Error.aspx");
-            } 
-           
+            }
+
         }
 
         protected void Alta_Click(object sender, ImageClickEventArgs e)
@@ -36,14 +36,19 @@ namespace WebApplication1
 
         }
 
-        protected void Unnamed_Click(object sender, ImageClickEventArgs e)
+        protected void Baja_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("Baja.aspx");
 
+        }
+        protected void Stock_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("ManejoStock.aspx");
 
         }
     }
 }
+
 
 
 

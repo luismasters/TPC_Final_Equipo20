@@ -71,6 +71,7 @@ namespace Negocio
 
                         lista.Add(prenda);
                     }
+
                 };
 
                 return lista;
@@ -161,7 +162,7 @@ namespace Negocio
             }
         }
 
-
+        
         public Prenda BuscarUnaPrenda(int id)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -222,7 +223,6 @@ namespace Negocio
         }
 
 
-
         #endregion
         public void Modificar(Prenda prenda)
         {
@@ -281,8 +281,6 @@ namespace Negocio
             }
         }
 
-
-
         public void Agregar(Prenda prenda)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -314,7 +312,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
 
             try
-            {   
+            {
                 datos.setearConsulta("DELETE FROM Prenda WHERE Id = @id");
                 datos.agregarParametro("@id", id);
                 datos.ejecutarAccion();
@@ -326,3 +324,4 @@ namespace Negocio
         }
     }
 }
+

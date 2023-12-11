@@ -118,7 +118,51 @@ namespace Negocio
             return categoria;
         }
 
+        public List<Stock> ObtenerStockPrenda(int idPrenda)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Stock> listaStock = new List<Stock>();
 
+            try
+            {
+                datos.setearConsulta("SELECT COALESCE(Cantidad, 'Sin Stock') AS Cantidad, COALESCE(Talle, 'Sin Stock') AS Talle FROM Stock WHERE IdPrenda = @IdPrenda");
+                datos.agregarParametro("IdPrenda", idPrenda);
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Stock stock = new Stock();
+                    stock.Cantidad = (int)datos.Lector["Cantidad"];
+                    stock.Talle = datos.Lector["Talle"].ToString();
+                    listaStock.Add(stock);
+                }
+                return listaStock;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        //public void ObtenerStockPrenda(int idPrenda)
+        //{
+        //    AccesoDatos datos = new AccesoDatos();
+        //    try
+        //    {
+        //        datos.setearConsulta("Select COALESCE(Cantidad, 'Sin Stock') as Cantidad, COALESCE(Talle, 'Sin Stock') as Talle from Stock where IdPrenda = @IdPrenda");
+        //        datos.agregarParametro("IdPrenda", idPrenda);
+               
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }
+        //}
         public void EliminarStock(string lote)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -171,7 +215,7 @@ namespace Negocio
 
             return lotes;
         }
-
+        
       
         public void EliminarStockPorLote(string lote)
         {

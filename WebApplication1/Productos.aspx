@@ -53,10 +53,7 @@
                                     <div class="card-body text-center">
                                         <h6 class="card-title" style="color: rgb(250 199 1)"><%# Eval("Descripcion") %></h6>
                                         <p class="card-text" style="font-size: 25px;">$<%# Eval("Precio") %> </p>
-                                        <p class="card-text">Unidades:<%# Eval("Stock") %></p>
-
                                     </div>
-
                                     <div class="quantity d-flex justify-content-center align-items-center">
                                         <p></p>
                                         <a class="btn btn-warning btn-sm" href='<%# "DetallePrenda.aspx?id=" + Eval("Id") %>'>Ver</a>

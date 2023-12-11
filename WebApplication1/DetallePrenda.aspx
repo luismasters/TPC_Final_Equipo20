@@ -19,14 +19,58 @@
                     <p><strong>Precio:</strong> $<%= prenda.Precio.ToString() %></p>
                     <p><strong>Categoria:</strong> <%= prenda.Categoria%></p>
                     <p><strong>Linea:</strong> <%= prenda.Linea%></p>
-                    <p><strong>Stock:</strong> <%= prenda.Stock%></p>
+                    <% 
+                        Negocio.StockNegocio stockNegocio = new Negocio.StockNegocio();
+                        List<Dominio.Stock> listaStock = stockNegocio.ObtenerStockPrenda(prenda.Id);
+                    %>
+                    <% if (listaStock.Count > 0)
+                        { %>
+                    <p><strong>Talles Disponibles:</strong> <%= string.Join(", ", listaStock.Select(s => s.Talle)) %></p>
+                    <label for="ddlTalles">Selecciona un Talle:</label>
+                    
+                    <select id="ddlTalles" class="form-control" style="width: 50px;" margin: 0 auto;">
+                        <% foreach (var stock in listaStock)
+                            { %>
+                        <option value="<%= stock.Talle %>"><%= stock.Talle %></option>
+                        <% } %>
+                    </select>
+                    <p id="cantidadDisponible"></p>
+
+                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            // Manejar el cambio en el selector de talles
+                            $("#ddlTalles").change(function () {
+                                var talleSeleccionado = $(this).val();
+                                var cantidadDisponible = obtenerCantidadDisponible(talleSeleccionado);
+                                $("#cantidadDisponible").text("Cantidad Disponible: " + cantidadDisponible);
+                            });
+
+                            // Función para obtener la cantidad disponible para un talle
+                            function obtenerCantidadDisponible(talle) {
+                                // Puedes implementar lógica adicional para obtener la cantidad del servidor si es necesario
+                                // Por ahora, simplemente obtendremos la cantidad de la listaStock
+                                var stockSeleccionado = <%= Newtonsoft.Json.JsonConvert.SerializeObject(listaStock) %>.find(function (s) {
+                                    return s.Talle === talle;
+                                });
+
+                                return stockSeleccionado ? stockSeleccionado.Cantidad : "Sin Stock";
+                            }
+                        });
+                    </script>
+
+                    <% }
+                        else
+                        { %>
+                    <p>No hay stock disponible para este artículo.</p>
+                    <% } %>
                     <div class="quantity align-items-center">
-                        <asp:Button ID="btnDecrement" runat="server" Text="-" CssClass="btn btn-sm btn-warning" OnClick="btnDecrement_Click" UseSubmitBehavior="false" />
-                        <asp:TextBox ID="quantity" runat="server" CssClass="custom-form-control text-center" Text="1" />
-                        <asp:Button ID="btnIncrement" runat="server" Text="+" CssClass="btn btn-sm btn-warning" OnClick="btnIncrement_Click" UseSubmitBehavior="false" />
+                        <asp:Button ID="btnDecrement" runat="server" Text="-" CssClass="btn btn-sm btn-warning" OnClick="btnDecrement_Click" UseSubmitBehavior="false" Visible="false" />
+                        <asp:TextBox ID="quantity" runat="server" CssClass="custom-form-control text-center" Text="1" Visible="false"/>
+                        <asp:Button ID="btnIncrement" runat="server" Text="+" CssClass="btn btn-sm btn-warning" OnClick="btnIncrement_Click" UseSubmitBehavior="false" Visible="false"/>
                     </div>
                     <p></p>
-                    <asp:Button ID="btnAgregarCarrito" runat="server" CssClass="btn btn-warning btn-sm" Text="Agregar al carrito" OnClick="btnAgregarCarrito_Click" />
+                    <asp:Button ID="btnAgregarCarrito" runat="server" CssClass="btn btn-warning btn-sm" Text="Agregar al carrito" OnClick="btnAgregarCarrito_Click" Visible="false" />
                 </div>
                 <% } %>
                 <% } %>
@@ -45,7 +89,7 @@
                     <!-- Mostrar imágenes adicionales -->
                     <% for (int i = 0; i < prenda.Imagenes.Count; i++)
                         { %>
-                    <img src="<%= prenda.Imagenes[i].ImagenURL %>" class="additional-img" alt="Imagen adicional del artículo" style="height: 100px; width: 100px; margin: 5px; cursor: pointer; border-radius: 10px" onclick="cambiarImagen('<%= prenda.Imagenes[i].ImagenURL %>')" />
+                    <img src="<%= prenda.Imagenes[i].ImagenURL %>" class="additional-img" alt="Imagen adicional del artículo" style="height: 100px; width: 100px; margin: 5px; cursor: pointer; border-radius: 10px" onclick="cambiarImagen('0000000000000000000000000000<%= prenda.Imagenes[i].ImagenURL %>')" />
                     <% } %>
                 </div>
 
