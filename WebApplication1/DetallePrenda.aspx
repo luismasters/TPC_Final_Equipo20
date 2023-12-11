@@ -79,13 +79,15 @@
                 <a href="Productos.aspx" class="btn btn-secondary btn-sm">Volver</a>
             </div>
             <div class="col-md-6 text-center bg-ca">
-                <% foreach (Dominio.Prenda prenda in (List<Dominio.Prenda>)Session["ArticuloList"])
-                    { %>
-                <% if (prenda.Id == (int)Session["IDArt"])
-                    { %>
+                <% foreach (Dominio.Prenda prenda in (List<Dominio.Prenda>)Session["ArticuloList"]){ %>
+                <% if (prenda.Id == (int)Session["IDArt"]){ %>
                 <div>
+                    <% if (prenda.Imagenes != null && prenda.Imagenes.Count > 0) { %>
                     <% string imagenUrl = prenda.Imagenes[0].ImagenURL; %>
                     <img id="imagenProducto" src="<%= imagenUrl %>" class="custom-img" alt="Imagen del artículo" style="height: 450px; width: 500px; border-radius: 10px" />
+                    <% } else { %>
+                    <img id="imagen" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Imagen_no_disponible.svg/1200px-Imagen_no_disponible.svg.png" class="custom-img" alt="Imagen del artículo" style="height: 450px; width: 500px; border-radius: 10px" />
+                    <% } %>
                 </div>
                 <div class="additional-images">
                     <!-- Mostrar imágenes adicionales -->
