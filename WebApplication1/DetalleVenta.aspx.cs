@@ -10,6 +10,7 @@ namespace WebApplication1
 {
     public partial class DetalleVenta : System.Web.UI.Page
     {
+        public  List<Dominio.DetalleVenta> listaDetalle { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,10 +23,8 @@ namespace WebApplication1
 
                     DetalleVentasNegocio detalleVentasNegocio = new DetalleVentasNegocio();
 
+                    listaDetalle=(List<Dominio.DetalleVenta>)detalleVentasNegocio.BuscarDetallePorVenta(idProducto);
 
-                     
-                    GridDetalle.DataSource = detalleVentasNegocio.BuscarDetallePorVenta(idProducto);
-                    GridDetalle.DataBind();
 
 
                 }
