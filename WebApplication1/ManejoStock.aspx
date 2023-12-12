@@ -4,7 +4,11 @@
            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
 
-        <div class="container mt-5">
+
+        <asp:HiddenField ID="HiddenFieldActiveTab" runat="server" />
+       
+              
+                <div class="container mt-5">
         <!-- Aquí comienza el contenido de la pestaña -->
               <ul class="nav nav-tabs" id="stockTabs" role="tablist">
                   <li class="nav-item">
@@ -92,28 +96,38 @@
                   </div>
 
                   <!-- Pestaña Listar Stock -->
-                    <div class="tab-pane fade" id="listarStock" role="tabpanel" aria-labelledby="listarStock-tab">
-                        <h3>Listado de Stock</h3>
-                        <div class="table-responsive">
-                            <asp:GridView ID="gvStock" runat="server" AutoGenerateColumns="False" CssClass="table"  style="color: white;">
-                                <Columns>
-                                    <asp:BoundField DataField="DescripcionPrenda" HeaderText="Descripción Prenda" />
-                                    <asp:BoundField DataField="Talle" HeaderText="Talle" />
-                                    <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                                    <asp:BoundField DataField="DescripcionCategoria" HeaderText="Categoría" />
-                                    <asp:BoundField DataField="Lote" HeaderText="Lote" />
-                                </Columns>
-                            </asp:GridView>
-                        </div>
-                    </div>
+                  <div class="tab-pane fade" id="listarStock" role="tabpanel" aria-labelledby="listarStock-tab">
+                      <h3>Listado de Stock</h3>
+                      <asp:Button ID="btnActualizarStock" runat="server" Text="Actualizar Stock" OnClick="btnActualizarStock_Click" CssClass="btn btn-primary" />
+                      <div class="table-responsive">
+                          <asp:GridView ID="gvStock" runat="server" AutoGenerateColumns="False" CssClass="table" style="color: white;">
+                              <Columns>
+                                  <asp:BoundField DataField="DescripcionPrenda" HeaderText="Descripción Prenda" />
+                                  <asp:BoundField DataField="Talle" HeaderText="Talle" />
+                                  <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
+                                  <asp:BoundField DataField="DescripcionCategoria" HeaderText="Categoría" />
+                                  <asp:BoundField DataField="Lote" HeaderText="Lote" />
+                              </Columns>
+                          </asp:GridView>
+                      </div>
+                  </div>
+
 
         </div>
     </div>
+
+
             </ContentTemplate>
         </asp:UpdatePanel>
 
 
-
+    <script>$(document).ready(function () {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var activeTab = $(e.target).attr('href');
+                $('#<%= HiddenFieldActiveTab.ClientID %>').val(activeTab);
+    });
+});
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>

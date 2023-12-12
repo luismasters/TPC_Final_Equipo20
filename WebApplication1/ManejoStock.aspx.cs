@@ -17,13 +17,18 @@ namespace WebApplication1
         {
             if (!IsPostBack)
             {
-
                 CargarPrendas();
                 CargarLotes();
-
                 gvStock.DataSource = _stockNegocio.ListarStock();
                 gvStock.DataBind();
-
+            }
+            else
+            {
+                string activeTab = HiddenFieldActiveTab.Value;
+                if (!string.IsNullOrEmpty(activeTab))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "SetActiveTab", "$('" + activeTab + "').tab('show');", true);
+                }
             }
         }
 
@@ -76,22 +81,37 @@ namespace WebApplication1
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            int idPrenda = int.Parse(ddlPrendasAgregar.SelectedValue);
-            int cantidad = int.Parse(txtCantidadAgregar.Text);
-            string talle = ddlTalles.SelectedValue;
-
-            Stock stock = new Stock
+            try
             {
-                IdPrenda = idPrenda,
-                Cantidad = cantidad,
-                Talle = talle,
-                Lote = GenerarNuevoLote()
-            };
+                int idPrenda = int.Parse(ddlPrendasAgregar.SelectedValue);
+                int cantidad = int.Parse(txtCantidadAgregar.Text);
+                string talle = ddlTalles.SelectedValue;
 
-            _stockNegocio.AgregarStock(stock);
-            MostrarMensaje("Stock agregado exitosamente");
+                Stock stock = new Stock
+                {
+                    IdPrenda = idPrenda,
+                    Cantidad = cantidad,
+                    Talle = talle,
+                    Lote = GenerarNuevoLote()
+                };
+
+                _stockNegocio.AgregarStock(stock);
+
+                MostrarMensaje("Stock agregado exitosamente");
+
+                ResetearFormularioAgregar();
+            }
+            catch (Exception ex)
+            {
+                MostrarMensaje("Error al agregar el stock: " + ex.Message);
+            }
         }
-
+        private void ResetearFormularioAgregar()
+        {
+            ddlPrendasAgregar.SelectedIndex = -1;
+            txtCantidadAgregar.Text = "";        
+            ddlTalles.SelectedIndex = -1;        
+        }
         protected void btnModificar_Click(object sender, EventArgs e)
         {
 
@@ -171,8 +191,10 @@ namespace WebApplication1
 
         private void MostrarMensaje(string mensaje)
         {
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", $"alert('{mensaje}');", true);
+            string script = $"alert('{mensaje}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
         }
+
 
 
         protected void ddlPrendasAgregar_SelectedIndexChanged(object sender, EventArgs e)
@@ -229,6 +251,17 @@ namespace WebApplication1
             {
                 LlenarTallesRemerasBuzos(ddlTalles);
             }
+        }
+
+        protected void btnActualizarStock_Click(object sender, EventArgs e)
+        {
+            ActualizarListaStock();
+        }
+
+        private void ActualizarListaStock()
+        {
+            gvStock.DataSource = _stockNegocio.ListarStock();
+            gvStock.DataBind();
         }
 
     }
