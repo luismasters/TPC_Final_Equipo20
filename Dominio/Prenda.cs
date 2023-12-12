@@ -16,7 +16,6 @@ namespace Dominio
         public Categoria Categoria { get; set; }
         public Genero Genero { get; set; }
         public Linea Linea { get; set; }
-        public string Talle { get; set; }
         public List<Imagen> Imagenes { get; set; }
         public string ImagenURL
         {

@@ -31,7 +31,6 @@ Precio money not null check (Precio>=0),
 IdCategoria int not  null foreign key references Categoria(Id),
 IdLinea int not  null foreign key references Linea(Id),
 IdGenero int not  null foreign key references Genero(Id),
-Talle varchar(10),
 )
 
 

@@ -44,19 +44,24 @@
                                 var talleSeleccionado = $(this).val();
                                 var cantidadDisponible = obtenerCantidadDisponible(talleSeleccionado);
                                 $("#cantidadDisponible").text("Cantidad Disponible: " + cantidadDisponible);
+
+                                // Actualizar el valor máximo en el campo de cantidad
+                                $("#quantity").attr("max", cantidadDisponible);
+
+                                // Habilitar/Deshabilitar botón de agregar al carrito
+                                $("#btnAgregarCarrito").prop('disabled', cantidadDisponible <= 0);
                             });
 
                             // Función para obtener la cantidad disponible para un talle
                             function obtenerCantidadDisponible(talle) {
-                                // Puedes implementar lógica adicional para obtener la cantidad del servidor si es necesario
-                                // Por ahora, simplemente obtendremos la cantidad de la listaStock
                                 var stockSeleccionado = <%= Newtonsoft.Json.JsonConvert.SerializeObject(listaStock) %>.find(function (s) {
-                                    return s.Talle === talle;
-                                });
+            return s.Talle === talle;
+        });
 
-                                return stockSeleccionado ? stockSeleccionado.Cantidad : "Sin Stock";
-                            }
-                        });
+        return stockSeleccionado ? stockSeleccionado.Cantidad : 0;
+    }
+});
+
                     </script>
 
                     <% }
@@ -115,7 +120,7 @@
                         }
                     }
 
-                    mostrarImagen(); // Mostrar la primera imagen al cargar la página
+                    mostrarImagen();
 
                     document.getElementById('btnAnterior').addEventListener('click', function () {
                         imagenActual = (imagenActual - 1 + imagenes.length) % imagenes.length;

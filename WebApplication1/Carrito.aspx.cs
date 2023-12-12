@@ -80,7 +80,7 @@ namespace WebApplication1
 
             foreach (var art in productosCarrito)
             {
-                dt.Rows.Add(art.Id, art.Descripcion, art.Precio, carrito[art.Id], art.Categoria.Descripcion, art.Genero.Descripcion, art.Linea.Descripcion, art.Talle);
+                dt.Rows.Add(art.Id, art.Descripcion, art.Precio, carrito[art.Id], art.Categoria.Descripcion, art.Genero.Descripcion, art.Linea.Descripcion);
             }
 
             return dt;

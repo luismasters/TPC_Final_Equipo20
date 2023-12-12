@@ -40,10 +40,6 @@
             </div>
         </div>
 
-
-
-
-
         <div class="container">
             <div class="col-2">
                 <asp:Button ID="botonEli" Text="Eliminar Prenda" runat="server" OnClick="Eliminar_Click" CssClass="btn btn-warning" Visible="false" />

@@ -125,7 +125,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT COALESCE(Cantidad, 'Sin Stock') AS Cantidad, COALESCE(Talle, 'Sin Stock') AS Talle FROM Stock WHERE IdPrenda = @IdPrenda");
+                datos.setearConsulta("SELECT Talle, SUM(Cantidad) AS Cantidad FROM Stock WHERE IdPrenda = @IdPrenda GROUP BY Talle");
                 datos.agregarParametro("IdPrenda", idPrenda);
 
                 datos.ejecutarLectura();
@@ -148,7 +148,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        
+
         public void EliminarStock(string lote)
         {
             AccesoDatos datos = new AccesoDatos();
