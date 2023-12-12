@@ -179,9 +179,11 @@ namespace WebApplication1
                     int idPrendaStock = (int)row["Id"];
                     string talleStock = row["Talle"].ToString();
                     int cantidadStock = (int)row["Cantidad"];
-                    stockNegocio.ActualizarStockVenta(idPrendaStock, talleStock, cantidadStock);
+                   stockNegocio.ActualizarStockVenta(idPrendaStock, talleStock, cantidadStock);
+
                 }
                 venta.Descripcion = descripcionPrenda;
+
                 negocio.RegistrarVenta(venta);
 
 

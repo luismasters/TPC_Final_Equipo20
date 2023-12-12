@@ -80,7 +80,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Insert into Ventas values (@IDUsuario, @MedioPago, @PrecioTotal, @Pagado, @IDEnvio, @Descripcion)");
+                datos.setearConsulta("Insert into Ventas (IDUsuario,IDEnvio,MedioPago,PrecioTotal,Pagado,Descripcion) values (@IDUsuario,@IDEnvio, @MedioPago, @PrecioTotal, @Pagado, @Descripcion)");
                 datos.agregarParametro("@IDUsuario", venta.IDUsuario);
                 datos.agregarParametro("@MedioPago", venta.MedioPago);
                 datos.agregarParametro("@PrecioTotal", venta.PrecioTotal);
