@@ -17,6 +17,8 @@ namespace Dominio
         public int IDEnvio { get; set; }
         public string Descripcion { get; set; }
         public string NombreUsuario { get; set; }
+        public bool Despachado { get; set; }
+
 
 
     }

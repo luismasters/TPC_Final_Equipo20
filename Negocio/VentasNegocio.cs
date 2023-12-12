@@ -16,7 +16,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado, IDEnvio, Descripcion from Ventas");
+                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado, IDEnvio, Descripcion,Despachado from Ventas");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -28,6 +28,8 @@ namespace Negocio
                     ventas.Pagado = (bool)datos.Lector["Pagado"];
                     ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
                     ventas.Descripcion = (datos.Lector["Descripcion"]as string)??"";
+                    ventas.Despachado = (bool)datos.Lector["Despachado"];
+
                     lista.Add(ventas);
                 }
                 return lista;
@@ -48,7 +50,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado, IDEnvio, Descripcion from Ventas where @IDUsuario = IDUsuario");
+                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado, IDEnvio, Descripcion,Despachado from Ventas where @IDUsuario = IDUsuario");
                 datos.agregarParametro("@IDUsuario", id);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -61,6 +63,8 @@ namespace Negocio
                     ventas.Pagado = (bool)datos.Lector["Pagado"];
                     ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
                     ventas.Descripcion = (datos.Lector["Descripcion"] as string) ?? "";
+                    ventas.Despachado = (bool)datos.Lector["Despachado"];
+
                     lista.Add(ventas);
                 }
                 return lista;

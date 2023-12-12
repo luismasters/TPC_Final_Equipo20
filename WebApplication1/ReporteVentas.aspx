@@ -20,7 +20,7 @@
                             <asp:Literal runat="server" Text='<%# ObtenerUsuario(Eval("IDUsuario")) %>'></asp:Literal>
                                 </p>
 
-                                <h6 class="card-title">Monto de la Venta: <%# (Eval("PrecioTotal")) %></h6>
+                                <h6 class="card-title">Monto de la Venta: <%# Convert.ToDecimal(Eval("PrecioTotal")).ToString("F2") %></h6>
 
                                 <p class="card-text">
                                     Tipo de pago:  

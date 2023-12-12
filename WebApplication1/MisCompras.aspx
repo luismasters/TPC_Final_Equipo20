@@ -6,7 +6,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 
-    <div class="container">
+    <div class="container mb-">
         <div class="row">
             <div class="col-2"></div>
 
@@ -17,7 +17,7 @@
                             <div class="card-header">
                                 <asp:Label runat="server" ID="lblContador"></asp:Label>
                             </div>
-                            <p class="card-title">Monto total: $<%# (Eval("PrecioTotal")) %></p>
+                            <p class="card-title">Monto total: $<%#Convert.ToDecimal(Eval("PrecioTotal")).ToString("F2") %></p>
                             <p class="card-text">
                                 Medio de pago:  
                     <asp:Literal runat="server" Text='<%# ObtenerDescripcionMedioPago(Eval("MedioPago")) %>'></asp:Literal>
