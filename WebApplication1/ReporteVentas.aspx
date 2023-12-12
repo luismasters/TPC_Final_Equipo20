@@ -3,6 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="container mb-4">
+
+        <div class="mb-3">
+    <asp:Button ID="btnVentasSinDespachar" runat="server" Text="Ver Ventas Sin Despachar" OnClick="BtnVentasSinDespachar_Click" CssClass="btn btn-primary" />
+    <asp:Button ID="btnVentasDespachadas" runat="server" Text="Ver Ventas Despachadas" OnClick="BtnVentasDespachadas_Click" CssClass="btn btn-info" />
+</div>
+
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
@@ -35,6 +41,8 @@
 
                                 <div style="text-align: right;">
                                     <asp:Button Text="Ver Detalle" runat="server" class="btn btn-warning" OnClick="VerDetalle_Click" CommandName="VerDetalle" CommandArgument='<%# Eval("idVenta") %>' />
+                                  <asp:Button Text="Marcar como Despachado" runat="server" class="btn btn-secondary" OnClick="Despachar_Click" CommandName="VerDetalle" CommandArgument='<%# Eval("idVenta") %>' />
+
                                 </div>
                             </div>
                         </div>

@@ -158,5 +158,27 @@ namespace Negocio
             }
         }
 
+        public void Despachar(int idVenta)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Ventas SET Despachado = 1 WHERE IDVenta = @IDVenta");
+                datos.agregarParametro("@IDVenta", idVenta);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+
+
     }
 }

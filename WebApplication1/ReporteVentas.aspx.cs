@@ -27,19 +27,15 @@ namespace WebApplication1
             }
             if (!IsPostBack)
             {
-                MostrarVentas();
                 
             }
         }
 
-        private void MostrarVentas()
-        {
-            // Aquí debes crear una instancia de VentasNegocio y llamar al método listar()
-            VentasNegocio negocioVentas = new VentasNegocio();
-            List<Ventas> listaVentas = negocioVentas.Listar(); // Suponiendo que el método listar devuelve una lista de ventas
+        private void MostrarVentas(List<Ventas> lista )
+        {         
 
 
-            rptVentas.DataSource = listaVentas;
+            rptVentas.DataSource = lista;
             rptVentas.DataBind();
         }
 
@@ -108,5 +104,46 @@ namespace WebApplication1
             // Redirigir a la página de detalles con el ID de la venta
             Response.Redirect($"DetalleVenta.aspx?ID={idVenta}");
         }
+        protected void Despachar_Click(object sender, EventArgs e)
+        {
+            // Obtener el botón que desencadenó el evento
+            Button btnVerDetalle = (Button)sender;
+
+            // Obtener el ID de la venta del CommandArgument del botón
+            int idVenta =Convert.ToInt32(btnVerDetalle.CommandArgument);
+
+            VentasNegocio ventasNeg= new VentasNegocio();
+            ventasNeg.Despachar(idVenta);
+
+            Response.Redirect(Request.RawUrl);
+
+        }
+
+
+        protected void BtnVentasSinDespachar_Click(object sender, EventArgs e)
+        {
+            VentasNegocio negocioVentas = new VentasNegocio();
+            List<Ventas> listaVentas = negocioVentas.Listar(); // Suponiendo que el método listar devuelve una lista de ventas
+            listaVentas = listaVentas.Where(venta => !venta.Despachado).ToList();
+            MostrarVentas(listaVentas);
+            
+        }
+
+        protected void BtnVentasDespachadas_Click(object sender, EventArgs e)
+        {
+
+
+            VentasNegocio negocioVentas = new VentasNegocio();
+            List<Ventas> listaVentas = negocioVentas.Listar(); // Suponiendo que el método listar devuelve una lista de ventas
+            listaVentas = listaVentas.Where(venta => venta.Despachado).ToList();
+            MostrarVentas(listaVentas);
+
+
+        }
+
+
+
+
+
     }
 }

@@ -15,6 +15,24 @@ namespace WebApplication1
     {
 
         /// <summary>
+        /// Control btnVentasSinDespachar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVentasSinDespachar;
+
+        /// <summary>
+        /// Control btnVentasDespachadas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVentasDespachadas;
+
+        /// <summary>
         /// Control rptVentas.
         /// </summary>
         /// <remarks>
