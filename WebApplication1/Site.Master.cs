@@ -32,5 +32,13 @@ namespace WebApplication1
             }
         }
 
+     
+
+        protected void btnCerrarSesion_Click1(object sender, EventArgs e)
+        {  FormsAuthentication.SignOut();
+            Session.Abandon();
+            Response.Redirect("Default.aspx");
+
+        }
     }
 }

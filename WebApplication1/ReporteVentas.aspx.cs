@@ -31,7 +31,7 @@ namespace WebApplication1
             }
         }
 
-        private void MostrarVentas(List<Ventas> lista )
+        protected void MostrarVentas(List<Ventas> lista )
         {         
 
 
@@ -103,6 +103,7 @@ namespace WebApplication1
 
             // Redirigir a la página de detalles con el ID de la venta
             Response.Redirect($"DetalleVenta.aspx?ID={idVenta}");
+         
         }
         protected void Despachar_Click(object sender, EventArgs e)
         {
@@ -114,7 +115,7 @@ namespace WebApplication1
 
             VentasNegocio ventasNeg= new VentasNegocio();
             ventasNeg.Despachar(idVenta);
-
+            btnVerDetalle.Visible = false;
             Response.Redirect(Request.RawUrl);
 
         }
@@ -126,6 +127,7 @@ namespace WebApplication1
             List<Ventas> listaVentas = negocioVentas.Listar(); // Suponiendo que el método listar devuelve una lista de ventas
             listaVentas = listaVentas.Where(venta => !venta.Despachado).ToList();
             MostrarVentas(listaVentas);
+
             
         }
 
@@ -137,13 +139,13 @@ namespace WebApplication1
             List<Ventas> listaVentas = negocioVentas.Listar(); // Suponiendo que el método listar devuelve una lista de ventas
             listaVentas = listaVentas.Where(venta => venta.Despachado).ToList();
             MostrarVentas(listaVentas);
-
+            
+          
 
         }
 
 
-
-
+       
 
     }
 }

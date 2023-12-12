@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="WebApplication1.Checkout" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div class="container">
     <h1>Detalles de su compra</h1>
     <asp:GridView ID="gvCarritoCheckout" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false">
         <Columns>
@@ -129,6 +131,7 @@
             return true;
         }
     </script>
+        </div>
 </asp:Content>
 
 

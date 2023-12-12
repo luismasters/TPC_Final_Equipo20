@@ -46,6 +46,11 @@ namespace WebApplication1
             Response.Redirect("ManejoStock.aspx");
 
         }
+        protected void Ventas_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("ReporteVentas.aspx");
+
+        }
     }
 }
 

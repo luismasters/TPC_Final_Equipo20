@@ -27,33 +27,25 @@
                                 </p>
 
                                 <h6 class="card-title">Monto de la Venta: <%# Convert.ToDecimal(Eval("PrecioTotal")).ToString("F2") %></h6>
-
                                 <p class="card-text">
                                     Tipo de pago:  
                             <asp:Literal runat="server" Text='<%# ObtenerDescripcionMedioPago(Eval("MedioPago")) %>'></asp:Literal>
                                 </p>
-
                                 <p class="card-text">
                                     Direccion Envio:  
                             <asp:Literal runat="server" Text='<%# ObtenerDireccion(Eval("IDEnvio")) %>'></asp:Literal>
                                 </p>
+                               <div style="text-align: right;">
+            <asp:Button ID="btnVerDetalle" Text="Ver Detalle" runat="server" class="btn btn-warning" OnClick="VerDetalle_Click" CommandName="VerDetalle" CommandArgument='<%# Eval("idVenta") %>' />
+            <asp:Button ID="btnDespachar" Text="Marcar como Despachado" runat="server" class="btn btn-secondary" OnClick="Despachar_Click" CommandName="BtnDespa" CommandArgument='<%# Eval("idVenta") %>'  />
+        </div>
 
-
-                                <div style="text-align: right;">
-                                    <asp:Button Text="Ver Detalle" runat="server" class="btn btn-warning" OnClick="VerDetalle_Click" CommandName="VerDetalle" CommandArgument='<%# Eval("idVenta") %>' />
-                                  <asp:Button Text="Marcar como Despachado" runat="server" class="btn btn-secondary" OnClick="Despachar_Click" CommandName="VerDetalle" CommandArgument='<%# Eval("idVenta") %>' />
-
-                                </div>
                             </div>
                         </div>
-
                     </ItemTemplate>
                 </asp:Repeater>
-
             </div>
             <div class="col-2"></div>
-
-
         </div>
     </div>
     <div style="height:100px"></div>

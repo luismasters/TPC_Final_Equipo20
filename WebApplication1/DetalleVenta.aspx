@@ -48,5 +48,8 @@
 %>
 
         </table>
+                                       <div style="text-align: right;">
+        <asp:HyperLink ID="hypBack" runat="server" Text="Volver Atrás" NavigateUrl="javascript:history.go(-1);" CssClass="btn btn-secondary" />
+                                          </div>
 </div>
 </asp:Content>

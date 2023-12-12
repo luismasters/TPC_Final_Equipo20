@@ -21,6 +21,10 @@
                 <asp:ImageButton ImageUrl="~/Content/Imagenes/Captura de pantalla 2023-11-15 222842.png" runat="server" Width="200px" Height="150px" OnClick="Baja_Click" />
                 <p>Dar de baja una Prenda</p>
             </div>
+             <div class="col-md-4">
+     <asp:ImageButton ImageUrl="~/Content/Imagenes/Captura de pantalla 2023-12-12 195308.png" runat="server" Width="200px" Height="150px" OnClick="Ventas_Click" />
+     <p>Administrar Ventas</p>
+ </div>
             <div class="col-md-4">
                 <asp:ImageButton ImageUrl="~/Content/Imagenes/almacenamiento.jpg" runat="server" Width="200px" Height="150px" OnClick="Stock_Click" />
                 <p>Administrar Stock</p>

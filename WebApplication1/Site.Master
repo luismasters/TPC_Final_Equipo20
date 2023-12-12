@@ -94,6 +94,15 @@
                                 <i class="fas fa-sign-in-alt"></i>Ingresar/Registrarse
                             </a>
                             <% } %>
+<div class="navbar-nav ml-auto">
+    <% if (Session["usuario"] != null) { %>
+        <!-- Botón para cerrar sesión -->
+        <asp:Button ID="btnCerrarSesion" runat="server" Text="Cerrar Sesión" OnClick="btnCerrarSesion_Click1" CssClass="nav-link btn btn-link">
+        </asp:Button>
+    <% } %>
+</div>
+
+
                         </div>
                     </div>
                     </div>
@@ -157,5 +166,6 @@
             });
         });
     </script>--%>
+
 </body>
 </html>
