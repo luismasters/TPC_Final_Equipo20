@@ -28,7 +28,6 @@ create table Prenda(
 Id int  identity(1,1) not null primary key,
 Descripcion Varchar(200) not null,
 Precio money not null check (Precio>=0),
-Stock int default 0 check (Stock>=0),
 IdCategoria int not  null foreign key references Categoria(Id),
 IdLinea int not  null foreign key references Linea(Id),
 IdGenero int not  null foreign key references Genero(Id),

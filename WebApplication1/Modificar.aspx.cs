@@ -50,10 +50,6 @@ namespace WebApplication1
 
             TxtDescripcionM.Text = prenda.Descripcion;
             TxtPrecio.Text = prenda.Precio.ToString("0.00");
-            TxtStock.Text = prenda.Stock.ToString("0");
-            TxtTalle.Text = prenda.Talle;
-
-
 
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
@@ -228,9 +224,6 @@ namespace WebApplication1
 
                 prenda.Descripcion = TxtDescripcionM.Text;
                 prenda.Precio = Convert.ToDecimal(TxtPrecio.Text);
-                prenda.Stock = Convert.ToInt32(TxtStock.Text);
-                prenda.Talle = TxtTalle.Text;
-
                 prenda.Categoria = new Categoria(); // Asegurar que se cree una nueva instancia de Categoria
                 prenda.Linea = new Linea(); // Asegurar que se cree una nueva instancia de Linea
                 prenda.Genero = new Genero(); // Asegurar que se cree una nueva instancia de Genero

@@ -146,7 +146,7 @@ namespace WebApplication1
 
         protected int BuscarId(List<Prenda> list)
         {
-            int proximoID = 1; // Valor predeterminado si la lista está vacía
+            int proximoID = 1; 
             if (list.Count > 0)
             {
                 // Encuentra el máximo ID actual y luego agrega 1 para obtener el próximo ID disponible
@@ -201,7 +201,6 @@ namespace WebApplication1
                     break;
 
                 default:
-                    // Manejo para un índice fuera de rango si es necesario
                     break;
             }
         }
@@ -209,7 +208,7 @@ namespace WebApplication1
         protected void BtnAnterior_Click(object sender, EventArgs e)
         {
             // Lógica para retroceder al elemento anterior
-            indice--; // Reduces the index to go to the previous element
+            indice--;
             MostrarElementoActual();
         }
 
@@ -222,13 +221,11 @@ namespace WebApplication1
                 Prenda prenda = new Prenda();
                 prenda.Descripcion = TxtDescripcion.Text;
                 prenda.Precio = decimal.Parse(TxtPrecio.Text);
-                prenda.Talle = TxtTalle.Text;
-                prenda.Stock = int.Parse(TxtStock.Text);
 
                 // Inicializar las propiedades dentro de Prenda
-                prenda.Categoria = new Categoria(); // Asegurar que se cree una nueva instancia de Categoria
-                prenda.Linea = new Linea(); // Asegurar que se cree una nueva instancia de Linea
-                prenda.Genero = new Genero(); // Asegurar que se cree una nueva instancia de Genero
+                prenda.Categoria = new Categoria();
+                prenda.Linea = new Linea();
+                prenda.Genero = new Genero();
 
                 foreach (Categoria item in ListCategoria)
                 {
@@ -236,7 +233,7 @@ namespace WebApplication1
                     {
                         prenda.Categoria.Id = item.Id;
                         prenda.Categoria.Descripcion = item.Descripcion;
-                        break; // Terminar el bucle una vez que se encuentre la categoría
+                        break;
                     }
                 }
 
@@ -246,7 +243,7 @@ namespace WebApplication1
                     {
                         prenda.Linea.Id = item.Id;
                         prenda.Linea.Descripcion = item.Descripcion;
-                        break; // Terminar el bucle una vez que se encuentre la línea
+                        break;
                     }
                 }
 
@@ -261,11 +258,9 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                // Manejo de la excepción (por ejemplo, mostrar un mensaje de error)
             }
-
             // Lógica para avanzar al siguiente elemento
-            indice++; // Increases the index to go to the next element
+            indice++;
             MostrarElementoActual();
         }
 

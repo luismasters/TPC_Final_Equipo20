@@ -181,6 +181,7 @@ namespace WebApplication1
             PrendaNegocio prendaNegocio = new PrendaNegocio();
             Prenda prendaSeleccionada = prendaNegocio.BuscarUnaPrenda(idPrendaSeleccionada);
 
+            CargarTallesSegunCategoria(prendaSeleccionada.Categoria);
         }
 
         private void LlenarTallesRemerasBuzos(DropDownList ddl)
@@ -217,5 +218,18 @@ namespace WebApplication1
                 LlenarTallesRemerasBuzos(ddlTalles);
             }
         }
+
+        private void CargarTallesSegunCategoria(Categoria categoria)
+        {
+            if (categoria.Id == 4)
+            {
+                LlenarTallesPantalones(ddlTalles);
+            }
+            else
+            {
+                LlenarTallesRemerasBuzos(ddlTalles);
+            }
+        }
+
     }
 }

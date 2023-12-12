@@ -38,7 +38,7 @@ namespace Negocio
             ImagenNegocio imagenNegocio = new ImagenNegocio();
             try
             {
-                datos.setearConsulta("SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle\r\nFROM Prenda P\r\nINNER JOIN Categoria C ON P.IdCategoria = C.Id\r\nINNER JOIN Genero G ON P.IdGenero = G.Id\r\nINNER JOIN Linea L ON P.IdLinea = L.Id;");
+                datos.setearConsulta("SELECT P.Id, P.Descripcion, P.Precio, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle\r\nFROM Prenda P\r\nINNER JOIN Categoria C ON P.IdCategoria = C.Id\r\nINNER JOIN Genero G ON P.IdGenero = G.Id\r\nINNER JOIN Linea L ON P.IdLinea = L.Id;");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -48,7 +48,6 @@ namespace Negocio
                     prenda.Descripcion = datos.Lector["Descripcion"].ToString();
                     prenda.Precio = Math.Round((decimal)datos.Lector["Precio"], 2);
                     prenda.Talle = datos.Lector["Talle"].ToString();
-                    prenda.Stock = (int)datos.Lector["Stock"];
                     prenda.Categoria = new Categoria();
                     {
                         prenda.Categoria.Id = (int)datos.Lector["IdCategoria"];
@@ -94,7 +93,7 @@ namespace Negocio
             try
             {
                 StringBuilder consulta = new StringBuilder();
-                consulta.Append("SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle FROM Prenda P INNER JOIN Categoria C ON P.IdCategoria = C.Id INNER JOIN Genero G ON P.IdGenero = G.Id INNER JOIN Linea L ON P.IdLinea = L.Id WHERE 1=1");
+                consulta.Append("SELECT P.Id, P.Descripcion, P.Precio, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle FROM Prenda P INNER JOIN Categoria C ON P.IdCategoria = C.Id INNER JOIN Genero G ON P.IdGenero = G.Id INNER JOIN Linea L ON P.IdLinea = L.Id WHERE 1=1");
 
                 if (!string.IsNullOrEmpty(categoria) && categoria != "Todas")
                     consulta.Append(" AND C.Descripcion LIKE @categoria");
@@ -129,7 +128,6 @@ namespace Negocio
                         Id = (int)datos.Lector["Id"],
                         Descripcion = datos.Lector["Descripcion"].ToString(),
                         Precio = (decimal)datos.Lector["Precio"],
-                        Stock = (int)datos.Lector["Stock"],
                         Talle = datos.Lector["Talle"].ToString(),
                         Categoria = new Categoria
                         {
@@ -171,7 +169,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle " +
+                datos.setearConsulta("SELECT P.Id, P.Descripcion, P.Precio, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle " +
                                     "FROM Prenda P " +
                                     "INNER JOIN Categoria C ON P.IdCategoria = C.Id " +
                                     "INNER JOIN Genero G ON P.IdGenero = G.Id " +
@@ -188,7 +186,6 @@ namespace Negocio
                         Id = (int)datos.Lector["Id"],
                         Descripcion = datos.Lector["Descripcion"].ToString(),
                         Precio = (decimal)datos.Lector["Precio"],
-                        Stock = (int)datos.Lector["Stock"],
                         Talle = datos.Lector["Talle"].ToString(),
                         Categoria = new Categoria
                         {
@@ -230,15 +227,14 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE Prenda SET Descripcion = @descripcion, Precio = @precio, Talle = @talle, IdCategoria = @idCategoria, IdLinea = @idLinea, Stock = @stock, IdGenero = @idGenero " +
+                datos.setearConsulta("UPDATE Prenda SET Descripcion = @descripcion, Precio = @precio, Talle = @talle, IdCategoria = @idCategoria, IdLinea = @idLinea, IdGenero = @idGenero " +
                                      "WHERE Id = @id");
                 datos.agregarParametro("@descripcion", prenda.Descripcion);
                 datos.agregarParametro("@precio", prenda.Precio);
                 datos.agregarParametro("@talle", prenda.Talle);
                 datos.agregarParametro("@idCategoria", prenda.Categoria.Id);
                 datos.agregarParametro("@idLinea", prenda.Linea.Id);
-                datos.agregarParametro("@stock", prenda.Stock);
-                datos.agregarParametro("@idGenero", prenda.Genero.Id); // Nuevo parámetro para el género
+                datos.agregarParametro("@idGenero", prenda.Genero.Id);
                 datos.agregarParametro("@id", prenda.Id);
 
                 datos.ejecutarAccion();
@@ -295,7 +291,6 @@ namespace Negocio
                 datos.agregarParametro("@idCategoria", prenda.Categoria.Id);
 
                 int prendaId = (int)datos.ejecutarAccionReturn();
-                // Aquí puedes agregar el código para manejar la tabla de Stock y relacionarla con la nueva prenda.
             }
             catch (Exception ex)
             {

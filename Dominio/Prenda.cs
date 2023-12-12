@@ -12,7 +12,7 @@ namespace Dominio
         public int Id { get; set; }
         public string Descripcion { get; set; }
         public decimal Precio { get; set; }
-        public int Stock { get; set; }
+        //public List<Stock> Stocks { get; set; }
         public Categoria Categoria { get; set; }
         public Genero Genero { get; set; }
         public Linea Linea { get; set; }

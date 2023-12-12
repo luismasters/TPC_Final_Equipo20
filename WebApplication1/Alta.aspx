@@ -26,18 +26,6 @@
                     </div>
 
                     <div class="form-group">
-                        <asp:Label Text="Cantidad Ingreso" runat="server" ID="lblStock" AssociatedControlID="TxtStock" CssClass="mr-2" />
-                        <asp:TextBox CssClass="form-control" runat="server" ID="TxtStock" type="integer" />
-                    </div>
-
-                    <div class="form-group">
-                        <asp:Label Text="Talle" runat="server" ID="lblTalle" AssociatedControlID="TxtTalle" CssClass="mr-2" />
-                        <asp:TextBox CssClass="form-control" runat="server" ID="TxtTalle" />
-                        <asp:RegularExpressionValidator ID="RegexValidatorTalle" runat="server" ControlToValidate="TxtTalle"
-                            ErrorMessage="Ingrese números o letras mayúsculas" ValidationExpression="^[A-Z0-9]+$" Display="Dynamic" />
-                    </div>
-
-                    <div class="form-group">
                         <asp:Label Text="Categoria" runat="server" ID="lblCategoria" AssociatedControlID="DropListCategoria" CssClass="mr-2" />
                         <asp:DropDownList CssClass="form-control" ID="DropListCategoria" runat="server">
                         </asp:DropDownList>
@@ -96,9 +84,6 @@
                 </div>
 
                 <script>
-                    // Supongamos que tienes una lista de URLs de imágenes en tu controlador o en el backend
-
-
                     // Función para generar la tira de imágenes
                     function mostrarImagenes() {
                         var imageStrip = document.getElementById('imageStrip');
@@ -107,9 +92,9 @@
                         listaImagenes.forEach(function (imagenUrl) {
                             var img = document.createElement('img');
                             img.src = imagenUrl;
-                            img.style.width = '150px'; // Define el ancho deseado para las imágenes
-                            img.style.marginRight = '10px'; // Agrega margen derecho para separar las imágenes
-                            imageStrip.appendChild(img); // Agrega la imagen al contenedor
+                            img.style.width = '150px';
+                            img.style.marginRight = '10px';
+                            imageStrip.appendChild(img);
                         });
                     }
 

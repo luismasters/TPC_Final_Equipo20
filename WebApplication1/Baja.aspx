@@ -26,8 +26,6 @@
                                         <div class="card-body">
                                             <h6 class="card-title" style="font-size: 12px;"><%# Eval("Descripcion") %></h6>
                                             <p class="card-text m-0" style="font-size: 12px;">Codigo: <%# Eval("ID") %></p>
-                                            <p class="card-text m-0" style="font-size: 12px;">Talle: <%# Eval("Talle") %></p>
-                                            <p class="card-text m-0" style="font-size: 12px;">Stock: <%# Eval("Stock") %></p>
                                             <p class="card-text m-0" style="font-size: 12px;">Categoria: <%# Eval("Categoria.Descripcion") %></p>
                                             <p class="card-text m-0" style="font-size: 12px;">Linea: <%# Eval("Linea.Descripcion") %></p>
                                             <p class="card-text m-0" style="font-size: 12px;">Genero: <%# Eval("Genero.Descripcion") %></p>

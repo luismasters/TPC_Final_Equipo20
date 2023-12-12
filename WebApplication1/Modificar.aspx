@@ -25,12 +25,10 @@
                                     <div class="card-body">
                                         <h6 class="card-title" style="font-size:12px;" ><%# Eval("Descripcion") %></h6>
                                         <p class="card-text m-0"  style="font-size:12px;">Codigo: <%# Eval("ID") %></p>
-                         <p class="card-text m-0"  style="font-size:12px";>Precio<%#FormatearPrecio(Eval("Precio")) %></p>
-                          <p class="card-text m-0"  style="font-size:12px;">Talle: <%# Eval("Talle") %></p>
-                          <p class="card-text m-0"  style="font-size:12px;">Stock: <%# Eval("Stock") %></p>
-                        <p class="card-text m-0" style="font-size:12px;">Categoria: <%# Eval("Categoria.Descripcion") %></p>
-                       <p class="card-text m-0" style="font-size:12px;">Linea: <%# Eval("Linea.Descripcion") %></p>
-                        <p class="card-text m-0" style="font-size:12px;">Genero: <%# Eval("Genero.Descripcion") %></p>
+                                        <p class="card-text m-0"  style="font-size:12px";>Precio<%#FormatearPrecio(Eval("Precio")) %></p>
+                                        <p class="card-text m-0" style="font-size:12px;">Categoria: <%# Eval("Categoria.Descripcion") %></p>
+                                        <p class="card-text m-0" style="font-size:12px;">Linea: <%# Eval("Linea.Descripcion") %></p>
+                                        <p class="card-text m-0" style="font-size:12px;">Genero: <%# Eval("Genero.Descripcion") %></p>
                                         <asp:Button ID="Button1" runat="server" CommandName="MostrarDetalle" CommandArgument='<%# Eval("ID") %>' Text="Seleccionar" CssClass="btn btn-warning" OnClick="Seleccionar_Click" />
                                     </div>
                                 </div>
@@ -52,18 +50,7 @@
                             </div>
                             <div class="mb-2">
                                 <asp:Label Text="Precio" runat="server" ID="lblPrecio" />
-                                <asp:TextBox CssClass="form-control" runat="server" ID="TxtPrecio" />
-                                
-                              
-                            </div>
-                            <div class="mb-2">
-                                <asp:Label Text="Cantidad Ingreso" runat="server" ID="lblStock" />
-                                <asp:TextBox CssClass="form-control" runat="server" ID="TxtStock" type="integer" />
-                            </div>
-                            <div class="mb-2">
-                                <asp:Label Text="Talle" runat="server" ID="lblTalle" />
-                                <asp:TextBox CssClass="form-control" runat="server" ID="TxtTalle" />
-                         
+                                <asp:TextBox CssClass="form-control" runat="server" ID="TxtPrecio" />                                                             
                             </div>
                             <div class="mb-2">
                                 <asp:Label Text="Categoria" runat="server" ID="lblCategoria" />
@@ -76,7 +63,6 @@
                                 <asp:DropDownList CssClass="form-control" runat="server" ID="DropListLinea">
                                 </asp:DropDownList>
                                 <asp:TextBox runat="server" ID="TxtNuevaLinea" Visible="false" placeholder="Nueva Linea"></asp:TextBox>
-
                             </div>
                             <div class="mb-2">
                                 <asp:Label Text="Genero" ID="lblGenero" runat="server" />
