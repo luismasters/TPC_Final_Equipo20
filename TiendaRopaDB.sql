@@ -1,28 +1,20 @@
-use master
-drop database TiendaRopa
-
 create database TiendaRopa
 use TiendaRopa
 
 create table Categoria(
 Id int identity(1,1) primary key,
 Descripcion Varchar(200) not null unique,
-
 )
 
 create table Genero(
 Id int identity(1,1) primary key,
 Descripcion Varchar(200) not null unique,
-
 )
 
 create table Linea(
 Id int identity(1,1) primary key,
 Descripcion Varchar(200) not null unique,
-
 )
-
-
 
 create table Prenda(
 Id int  identity(1,1) not null primary key,
@@ -32,8 +24,6 @@ IdCategoria int not  null foreign key references Categoria(Id),
 IdLinea int not  null foreign key references Linea(Id),
 IdGenero int not  null foreign key references Genero(Id),
 )
-
-
 
 create table Imagenes(
 Id int identity(1,1) primary key,
@@ -62,106 +52,56 @@ CREATE TABLE Stock (
     Lote VARCHAR(50) NOT NULL,
 )
 
-CREATE TABLE [dbo].[CiudadEnvio](
-	[IDCiudad] [int] IDENTITY(1,1) NOT NULL,
-	[Descripcion] [varchar](100) NOT NULL,
-	[PrecioEnvio] [int] NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[IDCiudad] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
+CREATE TABLE CiudadEnvio(
+	IDCiudad int IDENTITY(1,1) PRIMARY KEY,
+	Descripcion varchar(100) NOT NULL,
+	PrecioEnvio int NOT NULL,
+)
 
-CREATE TABLE [dbo].[DetalleVentas](
-	[IDDetalle] [int] IDENTITY(1,1) NOT NULL,
-	[IDVenta] [int] NOT NULL,
-	[IDPrenda] [int] NOT NULL,
-	[Cantidad] [int] NOT NULL,
-	[PrecioUnitario] [int] NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[IDDetalle] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+CREATE TABLE MedioPago(
+	IDPago tinyint IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	Descripcion varchar(50) NOT NULL
+)
 
-CREATE TABLE [dbo].[Envios](
-	[IDEnvio] [int] IDENTITY(1,1) NOT NULL,
-	[IDVenta] [int] NOT NULL,
-	[IDUsuario] [int] NOT NULL,
-	[Direccion] [varchar](200) NOT NULL,
-	[Telefono] [varchar](30) NULL,
-	[Observaciones] [varchar](300) NULL,
-	[Entregado] [bit] NULL,
-	[IDCiudad] [int] NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[IDEnvio] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
+CREATE TABLE Ventas(
+	IDVenta int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	IDUsuario int NOT NULL FOREIGN KEY REFERENCES Usuario (Id),
+	IDEnvio int not null,
+	MedioPago tinyint NOT NULL,
+	PrecioTotal float NOT NULL,
+	Pagado bit NULL,
+	Descripcion varchar (1000)
+)
 
-CREATE TABLE [dbo].[MedioPago](
-	[IDPago] [tinyint] IDENTITY(1,1) NOT NULL,
-	[Descripcion] [varchar](50) NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[IDPago] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
+CREATE TABLE Envios(
+	IDEnvio int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	IDVenta int NOT NULL FOREIGN KEY REFERENCES Ventas (IdVenta),
+	IDUsuario int NOT NULL FOREIGN KEY REFERENCES Usuario (Id),
+	Direccion varchar(200) NOT NULL,
+	Telefono varchar(30) NULL,
+	Observaciones varchar(300) NULL,
+	Entregado bit NULL,
+	IDCiudad int NOT NULL FOREIGN KEY REFERENCES CiudadEnvio (IdCiudad),
+)
 
+CREATE TABLE DetalleVentas(
+	IDDetalle int IDENTITY(1,1) PRIMARY KEY,
+	IDVenta int NOT NULL FOREIGN KEY REFERENCES Ventas (IdVenta),
+	IDPrenda int NOT NULL FOREIGN KEY REFERENCES Prenda (Id),
+	Cantidad int NOT NULL,
+	PrecioUnitario money NOT NULL,
+)
 
+Insert into CiudadEnvio (Descripcion, PrecioEnvio) values ('Ciudad Autonoma de Buenos Aires', 1500)
+Insert into CiudadEnvio (Descripcion, PrecioEnvio) values ('GBA Sur', 2000)
+Insert into CiudadEnvio (Descripcion, PrecioEnvio) values ('GBA Norte', 2000)
+Insert into CiudadEnvio (Descripcion, PrecioEnvio) values ('GBA Oeste', 2000)
+Insert into CiudadEnvio (Descripcion, PrecioEnvio) values ('Rosario', 3000)
+Insert into CiudadEnvio (Descripcion, PrecioEnvio) values ('Cordoba', 3500)
 
-
-CREATE TABLE [dbo].[Ventas](
-	[IDVenta] [int] IDENTITY(1,1) NOT NULL,
-	[IDUsuario] [int] NOT NULL,
-	[MedioPago] [tinyint] NOT NULL,
-	[PrecioTotal] [int] NOT NULL,
-	[Pagado] [bit] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[IDVenta] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-ALTER TABLE [dbo].[DetalleVentas]  WITH CHECK ADD FOREIGN KEY([IDPrenda])
-REFERENCES [dbo].[Prenda] ([Id])
-GO
-ALTER TABLE [dbo].[DetalleVentas]  WITH CHECK ADD FOREIGN KEY([IDVenta])
-REFERENCES [dbo].[Ventas] ([IDVenta])
-GO
-ALTER TABLE [dbo].[Envios]  WITH CHECK ADD FOREIGN KEY([IDCiudad])
-REFERENCES [dbo].[CiudadEnvio] ([IDCiudad])
-GO
-ALTER TABLE [dbo].[Envios]  WITH CHECK ADD FOREIGN KEY([IDUsuario])
-REFERENCES [dbo].[Usuario] ([Id])
-GO
-ALTER TABLE [dbo].[Envios]  WITH CHECK ADD FOREIGN KEY([IDVenta])
-REFERENCES [dbo].[Ventas] ([IDVenta])
-GO
-ALTER TABLE [dbo].[Ventas]  WITH CHECK ADD FOREIGN KEY([IDUsuario])
-REFERENCES [dbo].[Usuario] ([Id])
-GO
-ALTER TABLE [dbo].[Ventas]  WITH CHECK ADD FOREIGN KEY([MedioPago])
-REFERENCES [dbo].[MedioPago] ([IDPago])
-
---Modificaciones tabla Ventas (6/12/2023)
-
-ALTER TABLE Ventas MODIFY COLUMN PrecioTotal FLOAT;
-alter table Ventas add IDEnvio int
-alter table Envios add constraint fk_Ventas_Envios foreign key (IDEnvio) references Envios (IDEnvio)
-
-Insert into CiudadEnvio values ('Ciudad Autonoma de Buenos Aires', 1500, 'GBA Sur', 2000, 'GBA Norte', 2000, 'GBA Oeste', 2000, 'Rosario', 3000, 'Cordoba', 3500)
-
-Insert into MedioPago values ('Efectivo', 'Debito', 'Credito')
-
----Modificaciones tabla Ventas (8/12/2023)
-
-alter table Ventas add Descripcion varchar (1000)
-
---
+Insert into MedioPago values ('Efectivo')
+Insert into MedioPago values ('Debito')
+Insert into MedioPago values ('Credito')
 
 insert into Categoria (Descripcion) values ('Remeras')
 insert into Categoria (Descripcion) values ('Buzos')
@@ -169,37 +109,24 @@ insert into Categoria (Descripcion) values ('Camperas')
 insert into Categoria (Descripcion) values ('Pantalones')
 insert into Categoria (Descripcion) values ('Todas')
 
-
 insert into Genero (Descripcion) values ('Masculino')
 insert into Genero (Descripcion) values ('Femenino')
 
-
-
 insert into Linea (Descripcion) values ('Gamer')
 insert into Linea (Descripcion) values ('Casual')
-insert into Linea (Descripcion) values ('deportiva')
+insert into Linea (Descripcion) values ('Deportiva')
 insert into Linea (Descripcion) values ('Formal')
 insert into Linea (Descripcion) values ('Playa')
 insert into Linea (Descripcion) values ('Todas')
 
-
-
-
-select * from Imagenes
-
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Remera Gamer Mario Bros',5000,6,1,1,1,'L')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Campera Gamer Diablo IV',65000,12,3,1,1,'XL')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Buzo Gamer Halo',42000,8,2,1,1,'M')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Remera Gamer Bros Star',5000,10,1,1,1,'S')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Pantalon Hombre Cargo',25000,10,4,1,2,'42')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle)values ('Remera Gamer Xbox',7000,6,1,1,1,'M')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Pantalon Hombre Casual',35000,6,4,1,2,'44')
-insert into Prenda(Descripcion,Precio,Stock,IdCategoria,IdGenero,IdLinea,Talle) values ('Remera Gamer Bros Gore',6500,8,1,1,1,'L')
-
-
-
-
-
+insert into Prenda(Descripcion,Precio,IdCategoria,IdGenero,IdLinea) values ('Remera Gamer Mario Bros',5000,1,1,1)
+insert into Prenda(Descripcion,Precio,IdCategoria,IdGenero,IdLinea) values ('Campera Gamer Diablo IV',65000,3,1,1)
+insert into Prenda(Descripcion,Precio,IdCategoria,IdGenero,IdLinea) values ('Buzo Gamer Halo',42000,2,1,1)
+insert into Prenda(Descripcion,Precio,IdCategoria,IdGenero,IdLinea) values ('Remera Gamer Bros Star',5000,1,1,1)
+insert into Prenda(Descripcion,Precio,IdCategoria,IdGenero,IdLinea) values ('Pantalon Hombre Cargo',25000,4,1,2)
+insert into Prenda(Descripcion,Precio,IdCategoria,IdGenero,IdLinea) values ('Remera Gamer Xbox',7000,1,1,1)
+insert into Prenda(Descripcion,Precio,IdCategoria,IdGenero,IdLinea) values ('Pantalon Hombre Casual',35000,4,1,2)
+insert into Prenda(Descripcion,Precio,IdCategoria,IdGenero,IdLinea) values ('Remera Gamer Bros Gore',6500,1,1,1)
 
 
 insert into imagenes (IdPrenda,ImagenUrl) Values (2,'https://i.postimg.cc/j2WZnys3/Captura-de-pantalla-2023-11-03-131244.png')
@@ -210,25 +137,52 @@ insert into imagenes (IdPrenda,ImagenUrl) Values (6,'https://i.postimg.cc/sDhTVP
 insert into imagenes (IdPrenda,ImagenUrl) Values (7,'https://i.postimg.cc/y65f4pPM/Captura-de-pantalla-2023-11-03-132153.png')
 insert into imagenes (IdPrenda,ImagenUrl) Values (8,'https://i.postimg.cc/2Sn9xdnP/Captura-de-pantalla-2023-11-03-131639.png')
 
-
-SELECT P.Id, P.Descripcion, P.Precio, P.Stock, P.IdCategoria, C.Descripcion AS CategoriaDescripcion, P.IdGenero, G.Descripcion AS Genero, P.IdLinea, L.Descripcion AS Linea, P.Talle FROM Prenda P 
-INNER JOIN Categoria C ON P.IdCategoria = C.Id 
-INNER JOIN Genero G ON P.IdGenero = G.Id
-INNER JOIN Linea L ON P.IdLinea = L.Id;
-
 INSERT INTO Rol (Nombre) VALUES ('Administrador');
-INSERT INTO Rol (Nombre) VALUES ('Comprador');
-INSERT INTO Usuario (NombreUsuario, Pass, IdRol, Email) VALUES ('prueba', '123', 2, 'prueba@prueba.com');
+INSERT INTO Rol (Nombre) VALUES ('Usuario');
+INSERT INTO Usuario (NombreUsuario, Pass, IdRol, Email) VALUES ('User', 'user', 1, 'user@prueba.com');
+INSERT INTO Usuario (NombreUsuario, Pass, IdRol, Email) VALUES ('Admin', 'admin', 2, 'admin@prueba.com');
 
-select * from linea
-select * from genero
-select * from Categoria
-select * from Usuario
-select * from Rol
-delete from usuario where id=6;
-DECLARE @NombreUsuario NVARCHAR(100) = 'pruebaprueba',
-        @Pass NVARCHAR(100) = '123123',
-        @IdRol INT = 2,
-        @Email NVARCHAR(100) = 'prueba@pruebaprueba.com';
-INSERT INTO Usuario (NombreUsuario, Pass, IdRol, Email) VALUES (@NombreUsuario, @Pass, @IdRol, @Email)
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (1, 10, 'S', 'A')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (1, 10, 'M', 'A')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (1, 10, 'L', 'A')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (1, 10, 'XL', 'A')
 
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (2, 10, 'S', 'B')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (2, 10, 'M', 'B')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (2, 10, 'L', 'B')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (2, 10, 'XL', 'B')
+
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (3, 10, 'S', 'C')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (3, 10, 'M', 'C')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (3, 10, 'L', 'C')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (3, 10, 'XL', 'C')
+
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (4, 10, 'S', 'D')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (4, 10, 'M', 'D')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (4, 10, 'L', 'D')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (4, 10, 'XL', 'D')
+
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (5, 10, 'S', 'E')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (5, 10, 'M', 'E')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (5, 10, 'L', 'E')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (5, 10, 'XL', 'E')
+
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (6, 10, 'S', 'F')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (6, 10, 'M', 'F')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (6, 10, 'L', 'F')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (6, 10, 'XL', 'F')
+
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (7, 10, 'S', 'G')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (7, 10, 'M', 'G')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (7, 10, 'L', 'G')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (7, 10, 'XL', 'G')
+
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (8, 10, 'S', 'H')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (8, 10, 'M', 'H')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (8, 10, 'L', 'H')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (8, 10, 'XL', 'H')
+
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (9, 10, 'S', 'I')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (9, 10, 'M', 'I')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (9, 10, 'L', 'I')
+INSERT INTO Stock (IdPrenda, Cantidad, Talle, Lote) values (9, 10, 'XL', 'I')
