@@ -16,6 +16,8 @@
                         <div class="card text-black mb-4">
                             <div class="card-header">
                                 <asp:Label runat="server" ID="lblContador"></asp:Label>
+                             <p>Numero Control: <%#(Eval("IDVenta"))%></p>
+
                             </div>
                             <p class="card-title">Monto total: $<%#Convert.ToDecimal(Eval("PrecioTotal")).ToString("F2") %></p>
                             <p class="card-text">
@@ -31,6 +33,10 @@
                             </p>
                             <p class="card-text">
                                 <asp:Literal runat="server" Text='<%# Convert.ToBoolean(Eval("Pagado")) ? "Pagado" : "A pagar" %>'></asp:Literal>
+                            </p>
+                                                        <p class="card-text">
+                                Estatus:
+<%# Eval("Despachado").ToString().ToLower() == "true" ? "Finalizada" : "Proceso" %>
                             </p>
                             <div style="text-align: right;">
                                 <asp:Button Text="Detalle de Mi compra" runat="server" class="btn btn-warning" OnClick="VerDetalle_Click" CommandName="VerDetalle" CommandArgument='<%# Eval("idVenta") %>' />
