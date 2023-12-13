@@ -26,7 +26,7 @@
                             <asp:Literal runat="server" Text='<%# ObtenerUsuario(Eval("IDUsuario")) %>'></asp:Literal>
                                 </p>
 
-                                <h6 class="card-title">Monto de la Venta: <%# Convert.ToDecimal(Eval("PrecioTotal")).ToString("F2") %></h6>
+                                <h6 class="card-title">Monto de la Venta: $<%# Convert.ToDecimal(Eval("PrecioTotal")).ToString("F2") %></h6>
                                 <p class="card-text">
                                     Tipo de pago:  
                             <asp:Literal runat="server" Text='<%# ObtenerDescripcionMedioPago(Eval("MedioPago")) %>'></asp:Literal>
@@ -37,7 +37,7 @@
                                 </p>
                                <div style="text-align: right;">
             <asp:Button ID="btnVerDetalle" Text="Ver Detalle" runat="server" class="btn btn-warning" OnClick="VerDetalle_Click" CommandName="VerDetalle" CommandArgument='<%# Eval("idVenta") %>' />
-            <asp:Button ID="btnDespachar" Text="Marcar como Despachado" runat="server" class="btn btn-secondary" OnClick="Despachar_Click" CommandName="BtnDespa" CommandArgument='<%# Eval("idVenta") %>'  />
+            <asp:Button ID="btnDespachar" Text="Marcar como Despachado" runat="server" class="btn btn-secondary" OnClick="Despachar_Click" Visible="true" CommandName="BtnDespa" CommandArgument='<%# Eval("idVenta") %>'  />
         </div>
 
                             </div>

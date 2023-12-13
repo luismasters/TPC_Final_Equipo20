@@ -172,7 +172,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Stock SET Cantidad = Cantidad - @Cantidad WHERE IDPrenda = @IdPrenda AND Talle = @Talle");
+                datos.setearConsulta("UPDATE Stock SET Cantidad = Cantidad - @Cantidad WHERE IDPrenda = @IdPrenda");
                 datos.agregarParametro("@IdPrenda", idPrenda);
                 datos.agregarParametro("@Talle", talle);
                 datos.agregarParametro("@Cantidad", cantidad);

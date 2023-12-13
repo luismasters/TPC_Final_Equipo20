@@ -28,7 +28,7 @@ namespace Negocio
                     ventas.Pagado = (bool)datos.Lector["Pagado"];
                     ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
                     ventas.Descripcion = (datos.Lector["Descripcion"]as string)??"";
-                    ventas.Despachado = (bool)datos.Lector["Despachado"];
+                    ventas.Despachado = datos.Lector["Despachado"] as bool? ?? false;
 
                     lista.Add(ventas);
                 }
@@ -63,7 +63,7 @@ namespace Negocio
                     ventas.Pagado = (bool)datos.Lector["Pagado"];
                     ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
                     ventas.Descripcion = (datos.Lector["Descripcion"] as string) ?? "";
-                    ventas.Despachado = (bool)datos.Lector["Despachado"];
+                    ventas.Despachado = datos.Lector["Despachado"] as bool? ?? false; ;
 
                     lista.Add(ventas);
                 }
@@ -91,6 +91,7 @@ namespace Negocio
                 datos.agregarParametro("@Pagado", venta.Pagado);
                 datos.agregarParametro("IDEnvio", venta.IDEnvio);
                 datos.agregarParametro("@Descripcion", venta.Descripcion);
+                datos.agregarParametro("@Despachado", venta.Despachado);
 
                 datos.ejecutarLectura();
             }

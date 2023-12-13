@@ -183,7 +183,7 @@ namespace WebApplication1
 
                 }
                 venta.Descripcion = descripcionPrenda;
-
+                venta.Despachado = false;
                 negocio.RegistrarVenta(venta);
 
 

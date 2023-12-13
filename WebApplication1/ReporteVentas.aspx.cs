@@ -127,8 +127,7 @@ namespace WebApplication1
             List<Ventas> listaVentas = negocioVentas.Listar(); // Suponiendo que el método listar devuelve una lista de ventas
             listaVentas = listaVentas.Where(venta => !venta.Despachado).ToList();
             MostrarVentas(listaVentas);
-
-            
+                        
         }
 
         protected void BtnVentasDespachadas_Click(object sender, EventArgs e)
