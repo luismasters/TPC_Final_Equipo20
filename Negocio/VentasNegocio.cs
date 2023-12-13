@@ -79,6 +79,50 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+
+
+        public List<Ventas> ListarPorN_Venta(int Nventa)
+        {
+            List<Ventas> lista = new List<Ventas>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Select IDVenta, IDUsuario, MedioPago, PrecioTotal, Pagado, IDEnvio, Descripcion,Despachado from Ventas where @IDVenta = IDVenta");
+                datos.agregarParametro("@IDVenta", Nventa);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Ventas ventas = new Ventas();
+                    ventas.IDVenta = (int)datos.Lector["IDVenta"];
+                    ventas.IDUsuario = (int)datos.Lector["IDUsuario"];
+                    ventas.MedioPago = Convert.ToInt32(datos.Lector["MedioPago"]);
+                    ventas.PrecioTotal = Convert.ToDecimal(datos.Lector["PrecioTotal"]);
+                    ventas.Pagado = (bool)datos.Lector["Pagado"];
+                    ventas.IDEnvio = (int)datos.Lector["IDEnvio"];
+                    ventas.Descripcion = (datos.Lector["Descripcion"] as string) ?? "";
+                    ventas.Despachado = datos.Lector["Despachado"] as bool? ?? false; ;
+
+                    lista.Add(ventas);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+
+
+
+
         public void RegistrarVenta(Ventas venta)
         {
             AccesoDatos datos = new AccesoDatos();

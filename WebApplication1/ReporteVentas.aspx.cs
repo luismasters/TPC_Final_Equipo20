@@ -143,8 +143,22 @@ namespace WebApplication1
 
         }
 
+        protected void buscarV_Click(object sender, EventArgs e)
+        {
+           
+                try
+                {
+                    int Nventa = int.Parse(txtNVenta.Text);
 
-       
-
+                    VentasNegocio negocioVentas = new VentasNegocio();
+                    List<Ventas> listaVentas = negocioVentas.ListarPorN_Venta(Nventa);
+                    MostrarVentas(listaVentas);
+                }
+                catch (FormatException)
+                {
+                  
+                }
+            
+        }
     }
 }
