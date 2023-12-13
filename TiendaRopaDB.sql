@@ -1,3 +1,6 @@
+use master
+drop database TiendaRopa
+
 create database TiendaRopa
 use TiendaRopa
 
@@ -59,7 +62,7 @@ CREATE TABLE CiudadEnvio(
 )
 
 CREATE TABLE MedioPago(
-	IDPago tinyint IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	IDPago int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	Descripcion varchar(50) NOT NULL
 )
 
@@ -67,10 +70,12 @@ CREATE TABLE Ventas(
 	IDVenta int IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	IDUsuario int NOT NULL FOREIGN KEY REFERENCES Usuario (Id),
 	IDEnvio int not null,
-	MedioPago tinyint NOT NULL,
+	MedioPago int NOT NULL,
 	PrecioTotal float NOT NULL,
 	Pagado bit NULL,
-	Descripcion varchar (1000)
+	Descripcion varchar (1000),
+	Despachado bit default 0,
+
 )
 
 CREATE TABLE Envios(
